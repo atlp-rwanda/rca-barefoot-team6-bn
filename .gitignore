@@ -102,3 +102,23 @@ dist
 
 # TernJS port file
 .tern-port
+yarn.lock
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+yarn.lock
+=======
+>>>>>>> bb7a807 (parent 93c2e9699990af0ae7059a33874b2361f6f354da)
+>>>>>>> 8d74a26 (feat: project structure initialization)
+=======
+>>>>>>> 6599e8e (User Registration and Email Verification)
+=======
+>>>>>>> bb7a807 (parent 93c2e9699990af0ae7059a33874b2361f6f354da)
+=======
+yarn.lock
+=======
+>>>>>>> bb7a807 (parent 93c2e9699990af0ae7059a33874b2361f6f354da)
+>>>>>>> 8d74a26 (feat: project structure initialization)
