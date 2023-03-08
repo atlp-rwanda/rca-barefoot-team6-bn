@@ -1,0 +1,132 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+name: Build
+
+<<<<<<< HEAD
+name: Build
+
+=======
+>>>>>>> 8d74a26 (feat: project structure initialization)
+=======
+name: Build
+
+>>>>>>> 89e3b55 (feat: modified build script)
+on:
+  push:
+    branches: [develop,main]
+    paths-ignore:
+      - '**.md'
+<<<<<<< HEAD
+<<<<<<< HEAD
+    branches: [develop,main]
+    paths-ignore:
+      - '**.md'
+=======
+>>>>>>> 8d74a26 (feat: project structure initialization)
+=======
+>>>>>>> 89e3b55 (feat: modified build script)
+  pull_request:
+    branches: [develop,main]
+    paths-ignore:
+      - '**.md'
+<<<<<<< HEAD
+    branches: [develop,main]
+    paths-ignore:
+      - '**.md'
+=======
+>>>>>>> 89e3b55 (feat: modified build script)
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+<<<<<<< HEAD
+        os: [ubuntu-latest]
+=======
+        os: [ubuntu-latest, windows-latest, macos-latest]
+>>>>>>> 89e3b55 (feat: modified build script)
+        node-version: [18.x, 19.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+<<<<<<< HEAD
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+<<<<<<< HEAD
+<<<<<<< HEAD
+      - run: npm build --if-present
+=======
+name: Build CI
+=======
+name: Build
+
+>>>>>>> 6599e8e (User Registration and Email Verification)
+=======
+name: Build
+
+>>>>>>> 8d74a26 (feat: project structure initialization)
+on:
+  push:
+    branches: [develop,main]
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches: [develop,main]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18.x, 19.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+<<<<<<< HEAD
+<<<<<<< HEAD
+      - run: npm install
+      - run: npm build --if-present
+>>>>>>> 8254d03 (chore: add build-ci)
+=======
+=======
+        with:
+          node-version: ${{ matrix.node-version }}
+>>>>>>> 89e3b55 (feat: modified build script)
+=======
+>>>>>>> 8d74a26 (feat: project structure initialization)
+          cache: npm
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+<<<<<<< HEAD
+<<<<<<< HEAD
+        run: yarn build
+>>>>>>> 6599e8e (User Registration and Email Verification)
+=======
+      # - run: npm run build --if-presents
+>>>>>>> 48d1ac3 (ft: add pull request template)
+=======
+      - run: npm run build --if-presents
+>>>>>>> b797747 (feat: fixed run commands)
+=======
+        run: yarn build
+>>>>>>> 89e3b55 (feat: modified build script)
+=======
+        run: yarn build
+>>>>>>> 8d74a26 (feat: project structure initialization)
