@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+yarn.lock
+<<<<<<< HEAD
+yarn.lock
+=======
+>>>>>>> bb7a807 (parent 93c2e9699990af0ae7059a33874b2361f6f354da)
