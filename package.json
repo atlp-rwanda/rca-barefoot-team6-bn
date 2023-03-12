@@ -9,10 +9,13 @@
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint --fix --ext .js",
     "sequelize": "sequelize-cli",
+    "db:create": "sequelize-cli db:create",
     "db:migrate": "sequelize-cli db:migrate",
     "db:g:migration": "sequelize-cli migration:generate --name",
+    "db:migrate:reset": "sequelize-cli db:migrate:undo:all && npm run db:migrate",
     "db:g:seed": "sequelize-cli seed:generate --name",
-    "db:seeds": "sequelize-cli db:seed:all"
+    "db:seeds": "sequelize-cli db:seed:all",
+    "seeding": "npm run db:migrate:reset && npm run db:seeds"
   },
   "repository": {
     "type": "git",
