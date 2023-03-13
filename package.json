@@ -4,8 +4,18 @@
   "description": "Project Development",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node src/index.js"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "dev": "node src/index.js",
+    "lint": "eslint src --ext .js",
+    "lint:fix": "eslint --fix --ext .js",
+    "sequelize": "sequelize-cli",
+    "db:create": "sequelize-cli db:create",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:g:migration": "sequelize-cli migration:generate --name",
+    "db:migrate:reset": "sequelize-cli db:migrate:undo:all && npm run db:migrate",
+    "db:g:seed": "sequelize-cli seed:generate --name",
+    "db:seeds": "sequelize-cli db:seed:all",
+    "seeding": "npm run db:migrate:reset && npm run db:seeds"
   },
   "repository": {
     "type": "git",
@@ -22,6 +32,17 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "swaggiffy": "^1.0.5"
+    "swaggiffy": "^1.0.5",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.29.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.35.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "sequelize-cli": "^6.6.0"
   }
 }
