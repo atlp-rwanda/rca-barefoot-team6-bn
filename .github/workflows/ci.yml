@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - develop
+      - chore-gh-actions-184638363
   pull_request:
     branches:
       - develop
