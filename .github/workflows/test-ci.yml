@@ -2,7 +2,7 @@ name: Test CI
 on:
   push:
     branches:
-      - develop
+      - ch-coveralls-intergration
   pull_request:
     branches:
       - develop
