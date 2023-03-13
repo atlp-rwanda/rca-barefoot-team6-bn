@@ -1,18 +1,14 @@
-const DEV_DATABASE_URL = ''
-const TEST_DATABASE_URL = ''
-const DATABASE_URL = ''
+require('dotenv').config();
 
-module.exports = {
-  development: {
-    url: DEV_DATABASE_URL,
-    dialect: 'postgres'
-  },
-  test: {
-    url: TEST_DATABASE_URL,
-    dialect: 'postgres'
-  },
-  production: {
-    url: DATABASE_URL,
-    dialect: 'postgres'
-  }
-}
+export const development = {
+  url: process.env.DEV_DATABASE_URL,
+  dialect: 'postgres'
+};
+export const test = {
+  url: process.env.TEST_DATABASE_URL,
+  dialect: 'postgres'
+};
+export const production = {
+  url: process.env.PROD_DATABASE_URL,
+  dialect: 'postgres'
+};
