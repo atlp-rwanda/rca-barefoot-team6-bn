@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
     "dev": "node src/index.js",
+    "build": "echo \"Error: no build script specified\" && exit 0",
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint --fix --ext .js",
     "sequelize": "sequelize-cli",
