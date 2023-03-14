@@ -7,10 +7,14 @@ const port: number = 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).send('Hello World!');
-})
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+try {
+  app.get('/', (req: Request, res: Response) => {
+    res.status(200).send('Hello World!');
+  })
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+} catch (err: any) {
+  console.log(`Error occurred: ${err.message}`)
+}
