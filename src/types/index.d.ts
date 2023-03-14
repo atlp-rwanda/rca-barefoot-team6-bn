@@ -1,0 +1,1 @@
+export type DBConfigType = {url: string, dialect: 'postgres'}
