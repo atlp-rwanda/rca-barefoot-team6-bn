@@ -1,6 +1,6 @@
-const DEV_DATABASE_URL = ''
+const DEV_DATABASE_URL = 'postgres://pguser:pguser2@localhost:5432/postgres'
 const TEST_DATABASE_URL = ''
-const DATABASE_URL = ''
+const DATABASE_URL = 'postgres://pguser:pguser2@localhost:5432/postgres'
 
 module.exports = {
   development: {
