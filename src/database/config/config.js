@@ -1,18 +1,16 @@
-const DEV_DATABASE_URL = 'postgres://pguser:pguser2@localhost:5432/postgres'
-const TEST_DATABASE_URL = ''
-const DATABASE_URL = 'postgres://pguser:pguser2@localhost:5432/postgres'
+require('dotenv').config();
 
 module.exports = {
   development: {
-    url: DEV_DATABASE_URL,
+    url: process.env.DEV_DATABASE_URL,
     dialect: 'postgres'
   },
   test: {
-    url: TEST_DATABASE_URL,
+    url: process.env.TEST_DATABASE_URL,
     dialect: 'postgres'
   },
   production: {
-    url: DATABASE_URL,
+    url: process.env.PROD_DATABASE_URL,
     dialect: 'postgres'
   }
 }
