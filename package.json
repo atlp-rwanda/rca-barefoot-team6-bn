@@ -2,11 +2,12 @@
   "name": "rca-barefoot-team6-bn",
   "version": "1.0.0",
   "description": "Project Development",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "dev": "node src/index.js",
-    "build": "echo \"Error: no build script specified\" && exit 0",
+    "test": "echo \"Error: no test specified\"",
+    "build": "rimraf dist && babel src --out-dir dist  --copy-files",
+    "start": "node dist/app.js",
+    "dev": "nodemon --exec babel-node src/app.js",
     "lint": "eslint src --ext .js",
     "lint:fix": "eslint --fix --ext .js",
     "sequelize": "sequelize-cli",
@@ -38,11 +39,19 @@
     "sequelize": "^6.29.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/node": "^7.20.7",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/register": "^7.21.0",
     "eslint": "^8.35.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.21",
     "sequelize-cli": "^6.6.0"
   }
 }
