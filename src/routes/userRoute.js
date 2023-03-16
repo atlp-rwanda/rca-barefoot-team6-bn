@@ -1,9 +1,9 @@
-const express = require("express");
-const { createUser, verifyEmail, getVerifiedEmail } = require("../controllers/userController");
-const router = express.Router();
+import { Router } from "express";
+import { createUser, verifyEmail, welcomeNewUser } from "../controllers/userController";
+const router = Router();
 router.post("/", createUser)
 router.use("/verify-email/:token", verifyEmail)
-router.get("/verify-email/:token", getVerifiedEmail)
+router.get("/verify-email/:token", welcomeNewUser)
 
 
-module.exports = router
+export default router
