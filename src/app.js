@@ -1,16 +1,17 @@
 import express, {
   json
 } from 'express';
+import connectDB, { sequelize } from './database/config/db';
+import dotenv from 'dotenv';
+import userRoute from './routes/userRoute';
 
 const app = express();
-require('dotenv').config();
+dotenv.config();
 
 app.use(json())
-const userRoute = require('./routes/userRoute').default;
 app.use('/api/users', userRoute);
 
 const PORT = process.env.PORT || 3000;
-import connectDB, { sequelize } from './database/config/db';
 app.get('/', async (req, res) => {
   res.json({
     status: true,
@@ -22,6 +23,6 @@ app.listen(PORT, async () => {
   console.log(`Example app listening on port ${PORT}`)
   await connectDB();
   sequelize.sync({ force: false }).then(() => {
-    console.log("✅Synced database successfully...");
+    console.log('✅Synced database successfully...');
   });
 })

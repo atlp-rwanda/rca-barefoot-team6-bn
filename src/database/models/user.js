@@ -1,15 +1,17 @@
 'use strict'
 import { Model, DataTypes } from 'sequelize';
-import { hash } from 'bcryptjs';
-require('dotenv').config();
+import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
+import { config } from 'dotenv';
+
+config();
 class User extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate(models) {
+  static associate (models) {
     // define association here
   }
 };
@@ -31,7 +33,7 @@ User.init({
   emailVerificationToken: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: ""
+    defaultValue: ''
   },
   isEmailVerified: {
     type: DataTypes.BOOLEAN,
@@ -47,6 +49,13 @@ User.beforeCreate(async (user, options) => {
   const hashedPassword = await hash(user.password, 10)
   user.password = hashedPassword;
 })
+
+User.prototype.isValidPassword = async function (password) {
+  const user = this;
+  const compareResult = await compare(password, user.password);
+  return compareResult;
+};
+
 sequelize.sync();
 
 // export the model
