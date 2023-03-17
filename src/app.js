@@ -1,13 +1,27 @@
 import express, {
   json
 } from 'express';
+import routes from './routes';
+import session from 'express-session';
+import Passport from './routes/userRoutes';
+
+require('dotenv').config();
 
 const app = express();
-require('dotenv').config();
+const { passport } = Passport;
 
 app.use(json())
 
-const PORT = process.env.PORT || 3000;
+// enable passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// enable session
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true
+}));
 
 const db = require('./database/models/index');
 
@@ -25,5 +39,9 @@ app.get('/', async (req, res) => {
     message: 'Our node.js app works'
   })
 });
+
+app.use('/api', routes);
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`))
