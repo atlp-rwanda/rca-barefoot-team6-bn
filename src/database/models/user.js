@@ -1,21 +1,22 @@
 
-
 'use strict'
 import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
+import { config } from 'dotenv';
+
+config();
 class User extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate(models) {
+  static associate (models) {
     // define association here
   }
 };
-
-const userObj = {
+User.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -24,7 +25,7 @@ const userObj = {
   firstName: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: true
+    allowNull: false
   },
   lastName: {
     type: DataTypes.STRING,
@@ -55,8 +56,7 @@ const userObj = {
     allowNull: true,
     defaultValue: false
   }
-}
-User.init(userObj, {
+}, {
   sequelize,
   modelName: 'Users'
 });
@@ -73,5 +73,6 @@ User.prototype.isValidPassword = async function (password) {
 };
 
 sequelize.sync();
+
 // export the model
 export default User;
