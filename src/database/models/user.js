@@ -12,12 +12,11 @@ class User extends Model {
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate(models) {
+  static associate (models) {
     // define association here
   }
 };
-
-const userObj = {
+User.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -26,7 +25,7 @@ const userObj = {
   firstName: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: true
+    allowNull: false
   },
   lastName: {
     type: DataTypes.STRING,
@@ -79,8 +78,7 @@ const userObj = {
     type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
     defaultValue: USER_ENUM.CLIENT
   }
-}
-User.init(userObj, {
+}, {
   sequelize,
   modelName: 'Users'
 });
@@ -99,5 +97,6 @@ User.prototype.isValidPassword = async function (password) {
 };
 
 sequelize.sync();
+
 // export the model
 export default User;
