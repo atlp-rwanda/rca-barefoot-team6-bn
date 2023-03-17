@@ -1,15 +1,15 @@
 'use strict'
 import { Model, DataTypes } from 'sequelize';
 import { hash } from 'bcryptjs';
-require('dotenv').config();
 import { sequelize } from '../config/db';
+require('dotenv').config();
 class User extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate(models) {
+  static associate (models) {
     // define association here
   }
 };
@@ -28,10 +28,18 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  providerId: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   emailVerificationToken: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: ""
+    defaultValue: ''
   },
   isEmailVerified: {
     type: DataTypes.BOOLEAN,

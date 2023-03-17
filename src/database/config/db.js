@@ -4,7 +4,7 @@ require('dotenv').config();
 // Create a new Sequelize instance with the required configuration
 const sequelize = new Sequelize(process.env.DEV_DATABASE_URL, {
     dialect: 'postgres',
-    logging: false,
+    logging: console.log,
 });
 
 // Define the connectDB function
