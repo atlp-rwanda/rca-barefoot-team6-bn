@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 
 import hello from './hello';
-import user from './user';
-import hotel from './hotel';
 
 dotenv.config();
 
@@ -12,10 +10,8 @@ const host =
     : process.env.BASE_URL.split('http://')[1];
 
 const paths = {
-  ...hello,
-  ...user,
-  ...hotel
-  //   add other defined apis here
+  ...hello
+//   add other defined apis here
 };
 
 const config = {
