@@ -1,16 +1,15 @@
 import User from '../database/models/user';
+import { sendEmail, token } from '../utils/sendEmailAndToken';
 import jwt from 'jsonwebtoken';
 
-import { generateToken, sendEmail, token } from '../utils/sendEmailAndToken';
-
 export async function createUser (req, res) {
-  const { email, password } = req.body;
+  const { firstName, lastName, email, password } = req.body;
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
-    const user = await User.create({ email, password });
+    const user = await User.create({ firstName, lastName, email, password });
     await sendEmail(email, 'Verify Your Email', `Click the following link to verify your email address: ${process.env.BASE_URL}/verify-email?token=${token}`, `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/verify-email?token=${token}">${process.env.BASE_URL}/verify-email?token=${token}</a>`);
     await User.update({ emailVerificationToken: token, isEmailVerified: false }, { where: { id: user.id } });
     return res.status(201).json({
@@ -55,18 +54,12 @@ export async function loginUser (req, res) {
   }
 }
 
+// When user clicks verify email must be directed on this route
 export async function welcomeNewUser (req, res) {
   const { user } = req;
   try {
     await sendEmail(user.email, 'Welcome to My App', 'Thank you for verifying your email address.');
-    await User.update({ emailVerificationToken: null, isEmailVerified: true }, { where: { id: user.id } })
-      .then(() => {
-        console.log('Email verification token and email verification status updated successfully');
-      })
-      .catch((error) => {
-        console.error('Error updating email verification token and email verification status:', error);
-      });
-
+    await User.update({ emailVerificationToken: null, isEmailVerified: true }, { where: { id: user.id } });
     console.log('Email verified successfully!');
     return res.status(200).json({ message: 'Email verified successfully' });
   } catch (error) {
