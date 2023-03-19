@@ -3,6 +3,8 @@ import { Model, DataTypes } from 'sequelize';
 import { hash } from 'bcryptjs';
 require('dotenv').config();
 import { sequelize } from '../config/db';
+import { registerSchema } from 'swaggiffy';
+
 class User extends Model {
   /**
    * Helper method for defining associations.
@@ -13,7 +15,8 @@ class User extends Model {
     // define association here
   }
 };
-User.init({
+
+const userObj = {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -48,7 +51,8 @@ User.init({
     allowNull: true,
     defaultValue: false
   }
-}, {
+}
+User.init(userObj, {
   sequelize,
   modelName: 'Users'
 });
@@ -59,5 +63,6 @@ User.beforeCreate(async (user, options) => {
 })
 sequelize.sync();
 
+registerSchema('User', userObj, { orm: 'sequelize' });
 // export the model
 export default User;
