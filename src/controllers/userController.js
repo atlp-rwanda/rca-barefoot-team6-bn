@@ -2,25 +2,26 @@ import User from '../database/models/user';
 import { sendEmail, token } from '../utils/sendEmailAndToken';
 import jwt from 'jsonwebtoken';
 
-export async function createUser (req, res) {
-  const { firstName, lastName, email, password } = req.body;
-  try {
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
-      return res.status(400).json({ error: 'Email already registered' });
+export async function createUser(req, res) {
+    const { firstName, lastName, email, password } = req.body;
+    try {
+        const existingUser = await User.findOne({ where: { email } });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Email already registered' });
+        }
+        const user = await User.create({ firstName, lastName, email, password });
+        await sendEmail(email, 'Verify Your Email', `Click the following link to verify your email address: ${process.env.BASE_URL}/verify-email?token=${token}`, `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/verify-email?token=${token}">${process.env.BASE_URL}/verify-email?token=${token}</a>`);
+        await User.update({ emailVerificationToken: token, isEmailVerified: false }, { where: { id: user.id } });
+        return res.status(201).json({
+          message: 'User registered successfully! You should receive an email shortly.',
+          data: user
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server Error', error: error.message });
     }
-    const user = await User.create({ firstName, lastName, email, password });
-    await sendEmail(email, 'Verify Your Email', `Click the following link to verify your email address: ${process.env.BASE_URL}/verify-email?token=${token}`, `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/verify-email?token=${token}">${process.env.BASE_URL}/verify-email?token=${token}</a>`);
-    await User.update({ emailVerificationToken: token, isEmailVerified: false }, { where: { id: user.id } });
-    return res.status(201).json({
-      message: 'User registered successfully! You should receive an email shortly.',
-      data: user
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: 'Server Error', error: error.message });
+
   }
-}
 
 export async function verifyEmail (req, res, next) {
   const { token } = req.params;
