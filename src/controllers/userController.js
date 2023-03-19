@@ -9,7 +9,7 @@ export async function createUser(req, res) {
             return res.status(400).json({ error: 'Email already registered' });
         }
         const user = await User.create({ firstName, lastName, email, password });
-        await sendEmail(email, 'Verify Your Email', `Click the following link to verify your email address: ${process.env.BASE_URL}/verify-email?token=${token}`, `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/verify-email?token=${token}">${process.env.BASE_URL}/verify-email?token=${token}</a>`);
+        await sendEmail(email, 'Verify Your Email', '', `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/verify-email/${token}">${process.env.BASE_URL}/verify-email/${token}</a>`);
         await User.update({ emailVerificationToken: token, isEmailVerified: false }, { where: { id: user.id } });
         return res.status(201).json({
             message: "User registered successfully! You should receive an email shortly.",
