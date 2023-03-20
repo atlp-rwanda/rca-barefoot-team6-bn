@@ -1,5 +1,6 @@
 import User from '../database/models/user';
-import { sendEmail, token } from '../utils/sendEmailAndToken';
+import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
+import { sendEmail } from '../utils/sendEmail';
 
 export async function createUser(req, res) {
     const { firstName, lastName, email, password } = req.body;
@@ -9,8 +10,9 @@ export async function createUser(req, res) {
             return res.status(400).json({ error: 'Email already registered' });
         }
         const user = await User.create({ firstName, lastName, email, password });
-        await sendEmail(email, 'Verify Your Email', '', `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/api/users/verify-email/${token}">${process.env.BASE_URL}/api/users/verify-email/${token}</a>`);
-        await User.update({ emailVerificationToken: token, isEmailVerified: false }, { where: { id: user.id } });
+        const token = await generateEmailVerificationToken(email);
+        await sendVerificationEmail(email, token);
+        await updateUserVerificationInfo(user.id, token, false);
         return res.status(201).json({
             message: "User registered successfully! You should receive an email shortly.",
             data: user
@@ -36,8 +38,7 @@ export async function welcomeNewUser(req, res) {
     const { user } = req;
     try {
         await sendEmail(user.email, 'Welcome to My App', 'Thank you for verifying your email address.');
-        await User.update({ emailVerificationToken: null, isEmailVerified: true }, { where: { id: user.id } });
-        console.log('Email verified successfully!');
+        await updateUserVerificationInfo(user.id, null, true);
         return res.status(200).json({ message: 'Email verified successfully' });
     } catch (error) {
         console.error('Error verifying email:', error);
@@ -54,4 +55,14 @@ export async function getUsers(req, res) {
         console.error(error);
         return res.status(500).json({ message: 'Server Error', error: error.message });
     }
+}
+
+async function sendVerificationEmail(email, token) {
+    const subject = 'Verify Your Email';
+    const html = `<p>Click the following link to verify your email address: <a href="${process.env.BASE_URL}/api/users/verify-email/${token}">Verify My Email</a>`;
+    await sendEmail(email, subject, '', html);
+}
+
+async function updateUserVerificationInfo(userId, token, isVerified) {
+    await User.update({ emailVerificationToken: token, isEmailVerified: isVerified }, { where: { id: userId } });
 }
