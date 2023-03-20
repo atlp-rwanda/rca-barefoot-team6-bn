@@ -69,6 +69,19 @@ export async function welcomeNewUser (req, res) {
   }
 }
 
+// get my user profile
+export async function getMyProfile(req, res) {
+  try {
+    let user = await User.findOne({ where: { id: req.user.id } });
+    delete user.dataValues.password;
+    if (!user)
+      return res.status(404).send(API_RESPONSE(false, "User not found", 404));
+    return res.send(user);
+  } catch (e) {
+    return res.status(500).send(e);
+  }
+}
+
 // GET users
 export async function getUsers (req, res) {
   try {

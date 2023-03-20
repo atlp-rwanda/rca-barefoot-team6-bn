@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 3000;
 
 const db = require('./database/models/index');
 
-db.sequelize.sync()
+db.sequelize?.sync()
   .then(() => {
     console.log('Synced with database');
   })
