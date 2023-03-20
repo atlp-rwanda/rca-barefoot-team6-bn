@@ -3,7 +3,6 @@ import { Model, DataTypes } from 'sequelize';
 import { hash } from 'bcryptjs';
 require('dotenv').config();
 import { sequelize } from '../config/db';
-import { registerSchema } from 'swaggiffy';
 
 class User extends Model {
   /**
@@ -62,7 +61,5 @@ User.beforeCreate(async (user, options) => {
   user.password = hashedPassword;
 })
 sequelize.sync();
-
-registerSchema('User', userObj, { orm: 'sequelize' });
 // export the model
 export default User;
