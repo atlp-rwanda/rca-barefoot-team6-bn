@@ -4,13 +4,10 @@ require('dotenv').config();
 export async function sendEmail(to, subject, text, html) {
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
-    // host: 'smtp.ethereal.com',
-    // port: 587,
-    // secure: false, // true for 465, false for other ports
     service: 'gmail',
     auth: {
-      user: process.env.EMAIL, // replace with your sender email
-      pass: process.env.APP_PASS   // replace with your sender email password
+      user: process.env.EMAIL,
+      pass: process.env.APP_PASS
     }
   });
 
@@ -22,9 +19,5 @@ export async function sendEmail(to, subject, text, html) {
     text: text, // plain text body
     html: html
   });
-
   console.log('Message sent: %s', info.messageId);
 }
-
-
-export const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
