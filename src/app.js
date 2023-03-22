@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 import express, {
   json
 } from 'express';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; // Using require
 import userRoute from './routes/userRoute';
-<<<<<<< HEAD
 import hotelRoute from './routes/hotelRoute';
 
 // swagger
@@ -11,27 +11,18 @@ import swaggerUI from 'swagger-ui-express';
 // api docs
 import apiDoc from './swagger';
 import connectDB, { sequelize } from './database/config/db';
-=======
 
-// swagger
-import swaggerUI from 'swagger-ui-express';
+const cors = require('cors');
 
-// api docs
-import apiDoc from './swagger';
->>>>>>> 9207d9a (feat: added swagger documentation with openain)
+const { Swaggiffy } = require('swaggiffy');
 
 const app = express();
 dotenv.config();
+new Swaggiffy().setupExpress(app).swaggiffy();
 
 app.use(json())
+app.use(cors());
 app.use('/api/users', userRoute);
-<<<<<<< HEAD
-app.use('/api/hotels', hotelRoute);
-
-const PORT = process.env.PORT || 3000;
-
-app.get('/', async (req, res) => {
-=======
 
 const PORT = process.env.PORT || 3000;
 
@@ -46,7 +37,6 @@ db.sequelize?.sync()
   });
 
 app.get('/api/', async (req, res) => {
->>>>>>> 9207d9a (feat: added swagger documentation with openain)
   res.json({
     status: true,
     message: 'Our node.js app works'
@@ -55,15 +45,5 @@ app.get('/api/', async (req, res) => {
 
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
-<<<<<<< HEAD
-app.listen(PORT, async () => {
-  console.log(`App listening on port ${PORT}`)
-  await connectDB();
-  sequelize.sync({ force: false }).then(() => {
-    console.log('✅Synced database successfully...');
-  });
-})
-=======
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`))
->>>>>>> 9207d9a (feat: added swagger documentation with openain)
