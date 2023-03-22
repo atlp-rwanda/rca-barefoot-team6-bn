@@ -14,37 +14,8 @@ require('dotenv').config();
 app.use(json())
 const userRoute = require('./routes/userRoute').default;
 app.use('/api/users', userRoute);
-
-// swagger options
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Barefoot-nomad unflappables APIs',
-      version: '1.0.0',
-      description: 'This is the documentation for Barefoot-nomad unflappables APIs',
-      contact: {
-        name: 'API Support',
-        url: 'https://rca-barefoot-team-6-bn.onrender.com/',
-        email: 'phelixdusengimana@gmail.com'
-      },
-      servers: [{
-        url: 'http://localhost:3000',
-        description: 'Local Host Documentations'
-      },
-      {
-        url: 'https://rca-barefoot-team-6-bn.onrender.com/',
-        description: 'Onrender Documentations'
-      }]
-    }
-  },
-  apis: ['src/app.js', 'src/routes/*.js']
-};
-
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-
 const PORT = process.env.PORT || 3000;
+
 app.get('/', async (req, res) => {
   res.json({
     status: true,
