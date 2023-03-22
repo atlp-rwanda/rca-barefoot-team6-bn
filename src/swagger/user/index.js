@@ -1,4 +1,4 @@
-import responses from '../responses'
+import responses from '../responses';
 
 const user = {
   '/users': {
@@ -14,18 +14,12 @@ const user = {
           }
         }
       ],
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: [
-            'global'
-          ]
+          Bearer: ['global']
         }
       ]
     },
@@ -34,18 +28,12 @@ const user = {
       summary: '',
       description: '',
       parameters: [],
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: [
-            'global'
-          ]
+          Bearer: ['global']
         }
       ]
     }
@@ -63,22 +51,68 @@ const user = {
           type: 'string'
         }
       ],
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: [
-            'global'
-          ]
+          Bearer: ['global']
+        }
+      ]
+    }
+  },
+  '/users/request-password-reset': {
+    post: {
+      tags: ['User'],
+      summary: '',
+      description: 'endpoint to request a password reset',
+      parameters: [
+        {
+          in: 'body',
+          name: 'body',
+          required: true,
+          type: 'email'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          Bearer: ['global']
+        }
+      ]
+    }
+  },
+  '/users/reset-password/{token}': {
+    post: {
+      tags: ['User'],
+      summary: '',
+      description: 'reset password endpoint',
+      parameters: [
+        {
+          in: 'path',
+          name: 'token',
+          required: true,
+          type: 'string'
+        },
+        {
+          in: 'body',
+          name: 'password',
+          required: true,
+          type: 'string'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          Bearer: ['global']
         }
       ]
     }
   }
-}
+};
 
 export default user;

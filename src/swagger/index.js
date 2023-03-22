@@ -64,6 +64,14 @@ const config = {
           type: 'string',
           example: 'string'
         },
+        resetPasswordToken: {
+          type: 'string',
+          example: 'string'
+        },
+        resetPasswordExpires: {
+          type: 'timestamp',
+          example: 'string'
+        },
         emailVerificationToken: {
           type: 'string',
           example: 'string'
