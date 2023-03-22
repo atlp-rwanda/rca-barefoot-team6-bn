@@ -1,19 +1,22 @@
 import express, {
   json
 } from 'express';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; // Using require
 import userRoute from './routes/userRoute';
-
 // swagger
 import swaggerUI from 'swagger-ui-express';
-
 // api docs
 import apiDoc from './swagger';
+const cors = require('cors');
+
+const { Swaggiffy } = require('swaggiffy');
 
 const app = express();
 dotenv.config();
+new Swaggiffy().setupExpress(app).swaggiffy();
 
 app.use(json())
+app.use(cors());
 app.use('/api/users', userRoute);
 
 const PORT = process.env.PORT || 3000;
