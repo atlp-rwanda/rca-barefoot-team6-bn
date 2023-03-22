@@ -39,6 +39,16 @@ const userObj = {
     type: DataTypes.STRING,
     allowNull: false
   },
+  resetPasswordToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: ''
+  },
+  resetPasswordExpires: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    defaultValue: null
+  },
   emailVerificationToken: {
     type: DataTypes.STRING,
     allowNull: true,
