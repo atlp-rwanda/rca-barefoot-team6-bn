@@ -41,7 +41,7 @@ passport.use(
       callbackURL: '/api/users/auth/facebook/redirect',
       clientID: FACEBOOK_APP_ID,
       clientSecret: FACEBOOK_APP_SECRET,
-      profileFields: ['emails', 'firstName', 'lastName']
+      profileFields: ['id', 'name', 'email']
     },
     (accessToken, refreshToken, profile, done) => {
       const user = {

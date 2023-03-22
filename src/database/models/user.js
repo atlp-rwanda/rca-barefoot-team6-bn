@@ -33,7 +33,7 @@ const userObj = {
   },
   email: {
     type: DataTypes.STRING,
-    unique: true,
+    unique: false,
     allowNull: false
   },
   provider: {
