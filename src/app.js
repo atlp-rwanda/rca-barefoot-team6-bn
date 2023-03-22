@@ -5,33 +5,22 @@ import routes from './routes';
 import session from 'express-session';
 import Passport from './routes/userRoutes';
 
+// swagger
+import swaggerUI from 'swagger-ui-express';
+// api docs
+import apiDoc from './swagger';
+import connectDB, { sequelize } from './database/config/db';
+
+const app = express();
 require('dotenv').config();
 
 const app = express();
 const { passport } = Passport;
 
 app.use(json())
-
-// enable passport
-app.use(passport.initialize());
-app.use(passport.session());
-
-// enable session
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true
-}));
-
-const db = require('./database/models/index');
-
-db.sequelize.sync()
-  .then(() => {
-    console.log('Synced with database');
-  })
-  .catch((err) => {
-    console.log('Error syncing with database', err);
-  });
+const userRoute = require('./routes/userRoute').default;
+app.use('/api/users', userRoute);
+const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
   res.json({
@@ -40,8 +29,12 @@ app.get('/', async (req, res) => {
   })
 });
 
-app.use('/api', routes);
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => console.log(`App listening at port ${PORT}`))
+// use swagger apis
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
+app.listen(PORT, async () => {
+  console.log(`App listening on port ${PORT}`)
+  await connectDB();
+  sequelize.sync({ force: false }).then(() => {
+    console.log("✅Synced database successfully...");
+  });
+})

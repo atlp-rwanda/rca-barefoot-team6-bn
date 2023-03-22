@@ -1,19 +1,26 @@
 'use strict'
 import { Model, DataTypes } from 'sequelize';
 import { hash } from 'bcryptjs';
-import { sequelize } from '../config/db';
 require('dotenv').config();
+import { sequelize } from '../config/db';
+
 class User extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate (models) {
+  static associate(models) {
     // define association here
   }
 };
-User.init({
+
+const userObj = {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   firstName: {
     type: DataTypes.STRING,
     unique: false,
@@ -31,27 +38,20 @@ User.init({
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: true
-  },
-  provider: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  providerId: {
-    type: DataTypes.STRING,
-    allowNull: true
+    allowNull: false
   },
   emailVerificationToken: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: ''
+    defaultValue: ""
   },
   isEmailVerified: {
     type: DataTypes.BOOLEAN,
     allowNull: true,
     defaultValue: false
   }
-}, {
+}
+User.init(userObj, {
   sequelize,
   modelName: 'Users'
 });
@@ -61,6 +61,5 @@ User.beforeCreate(async (user, options) => {
   user.password = hashedPassword;
 })
 sequelize.sync();
-
 // export the model
 export default User;
