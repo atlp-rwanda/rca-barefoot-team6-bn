@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import express, {
   json
 } from 'express';
@@ -32,7 +33,17 @@ app.use(passport.session());
 
 app.use(json());
 
-app.get('/', async (req, res) => {
+const db = require('./database/models/index');
+
+db.sequelize?.sync()
+  .then(() => {
+    console.log('Synced with database');
+  })
+  .catch((err) => {
+    console.log('Error syncing with database', err);
+  });
+
+app.get('/api/', async (req, res) => {
   res.json({
     status: true,
     message: 'Our node.js app works'

@@ -14,9 +14,11 @@ class User extends Model {
    */
   static associate (models) {
     // define association here
+
   }
 };
-User.init({
+
+const userObj = {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -25,7 +27,7 @@ User.init({
   firstName: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: false
+    allowNull: true
   },
   lastName: {
     type: DataTypes.STRING,
@@ -78,7 +80,8 @@ User.init({
     type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
     defaultValue: USER_ENUM.CLIENT
   }
-}, {
+}
+User.init(userObj, {
   sequelize,
   modelName: 'Users'
 });
@@ -97,6 +100,5 @@ User.prototype.isValidPassword = async function (password) {
 };
 
 sequelize.sync();
-
 // export the model
 export default User;
