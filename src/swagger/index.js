@@ -7,8 +7,8 @@ dotenv.config();
 
 const host =
   process.env.NODE_ENV === 'production'
-    ? process.env.BASE_URL.split('https://')[1]
-    : process.env.BASE_URL.split('http://')[1];
+    ? process.env.BACKEND_URL.split('https://')[1]
+    : process.env.BACKEND_URL.split('http://')[1];
 
 const paths = {
   ...hello,
@@ -35,41 +35,41 @@ const config = {
   },
   tags: [
     { name: 'Hello', description: 'Example Api' },
-    { name: 'User', description: 'User Api' },
+    { name: 'User', description: 'User Api' }
     // Add other tags here
   ],
   paths,
   definitions: {
     User: {
-      type: "object",
+      type: 'object',
       properties: {
         id: {
-          type: "number",
+          type: 'number',
           example: 0,
           required: true
         },
         firstName: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         lastName: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         email: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         password: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         emailVerificationToken: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         isEmailVerified: {
-          type: "boolean",
+          type: 'boolean',
           example: false
         }
       }

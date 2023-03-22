@@ -29,7 +29,7 @@ class AuthController {
 
       const responseBuffer = Buffer.from(JSON.stringify(apiResponse));
 
-      return res.redirect(`${FRONTEND_URL}/login?code=${responseBuffer.toString('base64')}`);
+      return res.redirect(`${FRONTEND_URL}?code=${responseBuffer.toString('base64')}`);
     } catch (error) {
       if (error.name === 'SequelizeValidationError') {
         const apiResponse = {
@@ -38,7 +38,7 @@ class AuthController {
           error: 'Validation Error'
         };
         const responseBuffer = Buffer.from(JSON.stringify(apiResponse));
-        return res.redirect(`${FRONTEND_URL}/login?code=${responseBuffer.toString('base64')}`);
+        return res.redirect(`${FRONTEND_URL}?code=${responseBuffer.toString('base64')}`);
       }
       // in case the email is not authorized
       if (error.name === 'Email not authorized') {
@@ -48,7 +48,7 @@ class AuthController {
           error: 'Email not authorized'
         };
         const responseBuffer = Buffer.from(JSON.stringify(apiResponse));
-        return res.redirect(`${FRONTEND_URL}/login?code=${responseBuffer.toString('base64')}`);
+        return res.redirect(`${FRONTEND_URL}?code=${responseBuffer.toString('base64')}`);
       }
       // return Response.serverError(res, error);
       const apiResponse = {
@@ -57,7 +57,7 @@ class AuthController {
         error: 'Server Error'
       };
       const responseBuffer = Buffer.from(JSON.stringify(apiResponse));
-      return res.redirect(`${FRONTEND_URL}/login?code=${responseBuffer.toString('base64')}`);
+      return res.redirect(`${FRONTEND_URL}?code=${responseBuffer.toString('base64')}`);
     }
   }
 }

@@ -1,8 +1,8 @@
 'use strict'
 import { Model, DataTypes } from 'sequelize';
 import { hash } from 'bcryptjs';
-require('dotenv').config();
 import { sequelize } from '../config/db';
+require('dotenv').config();
 
 class User extends Model {
   /**
@@ -10,7 +10,7 @@ class User extends Model {
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate(models) {
+  static associate (models) {
     // define association here
   }
 };
@@ -36,14 +36,22 @@ const userObj = {
     unique: true,
     allowNull: false
   },
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  providerId: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   emailVerificationToken: {
     type: DataTypes.STRING,
     allowNull: true,
-    defaultValue: ""
+    defaultValue: ''
   },
   isEmailVerified: {
     type: DataTypes.BOOLEAN,
@@ -57,8 +65,10 @@ User.init(userObj, {
 });
 
 User.beforeCreate(async (user, options) => {
-  const hashedPassword = await hash(user.password, 10)
-  user.password = hashedPassword;
+  if (user.password) {
+    const hashedPassword = await hash(user.password, 10)
+    user.password = hashedPassword;
+  }
 })
 sequelize.sync();
 // export the model

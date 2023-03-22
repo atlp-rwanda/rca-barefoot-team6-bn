@@ -1,10 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-useless-catch */
-import database from '../database/models';
-
-const {
-  user
-} = database;
+import User from '../database/models/user';
 
 /** Class representing user services. */
 
@@ -16,15 +12,14 @@ class UserService {
    */
   static async findOrCreateUser (_user) {
     try {
-      const users = await user.findOrCreate({
+      const users = await User.findOrCreate({
         where: { providerId: _user.providerId, provider: _user.provider },
         defaults: _user
       });
 
       return users;
     } catch (error) {
-      console.log(error);
-
+      console.log('error', error)
       throw error;
     }
   }

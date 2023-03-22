@@ -3,9 +3,12 @@ import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
 import AuthController from '../controllers/authController';
+import { createUser, getUsers, verifyEmail, welcomeNewUser } from '../controllers/userController';
 
 const router = express.Router();
+
 const { loginCallback } = AuthController
+const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = process.env;
 
 // configure google and facebook logins
 passport.serializeUser((user, done) => done(null, user));
@@ -15,8 +18,8 @@ passport.use(
   new GoogleStrategy(
     {
       callbackURL: '/api/users/auth/google/redirect',
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
       profileFields: ['emails', 'firstName', 'lastName']
     },
     (accessToken, refreshToken, profile, done) => {
@@ -36,8 +39,8 @@ passport.use(
   new FacebookStrategy(
     {
       callbackURL: '/api/users/auth/facebook/redirect',
-      clientID: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      clientID: FACEBOOK_APP_ID,
+      clientSecret: FACEBOOK_APP_SECRET,
       profileFields: ['emails', 'firstName', 'lastName']
     },
     (accessToken, refreshToken, profile, done) => {
@@ -78,5 +81,10 @@ router.get(
   passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }),
   loginCallback
 );
+
+router.post('/', createUser)
+router.use('/verify-email/:token', verifyEmail)
+router.get('/verify-email/:token', welcomeNewUser)
+router.get('/', getUsers)
 
 export default router;

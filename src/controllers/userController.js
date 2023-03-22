@@ -4,6 +4,7 @@ import { sendEmail } from '../utils/sendEmail';
 
 export async function createUser(req, res) {
     const { firstName, lastName, email, password } = req.body;
+    console.log("req.body")
     try {
         const existingUser = await User.findOne({ where: { email } });
         if (existingUser) {
