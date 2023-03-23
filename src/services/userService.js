@@ -13,7 +13,7 @@ class UserService {
   static async findOrCreateUser (_user) {
     try {
       const users = await User.findOrCreate({
-        where: { providerId: _user.providerId, provider: _user.provider },
+        where: { email: _user.email },
         defaults: _user
       });
 
