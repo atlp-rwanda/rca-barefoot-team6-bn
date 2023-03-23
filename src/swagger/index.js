@@ -1,17 +1,19 @@
 import dotenv from 'dotenv';
 
 import hello from './hello';
+import user from './user';
 
 dotenv.config();
 
 const host =
-  process.env.NODE_ENV === 'production'
-    ? process.env.BASE_URL.split('https://')[1]
-    : process.env.BASE_URL.split('http://')[1];
+  process.env.NODE_ENV === 'production' ?
+  process.env.BASE_URL.split('https://')[1] :
+  process.env.BASE_URL.split('http://')[1];
 
 const paths = {
-  ...hello
-//   add other defined apis here
+  ...hello,
+  ...user
+  //   add other defined apis here
 };
 
 const config = {
@@ -31,10 +33,31 @@ const config = {
       in: 'header'
     }
   },
-  tags: [
-    { name: 'Hello', description: 'Example Api' }
+  tags: [{
+      name: 'Hello',
+      description: 'Example Api'
+    },
+    {
+      name: 'User',
+      description: 'User Api'
+    }
     // Add other tags here
   ],
-  paths
+  paths,
+  definitions: {
+    LoginInfo: {
+      type: 'object',
+      properties: {
+        email: {
+          type: 'string',
+          example: 'admin@example.com'
+        },
+        password: {
+          type: 'string',
+          example: 'admin123!'
+        }
+      }
+    }
+  }
 };
 export default config;
