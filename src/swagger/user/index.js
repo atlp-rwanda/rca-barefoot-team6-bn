@@ -71,11 +71,10 @@ const user = {
           in: 'body',
           name: 'body',
           schema: {
-            type: 'object',
             properties: {
               email: {
                 type: 'email',
-                example: 'email@gmail.com',
+                example: '',
                 required: true
               }
             }
