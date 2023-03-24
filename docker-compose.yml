@@ -8,23 +8,7 @@ services:
     depends_on:
       - postgres
     ports:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       - '3000:3000'
-=======
-      - '8080:8080'
->>>>>>> fb87bbf (chore(docker): create docker compose file)
-=======
-      - '3000:3000'
->>>>>>> 6599e8e (User Registration and Email Verification)
-=======
-      - '3000:3000'
->>>>>>> f12e49c (chore(docker): expose app to the correct port)
-=======
-      - '3000:3000'
->>>>>>> 8d74a26 (feat: project structure initialization)
     volumes:
       # Maps our current project directory `.` to
       # our working directory in the container

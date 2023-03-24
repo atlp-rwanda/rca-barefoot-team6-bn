@@ -1,16 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import responses from '../responses';
-=======
-import responses from '../responses'
->>>>>>> 5aef2c6 (swagger)
-=======
-import responses from '../responses';
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
-import responses from '../responses';
->>>>>>> 8d74a26 (feat: project structure initialization)
 
 const user = {
   '/users': {
@@ -26,39 +14,12 @@ const user = {
           }
         }
       ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
       consumes: ['application/json'],
       produces: ['application/json'],
       responses,
       security: [
         {
           Bearer: ['global']
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
-      responses,
-      security: [
-        {
-          Bearer: [
-            'global'
-          ]
->>>>>>> 5aef2c6 (swagger)
-=======
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
         }
       ]
     },
@@ -67,39 +28,12 @@ const user = {
       summary: '',
       description: '',
       parameters: [],
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
       consumes: ['application/json'],
       produces: ['application/json'],
       responses,
       security: [
         {
           Bearer: ['global']
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
-      responses,
-      security: [
-        {
-          Bearer: [
-            'global'
-          ]
->>>>>>> 5aef2c6 (swagger)
-=======
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
         }
       ]
     }
@@ -117,13 +51,6 @@ const user = {
           type: 'string'
         }
       ],
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
       consumes: ['application/json'],
       produces: ['application/json'],
       responses,
@@ -143,41 +70,16 @@ const user = {
         {
           in: 'body',
           name: 'body',
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
           schema: {
             properties: {
               email: {
                 type: 'email',
                 example: '',
-=======
-          schema: {
-            properties: {
-              email: {
-                type: 'email',
-<<<<<<< HEAD
-                example: 'email@gmail.com',
->>>>>>> e17b8df (ft(resetPassword):task concluded[# 184638375])
-=======
-                example: '',
->>>>>>> abcac00 (ft(resetPassword):task concluded[# 184638375])
                 required: true
               }
             }
           }
 
-<<<<<<< HEAD
-=======
-          required: true,
-          type: 'email'
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> e17b8df (ft(resetPassword):task concluded[# 184638375])
-=======
-          required: true,
-          type: 'email'
->>>>>>> 8d74a26 (feat: project structure initialization)
         }
       ],
       consumes: ['application/json'],
@@ -205,11 +107,6 @@ const user = {
         {
           in: 'body',
           name: 'password',
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> e17b8df (ft(resetPassword):task concluded[# 184638375])
           schema: {
             type: 'object',
             properties: {
@@ -220,17 +117,6 @@ const user = {
               }
             }
           }
-<<<<<<< HEAD
-=======
-          required: true,
-          type: 'string'
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> e17b8df (ft(resetPassword):task concluded[# 184638375])
-=======
-          required: true,
-          type: 'string'
->>>>>>> 8d74a26 (feat: project structure initialization)
         }
       ],
       consumes: ['application/json'],
@@ -239,42 +125,10 @@ const user = {
       security: [
         {
           Bearer: ['global']
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
-      responses,
-      security: [
-        {
-          Bearer: [
-            'global'
-          ]
->>>>>>> 5aef2c6 (swagger)
-=======
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
         }
       ]
     }
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 };
-=======
-}
->>>>>>> 5aef2c6 (swagger)
-=======
-};
->>>>>>> 962e3ca (ft(Reset-Password): request changing pass via email [Inprogress # 184638375])
-=======
-};
->>>>>>> 8d74a26 (feat: project structure initialization)
 
 export default user;
