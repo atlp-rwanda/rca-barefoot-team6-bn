@@ -70,8 +70,17 @@ const user = {
         {
           in: 'body',
           name: 'body',
-          required: true,
-          type: 'email'
+          schema: {
+            type: 'object',
+            properties: {
+              email: {
+                type: 'email',
+                example: 'email@gmail.com',
+                required: true
+              }
+            }
+          }
+
         }
       ],
       consumes: ['application/json'],
@@ -99,8 +108,16 @@ const user = {
         {
           in: 'body',
           name: 'password',
-          required: true,
-          type: 'string'
+          schema: {
+            type: 'object',
+            properties: {
+              password: {
+                type: 'string',
+                example: 'NewPassword',
+                required: true
+              }
+            }
+          }
         }
       ],
       consumes: ['application/json'],
