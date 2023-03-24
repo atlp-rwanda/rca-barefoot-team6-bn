@@ -23,4 +23,12 @@ app.get('/', async (req, res) => {
   })
 });
 
-app.listen(PORT, () => console.log(`App listening at port ${PORT}`))
+// use swagger apis
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
+app.listen(PORT, async () => {
+  console.log(`App listening on port ${PORT}`)
+  await connectDB();
+  sequelize.sync({ force: false }).then(() => {
+    console.log('✅Synced database successfully...');
+  });
+})
