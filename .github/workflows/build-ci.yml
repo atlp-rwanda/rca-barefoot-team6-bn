@@ -1,25 +1,11 @@
 name: Build
 
-<<<<<<< HEAD
-name: Build
-
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
 on:
   push:
     branches: [develop,main]
     paths-ignore:
       - '**.md'
-<<<<<<< HEAD
-    branches: [develop,main]
-    paths-ignore:
-      - '**.md'
-=======
->>>>>>> 8d74a26 (feat: project structure initialization)
   pull_request:
-    branches: [develop,main]
-    paths-ignore:
-      - '**.md'
     branches: [develop,main]
     paths-ignore:
       - '**.md'
@@ -36,10 +22,10 @@ jobs:
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - run: npm build --if-present
+          cache: npm
+      - name: Install dependencies
+        run: yarn install
+      - name: Build
+        run: yarn build

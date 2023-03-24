@@ -13,7 +13,8 @@ class User extends Model {
     // define association here
   }
 };
-User.init({
+
+const userObj = {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -58,7 +59,8 @@ User.init({
     allowNull: true,
     defaultValue: false
   }
-}, {
+}
+User.init(userObj, {
   sequelize,
   modelName: 'Users'
 });
@@ -68,6 +70,5 @@ User.beforeCreate(async (user, options) => {
   user.password = hashedPassword;
 })
 sequelize.sync();
-
 // export the model
 export default User;
