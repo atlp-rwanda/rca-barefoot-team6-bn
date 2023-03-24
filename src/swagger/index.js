@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 
 import hello from './hello';
 import user from './user';
+import auth from './auth';
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const host =
 
 const paths = {
   ...hello,
-  ...user
+  ...user,
+  ...auth
   //   add other defined apis here
 };
 
@@ -40,6 +42,10 @@ const config = {
   {
     name: 'User',
     description: 'User Api'
+  },
+  {
+    name: 'Auth',
+    description: 'Authentication Api'
   }
     // Add other tags here
   ],

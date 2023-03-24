@@ -36,9 +36,17 @@ const userObj = {
     unique: true,
     allowNull: false
   },
+  facebookId: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  googleId: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
   },
   resetPasswordToken: {
     type: DataTypes.STRING,
@@ -72,8 +80,10 @@ User.init(userObj, {
 });
 
 User.beforeCreate(async (user, options) => {
-  const hashedPassword = await hash(user.password, 10)
-  user.password = hashedPassword;
+  if (user.password) {
+    const hashedPassword = await hash(user.password, 10)
+    user.password = hashedPassword;
+  }
 })
 
 User.prototype.isValidPassword = async function (password) {
