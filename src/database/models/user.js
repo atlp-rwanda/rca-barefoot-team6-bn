@@ -71,3 +71,9 @@ sequelize.sync();
 
 // export the model
 export default User;
+<<<<<<< HEAD
+
+// export the model
+export default User;
+=======
+>>>>>>> c977833 (feat: added swagger documentation with openain)

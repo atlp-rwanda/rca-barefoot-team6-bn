@@ -4,7 +4,8 @@ import express, {
 
 // swagger
 import swaggerUI from 'swagger-ui-express';
-import swaggerJsDoc from 'swagger-jsdoc';
+// api docs
+import apiDoc from './swagger';
 import connectDB, { sequelize } from './database/config/db';
 
 const app = express();

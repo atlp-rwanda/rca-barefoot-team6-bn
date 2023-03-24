@@ -21,3 +21,6 @@ export async function sendEmail (to, subject, text, html) {
   });
   console.log('Message sent: %s', info.messageId);
 }
+
+// Generate random token
+export const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
