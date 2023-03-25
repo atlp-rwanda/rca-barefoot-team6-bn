@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
 import hello from './hello';
+import user from './user';
 
 dotenv.config();
 
@@ -10,8 +11,9 @@ const host =
     : process.env.BASE_URL.split('http://')[1];
 
 const paths = {
-  ...hello
-//   add other defined apis here
+  ...hello,
+  ...user
+  //   add other defined apis here
 };
 
 const config = {
@@ -31,10 +33,52 @@ const config = {
       in: 'header'
     }
   },
-  tags: [
-    { name: 'Hello', description: 'Example Api' }
+  tags: [{
+    name: 'Hello',
+    description: 'Example Api'
+  },
+  {
+    name: 'User',
+    description: 'User Api'
+  }
     // Add other tags here
   ],
-  paths
+  paths,
+  definitions: {
+    LoginInfo: {
+      type: 'object',
+      properties: {
+        email: {
+          type: 'string',
+          example: 'admin@example.com'
+        },
+        password: {
+          type: 'string',
+          example: 'admin123!'
+        }
+      }
+    },
+    User: {
+      type: 'object',
+      properties: {
+        firstName: {
+          type: 'string',
+          example: 'string'
+        },
+        lastName: {
+          type: 'string',
+          example: 'string'
+        },
+        email: {
+          type: 'string',
+          example: 'string'
+        },
+        password: {
+          type: 'string',
+          example: 'string'
+        }
+      }
+    }
+  }
 };
 export default config;
