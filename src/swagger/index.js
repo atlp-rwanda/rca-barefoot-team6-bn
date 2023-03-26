@@ -6,9 +6,9 @@ import user from './user';
 dotenv.config();
 
 const host =
-  process.env.NODE_ENV === 'production' ?
-    process.env.BASE_URL.split('https://')[1] :
-    process.env.BASE_URL.split('http://')[1];
+  process.env.NODE_ENV === 'production'
+    ? process.env.BASE_URL.split('https://')[1]
+    : process.env.BASE_URL.split('http://')[1];
 
 const paths = {
   ...hello,
@@ -59,23 +59,23 @@ const config = {
       }
     },
     User: {
-      type: "object",
+      type: 'object',
       properties: {
         firstName: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         lastName: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         email: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         },
         password: {
-          type: "string",
-          example: "string"
+          type: 'string',
+          example: 'string'
         }
       }
     }
