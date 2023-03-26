@@ -1,6 +1,8 @@
 import express, {
   json
 } from 'express';
+import dotenv from 'dotenv';
+import userRoute from './routes/userRoute';
 
 // swagger
 import swaggerUI from 'swagger-ui-express';
@@ -9,10 +11,9 @@ import apiDoc from './swagger';
 import connectDB, { sequelize } from './database/config/db';
 
 const app = express();
-require('dotenv').config();
+dotenv.config();
 
 app.use(json())
-const userRoute = require('./routes/userRoute').default;
 app.use('/api/users', userRoute);
 const PORT = process.env.PORT || 3000;
 

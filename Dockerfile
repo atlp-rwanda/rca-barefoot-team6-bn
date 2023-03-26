@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Necessary for your browser to send HTTP requests to your Node app
-EXPOSE 3000
+EXPOSE 8080
 
 # Command to run when the container is ready
 CMD [ "npm", "run", "dev"]

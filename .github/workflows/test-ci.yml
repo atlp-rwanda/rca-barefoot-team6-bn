@@ -23,24 +23,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
       - run: npm run test --if-present
-=======
-      - run: npm test --if-present
->>>>>>> 9ab3d20 (chore: rename to test ci)
-=======
-      - run: npm run test --if-present
->>>>>>> 6599e8e (User Registration and Email Verification)
-=======
-      # - run: npm run test --if-present
->>>>>>> 02e26dd (ft: comment out test and build scripts)
-=======
-      - run: npm run test --if-present
->>>>>>> b797747 (feat: fixed run commands)
-=======
-      - run: npm run test --if-present
->>>>>>> 8d74a26 (feat: project structure initialization)
