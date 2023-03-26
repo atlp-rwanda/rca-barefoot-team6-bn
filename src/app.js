@@ -1,9 +1,8 @@
 import express, {
   json
 } from 'express';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'; // Using require
 import userRoute from './routes/userRoute';
-
 // swagger
 import swaggerUI from 'swagger-ui-express';
 // api docs

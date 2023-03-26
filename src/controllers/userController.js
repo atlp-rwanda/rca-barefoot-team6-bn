@@ -98,3 +98,15 @@ async function sendVerificationEmail (email, token) {
 async function updateUserVerificationInfo (userId, token, isVerified) {
   await User.update({ emailVerificationToken: token, isEmailVerified: isVerified }, { where: { id: userId } });
 }
+// logout
+export async function logout (req, res) {
+  try {
+    const user = await User.findOne({ where: { id: req.user.id } });
+    user.isLoggedIn = false;
+    user.update();
+    user.save();
+    return res.status(200).json({ message: 'logged out' });
+  } catch (e) {
+    return res.status(500).send(e);
+  }
+}

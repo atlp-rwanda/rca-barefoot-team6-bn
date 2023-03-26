@@ -126,6 +126,24 @@ const user = {
         JWT: []
       }]
     }
+  },
+  '/users/logout': {
+    put: {
+      tags: ['User'],
+      summary: '',
+      parameters: [],
+      description: '',
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
+      responses,
+      security: [{
+        JWT: []
+      }]
+    }
   }
 }
 
