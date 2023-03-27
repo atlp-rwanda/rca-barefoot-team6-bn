@@ -1,9 +1,9 @@
+/* eslint-disable no-undef */
 import User from '../database/models/user';
 import jwt from 'jsonwebtoken';
 import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
 import { sendEmail } from '../utils/sendEmail';
 import { generateResetPasswordToken } from '../utils/passwordResetToken';
-
 
 export async function createUser (req, res) {
   const { firstName, lastName, email, password } = req.body;
@@ -110,7 +110,6 @@ export async function logout (req, res) {
   }
 }
 
-
 // POST request to initiate password change process
 exports.initiatePasswordReset = async (req, res) => {
   try {
@@ -180,4 +179,3 @@ async function updateUserPasswordResetToken (userEmail, token) {
     { where: { email: userEmail } }
   );
 };
-

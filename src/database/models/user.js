@@ -82,7 +82,6 @@ User.prototype.isValidPassword = async function (password) {
   return compareResult;
 };
 
-
 sequelize.sync();
 // export the model
 export default User;

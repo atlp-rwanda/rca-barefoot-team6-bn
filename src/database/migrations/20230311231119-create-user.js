@@ -17,13 +17,13 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
-       resetPasswordToken: {
+      resetPasswordToken: {
         type: Sequelize.STRING,
         allowNull: true
       },
@@ -62,4 +62,3 @@ module.exports = {
     await queryInterface.dropTable('Users');
   }
 };
-
