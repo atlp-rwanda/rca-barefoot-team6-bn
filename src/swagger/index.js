@@ -33,21 +33,34 @@ const config = {
       in: 'header'
     }
   },
-  tags: [
-    { name: 'Hello', description: 'Example Api' },
-    { name: 'User', description: 'User Api' }
+  tags: [{
+    name: 'Hello',
+    description: 'Example Api'
+  },
+  {
+    name: 'User',
+    description: 'User Api'
+  }
     // Add other tags here
   ],
   paths,
   definitions: {
+    LoginInfo: {
+      type: 'object',
+      properties: {
+        email: {
+          type: 'string',
+          example: 'admin@example.com'
+        },
+        password: {
+          type: 'string',
+          example: 'admin123!'
+        }
+      }
+    },
     User: {
       type: 'object',
       properties: {
-        id: {
-          type: 'number',
-          example: 0,
-          required: true
-        },
         firstName: {
           type: 'string',
           example: 'string'
@@ -63,22 +76,6 @@ const config = {
         password: {
           type: 'string',
           example: 'string'
-        },
-        resetPasswordToken: {
-          type: 'string',
-          example: 'string'
-        },
-        resetPasswordExpires: {
-          type: 'timestamp',
-          example: 'string'
-        },
-        emailVerificationToken: {
-          type: 'string',
-          example: 'string'
-        },
-        isEmailVerified: {
-          type: 'boolean',
-          example: false
         }
       }
     }
