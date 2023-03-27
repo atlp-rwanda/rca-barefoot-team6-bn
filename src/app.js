@@ -1,7 +1,6 @@
 import express, {
   json
 } from 'express';
-
 import dotenv from 'dotenv'; // Using require
 import userRoute from './routes/userRoute';
 

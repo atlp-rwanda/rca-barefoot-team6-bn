@@ -4,6 +4,7 @@ import { generateEmailVerificationToken } from '../utils/emailVerificationToken'
 import { sendEmail } from '../utils/sendEmail';
 import { generateResetPasswordToken } from '../utils/passwordResetToken';
 
+
 export async function createUser (req, res) {
   const { firstName, lastName, email, password } = req.body;
   try {
@@ -69,7 +70,6 @@ export async function getMyProfile (req, res) {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
-    // eslint-disable-next-line no-undef
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {
@@ -109,6 +109,7 @@ export async function logout (req, res) {
     return res.status(500).send(e);
   }
 }
+
 
 // POST request to initiate password change process
 exports.initiatePasswordReset = async (req, res) => {
@@ -179,3 +180,4 @@ async function updateUserPasswordResetToken (userEmail, token) {
     { where: { email: userEmail } }
   );
 };
+

@@ -1,8 +1,9 @@
 'use strict'
 import { Model, DataTypes } from 'sequelize';
-import { hash } from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
 require('dotenv').config();
+
 class User extends Model {
   /**
    * Helper method for defining associations.
@@ -23,7 +24,7 @@ const userObj = {
   firstName: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: false
+    allowNull: true
   },
   lastName: {
     type: DataTypes.STRING,
@@ -58,6 +59,11 @@ const userObj = {
     type: DataTypes.BOOLEAN,
     allowNull: true,
     defaultValue: false
+  },
+  isLoggedIn: {
+    type: DataTypes.BOOLEAN,
+    allowNull: true,
+    defaultValue: false
   }
 }
 User.init(userObj, {
@@ -69,6 +75,14 @@ User.beforeCreate(async (user, options) => {
   const hashedPassword = await hash(user.password, 10)
   user.password = hashedPassword;
 })
+
+User.prototype.isValidPassword = async function (password) {
+  const user = this;
+  const compareResult = await compare(password, user.password);
+  return compareResult;
+};
+
+
 sequelize.sync();
 // export the model
 export default User;
