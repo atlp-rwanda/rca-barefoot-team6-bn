@@ -1,8 +1,9 @@
-
 'use strict'
 import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
+require('dotenv').config();
+
 class User extends Model {
   /**
    * Helper method for defining associations.
@@ -38,6 +39,16 @@ const userObj = {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  resetPasswordToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: ''
+  },
+  resetPasswordExpires: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    defaultValue: null
   },
   emailVerificationToken: {
     type: DataTypes.STRING,

@@ -127,6 +127,74 @@ const user = {
       }]
     }
   },
+  '/users/request-password-reset': {
+    post: {
+      tags: ['User'],
+      summary: '',
+      description: 'endpoint to request a password reset',
+      parameters: [
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            properties: {
+              email: {
+                type: 'email',
+                example: '',
+                required: true
+              }
+            }
+          }
+
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          Bearer: ['global']
+        }
+      ]
+    }
+  },
+  '/users/reset-password/{token}': {
+    post: {
+      tags: ['User'],
+      summary: '',
+      description: 'reset password endpoint',
+      parameters: [
+        {
+          in: 'path',
+          name: 'token',
+          required: true,
+          type: 'string'
+        },
+        {
+          in: 'body',
+          name: 'password',
+          schema: {
+            type: 'object',
+            properties: {
+              password: {
+                type: 'string',
+                example: 'NewPassword',
+                required: true
+              }
+            }
+          }
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          Bearer: ['global']
+        }
+      ]
+    }
+  },
   '/users/logout': {
     put: {
       tags: ['User'],

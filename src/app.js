@@ -3,6 +3,7 @@ import express, {
 } from 'express';
 import dotenv from 'dotenv'; // Using require
 import userRoute from './routes/userRoute';
+
 // swagger
 import swaggerUI from 'swagger-ui-express';
 // api docs
@@ -13,6 +14,7 @@ const app = express();
 dotenv.config();
 
 app.use(json())
+
 app.use('/api/users', userRoute);
 const PORT = process.env.PORT || 3000;
 

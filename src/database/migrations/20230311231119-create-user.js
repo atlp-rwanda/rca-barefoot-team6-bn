@@ -17,11 +17,19 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
+      },
+      resetPasswordToken: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      resetPasswordExpires: {
+        type: Sequelize.DATE,
+        allowNull: true
       },
       emailVerificationToken: {
         type: Sequelize.STRING,
