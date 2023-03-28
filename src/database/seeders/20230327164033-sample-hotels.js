@@ -11,6 +11,7 @@ module.exports = {
           email: "reservations@thegrandhotel.com",
           address: "123 Main St, City, State",
           website: "https://www.thegrandhotel.com",
+<<<<<<< HEAD
           province: "Kigali",
           district: "Gasabo",
           sector: "Kacyiru",
@@ -20,6 +21,8 @@ module.exports = {
           //   latitude: 37.7749,
           //   longitude: -122.4194
           // },
+=======
+>>>>>>> 27815fd (feat: create CRUD operations for hotels)
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -27,6 +30,7 @@ module.exports = {
           name: "Luxury Inn",
           email: "info@luxuryinn.com",
           address: "456 Broad St, City, State",
+<<<<<<< HEAD
           province: "North",
           district: "Musanze",
           sector: "Muhoza",
@@ -36,6 +40,8 @@ module.exports = {
           //   latitude: 37.7749,
           //   longitude: -122.4194
           // },
+=======
+>>>>>>> 27815fd (feat: create CRUD operations for hotels)
           website: "https://www.luxuryinn.com",
           createdAt: new Date(),
           updatedAt: new Date(),
