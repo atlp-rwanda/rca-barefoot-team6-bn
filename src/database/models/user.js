@@ -2,7 +2,8 @@
 import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 class User extends Model {
   /**
@@ -10,7 +11,7 @@ class User extends Model {
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate (models) {
+  static associate(models) {
     // define association here
   }
 };
@@ -20,6 +21,10 @@ const userObj = {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
+  },
+  role: {
+    type: DataTypes.ENUM('USER', 'AGENT', 'ADMIN'),
+    defaultValue: 'USER'
   },
   firstName: {
     type: DataTypes.STRING,

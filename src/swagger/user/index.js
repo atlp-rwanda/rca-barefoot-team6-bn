@@ -41,13 +41,9 @@ const user = {
         'application/json'
       ],
       responses,
-      security: [
-        {
-          Bearer: [
-            'global'
-          ]
-        }
-      ]
+      security: [{
+        JWT: []
+      }]
     }
   },
   '/users/verify-email/{token}': {
