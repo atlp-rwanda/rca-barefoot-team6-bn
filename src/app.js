@@ -3,6 +3,7 @@ import express, {
 } from 'express';
 import dotenv from 'dotenv';
 import userRoute from './routes/userRoute';
+import hotelRoute from './routes/hotelRoute';
 
 // swagger
 import swaggerUI from 'swagger-ui-express';
@@ -15,6 +16,8 @@ dotenv.config();
 
 app.use(json())
 app.use('/api/users', userRoute);
+app.use('/api/hotels', hotelRoute);
+
 const PORT = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
