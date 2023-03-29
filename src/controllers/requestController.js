@@ -25,6 +25,8 @@ export const createRequest = async (req, res) => {
             user_id: user.id,
             room_id
         });
+        request.UserId = undefined
+        request.RoomId = undefined
         return res.status(201).json({
             message: 'Request created successfully',
             data: request
@@ -88,3 +90,20 @@ export const updateRequest = async (req, res) => {
         return res.status(500).json({ message: 'Server Error', error: err.message });
     }
 };
+// Get Requests
+export async function getRequests(req, res) {
+    try {
+        const requests = await Request.findAll();
+        res.status(200).json({
+            status: true,
+            message: "Requests found",
+            data: requests
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: false,
+            message: "Internal server error",
+            error,
+        });
+    }
+}

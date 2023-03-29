@@ -5,6 +5,7 @@ import user from './user';
 import request from './request';
 import hotel from './hotel';
 import room from './room';
+import auth from './auth';
 
 dotenv.config();
 
@@ -16,9 +17,10 @@ const host =
 const paths = {
   ...hello,
   ...user,
-  ...request,
   ...hotel,
-  ...room
+  ...room,
+  ...request,
+  ...auth
   //   add other defined apis here
 };
 
@@ -46,6 +48,10 @@ const config = {
   {
     name: 'User',
     description: 'User Api'
+  },
+  {
+    name: 'Auth',
+    description: 'Authentication Api'
   }
     // Add other tags here
   ],
@@ -67,6 +73,10 @@ const config = {
     User: {
       type: 'object',
       properties: {
+        role: {
+          type: 'string',
+          example: 'USER'
+        },
         firstName: {
           type: 'string',
           example: 'string'
@@ -74,10 +84,6 @@ const config = {
         lastName: {
           type: 'string',
           example: 'string'
-        },
-        role: {
-          type: 'string',
-          example: 'USER'
         },
         email: {
           type: 'string',
@@ -125,7 +131,7 @@ const config = {
       properties: {
         name: {
           type: "string",
-          example: "The Grand Hotel"
+          example: "Stunning Room"
         },
         description: {
           type: "string",

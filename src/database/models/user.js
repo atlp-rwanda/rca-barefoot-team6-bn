@@ -43,7 +43,15 @@ const userObj = {
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
+  },
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  providerId: {
+    type: DataTypes.TEXT,
+    allowNull: true
   },
   resetPasswordToken: {
     type: DataTypes.STRING,
@@ -77,8 +85,10 @@ User.init(userObj, {
 });
 
 User.beforeCreate(async (user, options) => {
-  const hashedPassword = await hash(user.password, 10)
-  user.password = hashedPassword;
+  if (user.password) {
+    const hashedPassword = await hash(user.password, 10)
+    user.password = hashedPassword;
+  }
 })
 
 User.prototype.isValidPassword = async function (password) {

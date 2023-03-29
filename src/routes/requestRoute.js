@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createRequest, updateRequest } from '../controllers/requestController';
+import { createRequest, getRequests, updateRequest } from '../controllers/requestController';
 import { isLoggedIn } from '../middlewares/authMiddleware'
 const router = Router();
 
@@ -13,5 +13,6 @@ router.post('/:room_id', isLoggedIn, createRequest);
 // @access Private
 // validateRequestFn
 router.put('/:id', isLoggedIn, updateRequest);
+router.get('/', isLoggedIn, getRequests);
 
 export default router

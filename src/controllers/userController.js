@@ -41,7 +41,6 @@ export async function welcomeNewUser(req, res) {
 // login user
 export async function loginUser(req, res) {
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -67,6 +66,7 @@ export async function loginUser(req, res) {
 // get user profile
 export async function getMyProfile(req, res) {
   try {
+
     let user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
     if (!user)

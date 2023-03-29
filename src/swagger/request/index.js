@@ -1,6 +1,22 @@
 import responses from '../responses'
 
 const request = {
+  '/requests': {
+    get: {
+      tags: ["Request"],
+      summary: "Get Requests",
+      description: "",
+      parameters: [],
+      consumes: ["application/json"],
+      produces: ["application/json"],
+      responses,
+      security: [
+        {
+          Bearer: ["global"],
+        },
+      ],
+    },
+  },
   '/requests/{room_id}': {
     post: {
       tags: [
