@@ -46,6 +46,10 @@ const config = {
   {
     name: 'Auth',
     description: 'Authentication Api'
+  },
+  {
+    name: 'Request',
+    description: 'Request Api'
   }
     // Add other tags here
   ],

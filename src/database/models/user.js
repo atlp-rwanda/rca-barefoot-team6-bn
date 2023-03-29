@@ -2,8 +2,9 @@
 import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
-require('dotenv').config();
+import dotenv from 'dotenv'
 
+dotenv.config();
 class User extends Model {
   /**
    * Helper method for defining associations.
