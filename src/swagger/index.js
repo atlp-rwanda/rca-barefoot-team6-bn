@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import hello from './hello';
 import user from './user';
 import auth from './auth';
+import destinations from './destinations';
 
 dotenv.config();
 
@@ -14,7 +15,8 @@ const host =
 const paths = {
   ...hello,
   ...user,
-  ...auth
+  ...auth,
+  ...destinations
   //   add other defined apis here
 };
 

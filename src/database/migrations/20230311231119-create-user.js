@@ -28,17 +28,13 @@ module.exports = {
         allowNull: true
       },
       resetPasswordExpires: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       facebookId: {
         type: Sequelize.STRING,
         allowNull: true
       },
       googleId: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
-      password: {
         type: Sequelize.STRING,
         allowNull: true
       },
