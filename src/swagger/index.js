@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 
 import hello from './hello';
 import user from './user';
+import hotel from './hotel';
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const host =
 
 const paths = {
   ...hello,
-  ...user
+  ...user,
+  ...hotel
   //   add other defined apis here
 };
 
@@ -76,6 +78,27 @@ const config = {
         password: {
           type: 'string',
           example: 'string'
+        }
+      }
+    },
+    Hotel: {
+      type: "object",
+      properties: {
+        name: {
+          type: "string",
+          example: "The Grand Hotel"
+        },
+        email: {
+          type: "string",
+          example: "reservations@thegrandhotel.com"
+        },
+        address: {
+          type: "string",
+          example: "123 Main St, City, State"
+        },
+        website: {
+          type: "string",
+          example: "https://www.luxuryinn.com"
         }
       }
     }
