@@ -1,7 +1,6 @@
 import responses from '../responses';
 
 const hotel = {
-
   '/hotels': {
     post: {
       tags: ['Hotel'],
@@ -20,7 +19,7 @@ const hotel = {
       responses,
       security: [
         {
-          JWT: []
+          Bearer: ['global']
         }
       ]
     },
@@ -34,7 +33,7 @@ const hotel = {
       responses,
       security: [
         {
-          JWT: []
+          Bearer: ['global']
         }
       ]
     }
@@ -57,7 +56,7 @@ const hotel = {
       responses,
       security: [
         {
-          JWT: []
+          Bearer: ['global']
         }
       ]
     },
