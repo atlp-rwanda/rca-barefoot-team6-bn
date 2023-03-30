@@ -5,7 +5,7 @@ import express, {
 import dotenv from 'dotenv'; // Using require
 import userRoute from './routes/userRoute';
 import hotelRoute from './routes/hotelRoute';
-
+import feedbackRoute from './routes/feedbackRoute';
 // swagger
 import swaggerUI from 'swagger-ui-express';
 // api docs
@@ -23,6 +23,8 @@ new Swaggiffy().setupExpress(app).swaggiffy();
 app.use(json())
 app.use(cors());
 app.use('/api/users', userRoute);
+app.use('/api/feedback', feedbackRoute);
+app.use('/api/hotel', hotelRoute);
 
 const PORT = process.env.PORT || 3000;
 

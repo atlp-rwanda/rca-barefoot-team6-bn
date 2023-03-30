@@ -4,7 +4,7 @@ import { sequelize } from '../config/db';
 import { config } from 'dotenv';
 
 config();
-class Token extends Model {
+class Feedback extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
@@ -14,7 +14,7 @@ class Token extends Model {
     // define association here
   }
 };
-Token.init({
+Feedback.init({
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -22,21 +22,34 @@ Token.init({
   },
   userId: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'id'
+    }
+  },
+  hotelId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Hotels',
+      key: 'id'
+    }
+  },
+  subject: {
+    type: DataTypes.STRING,
     allowNull: false
   },
-  state: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    validate: {
-      isIn: [['active', 'inactive']]
-    }
+  feedback: {
+    type: DataTypes.TEXT,
+    allowNull: false
   }
 }, {
   sequelize,
-  modelName: 'Tokens'
+  modelName: 'Feedbacks'
 });
 
 sequelize.sync();
 
 // export the model
-export default Token;
+export default Feedback;
