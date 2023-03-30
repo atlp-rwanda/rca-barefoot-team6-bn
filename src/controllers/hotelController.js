@@ -2,6 +2,10 @@ import Hotel from '../database/models/hotel';
 
 // create a hotel
 export async function createHotel (req, res) {
+<<<<<<< HEAD
+=======
+  const { name, address, email, website } = req.body;
+>>>>>>> fb33450 (ft: feedback)
   try {
     const existingHotel = await Hotel.findOne({ where: { email: req.body.email } });
     if (existingHotel) {
