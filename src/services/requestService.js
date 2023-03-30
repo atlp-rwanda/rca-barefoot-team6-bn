@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-useless-catch */
 import Request from '../database/models/request';
+import Room from '../database/models/room';
 
 /** Class representing request services. */
 
@@ -74,6 +75,22 @@ class RequestService {
   }
 
   /**
+   * Get requests of a hotel
+   * @param hotelId hotel id
+   * @returns {[object]} all requests in a hotel
+   */
+  static async getRequestsByHotelId (hotelId) {
+    try {
+      const allRooms = Room.findAll({ where: { hotelId } });
+      // then find all requests that have roomId in allRooms object
+      const requests = await Request.findAll({ where: { roomId: allRooms } });
+      return requests;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
    * Filter requests by different params
    * @param {object} {status, roomId, userId, checkIn, checkOut}
    * @returns {[object]} requests that matches all the params
@@ -82,6 +99,24 @@ class RequestService {
     try {
       const requests = await Request.findAll({ where: { ...params } });
       return requests;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+   * change request status
+   * @param id request id
+   * @param status request status
+   * @returns {object} updated data
+   */
+  static async changeRequestStatus (id, status) {
+    try {
+      const request = await Request.update({ status }, { where: { id } });
+      if (request.length > 0) {
+        return await this.getRequestById(id)
+      }
+      return request;
     } catch (error) {
       throw error;
     }
