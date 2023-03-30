@@ -123,11 +123,10 @@ const user = {
       ],
       responses,
       security: [{
-        JWT: [],
+        JWT: []
       }]
     }
-  },
+  }
 }
-
 
 export default user;
