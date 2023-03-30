@@ -1,115 +1,145 @@
-import responses from "../responses";
+import responses from '../responses';
 
 const hotel = {
-  "/hotels": {
+  '/hotels': {
     post: {
-      tags: ["Hotel"],
-      summary: "",
+      tags: ['Hotel'],
+      summary: '',
       parameters: [
         {
-          in: "body",
-          name: "body",
+          in: 'body',
+          name: 'body',
           schema: {
-            $ref: "#/definitions/Hotel",
-          },
-        },
+            $ref: '#/definitions/Hotel'
+          }
+        }
       ],
-      consumes: ["application/json"],
-      produces: ["application/json"],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: ["global"],
-        },
-      ],
+          Bearer: ['global']
+        }
+      ]
     },
     get: {
-      tags: ["Hotel"],
-      summary: "",
-      description: "",
+      tags: ['Hotel'],
+      summary: '',
+      description: '',
       parameters: [],
-      consumes: ["application/json"],
-      produces: ["application/json"],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: ["global"],
-        },
-      ],
-    },
+          Bearer: ['global']
+        }
+      ]
+    }
   },
-  "/hotels/{id}": {
+  '/hotels/{id}': {
     get: {
-      tags: ["Hotel"],
-      summary: "",
-      description: "",
+      tags: ['Hotel'],
+      summary: '',
+      description: '',
       parameters: [
         {
-          in: "path",
-          name: "id",
+          in: 'path',
+          name: 'id',
           required: true,
-          type: "string",
-        },
+          type: 'string'
+        }
       ],
-      consumes: ["application/json"],
-      produces: ["application/json"],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: ["global"],
-        },
-      ],
+          Bearer: ['global']
+        }
+      ]
     },
     put: {
-      tags: ["Hotel"],
-      summary: "",
-      description: "",
+      tags: ['Hotel'],
+      summary: '',
+      description: '',
       parameters: [
         {
-          in: "path",
-          name: "id",
+          in: 'path',
+          name: 'id',
           required: true,
-          type: "string",
+          type: 'string'
         },
         {
-          in: "body",
-          name: "body",
+          in: 'body',
+          name: 'body',
           schema: {
-            $ref: "#/definitions/Hotel",
-          },
-        },
+            $ref: '#/definitions/Hotel'
+          }
+        }
       ],
-      consumes: ["application/json"],
-      produces: ["application/json"],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: ["global"],
-        },
-      ],
+          Bearer: ['global']
+        }
+      ]
     },
     delete: {
-      tags: ["Hotel"],
-      summary: "",
-      description: "",
+      tags: ['Hotel'],
+      summary: '',
+      description: '',
       parameters: [
         {
-          in: "path",
-          name: "id",
+          in: 'path',
+          name: 'id',
           required: true,
-          type: "string",
-        },
+          type: 'string'
+        }
       ],
-      consumes: ["application/json"],
-      produces: ["application/json"],
+      consumes: ['application/json'],
+      produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: ["global"],
-        },
-      ],
-    },
+          Bearer: ['global']
+        }
+      ]
+    }
   },
+  '/search': {
+    post: {
+      tags: ['Hotel'],
+      summary: 'Search for records across all tables',
+      parameters: [
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            type: 'object',
+            properties: {
+              searchText: {
+                type: 'string',
+                example: 'grandhotel',
+                required: true
+              }
+            }
+          }
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          Bearer: ['global']
+        }
+      ]
+    }
+  }
 };
 
 export default hotel;

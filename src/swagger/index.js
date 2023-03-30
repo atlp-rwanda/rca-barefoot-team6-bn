@@ -82,23 +82,23 @@ const config = {
       }
     },
     Hotel: {
-      type: "object",
+      type: 'object',
       properties: {
         name: {
-          type: "string",
-          example: "The Grand Hotel"
+          type: 'string',
+          example: 'The Grand Hotel'
         },
         email: {
-          type: "string",
-          example: "reservations@thegrandhotel.com"
+          type: 'string',
+          example: 'reservations@thegrandhotel.com'
         },
         address: {
-          type: "string",
-          example: "123 Main St, City, State"
+          type: 'string',
+          example: '123 Main St, City, State'
         },
         website: {
-          type: "string",
-          example: "https://www.luxuryinn.com"
+          type: 'string',
+          example: 'https://www.luxuryinn.com'
         }
       }
     }
