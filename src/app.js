@@ -2,9 +2,7 @@ import express, {
   json
 } from 'express';
 import dotenv from 'dotenv'; // Using require
-import userRoute from './routes/userRoute';
 import requestRoute from './routes/requestRoute';
-import hotelRoute from './routes/hotelRoute';
 import roomRoute from './routes/roomRoute';
 import passport from 'passport';
 import session from 'express-session';
@@ -35,11 +33,6 @@ app.use(passport.session());
 
 app.use(json());
 
-app.use('/api/users', userRoute);
-app.use('/api/requests', requestRoute);
-app.use('/api/hotels', hotelRoute);
-app.use('/api/rooms', roomRoute);
-
 app.get('/', async (req, res) => {
   res.json({
     status: true,
@@ -52,6 +45,8 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 
 // all apis
 app.use('/api', routes);
+app.use('/api/requests', requestRoute);
+app.use('/api/rooms', roomRoute);
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)
   await connectDB();

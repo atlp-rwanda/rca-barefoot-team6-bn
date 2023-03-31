@@ -6,6 +6,7 @@ import request from './request';
 import hotel from './hotel';
 import room from './room';
 import auth from './auth';
+import destinations from './destinations';
 
 dotenv.config();
 
@@ -20,7 +21,8 @@ const paths = {
   ...hotel,
   ...room,
   ...request,
-  ...auth
+  ...auth,
+  ...destinations
   //   add other defined apis here
 };
 
@@ -96,6 +98,31 @@ const config = {
         },
       },
     },
+    Room: {
+      type: "object",
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Room 1'
+        },
+        description: {
+          type: "string",
+          example: "Room description",
+        },
+        maxAccomodate: {
+          type: "integer",
+          example: "2",
+        },
+        floor: {
+          type: "integer",
+          example: "2",
+        },
+        roomType: {
+          type: "string",
+          example: "SINGLE",
+        },
+      },
+    },
     Hotel: {
       type: "object",
       properties: {
@@ -141,6 +168,16 @@ const config = {
         },
       },
     },
+    Request: {
+      type: 'object',
+      properties: {
+        status: {
+          type: 'string',
+          example: 'PENDING',
+          required: true
+        }
+      }
+    }
   },
 };
 export default config;
