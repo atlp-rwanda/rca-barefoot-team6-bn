@@ -2,13 +2,12 @@ import Hotel from '../database/models/hotel';
 
 // create a hotel
 export async function createHotel(req, res) {
-  const {name, address, email, website} = req.body;
   try {
-    const existingHotel = await Hotel.findOne({ where: { email } });
+    const existingHotel = await Hotel.findOne({ where: { email: req.body.email } });
     if (existingHotel) {
-        return res.status(400).json({ error: 'Email already registered' });
+      return res.status(400).json({ error: 'Email already registered' });
     }
-    const hotel = await Hotel.create({ name, address, email, website });
+    const hotel = await Hotel.create(req.body);
     res.status(201).json({
       status: true,
       message: "Hotel created successfully",

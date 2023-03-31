@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 import hello from './hello';
 import user from './user';
@@ -10,9 +10,9 @@ import auth from './auth';
 dotenv.config();
 
 const host =
-  process.env.NODE_ENV === 'production'
-    ? process.env.BASE_URL.split('https://')[1]
-    : process.env.BASE_URL.split('http://')[1];
+  process.env.NODE_ENV === "production"
+    ? process.env.BASE_URL.split("https://")[1]
+    : process.env.BASE_URL.split("http://")[1];
 
 const paths = {
   ...hello,
@@ -25,132 +25,122 @@ const paths = {
 };
 
 const config = {
-  swagger: '2.0',
+  swagger: "2.0",
   info: {
-    description: 'Barefoot Normard Unflappables APIs',
-    version: '1.0.0',
-    title: 'Unflappables Team'
+    description: "Barefoot Normard Unflappables APIs",
+    version: "1.0.0",
+    title: "Unflappables Team",
   },
   host,
-  basePath: ['/api/'],
-  schemes: ['http', 'https'],
+  basePath: ["/api/"],
+  schemes: ["http", "https"],
   securityDefinitions: {
     JWT: {
-      type: 'apiKey',
-      name: 'Authorization',
-      in: 'header'
-    }
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+    },
   },
-  tags: [{
-    name: 'Hello',
-    description: 'Example Api'
-  },
-  {
-    name: 'User',
-    description: 'User Api'
-  },
-  {
-    name: 'Auth',
-    description: 'Authentication Api'
-  }
+  tags: [
+    {
+      name: "Hello",
+      description: "Example Api",
+    },
+    {
+      name: "User",
+      description: "User Api",
+    },
+    {
+      name: "Auth",
+      description: "Authentication Api",
+    },
     // Add other tags here
   ],
   paths,
   definitions: {
     LoginInfo: {
-      type: 'object',
+      type: "object",
       properties: {
         email: {
-          type: 'string',
-          example: 'admin@example.com'
+          type: "string",
+          example: "admin@example.com",
         },
         password: {
-          type: 'string',
-          example: 'admin123!'
-        }
-      }
+          type: "string",
+          example: "admin123!",
+        },
+      },
     },
     User: {
-      type: 'object',
+      type: "object",
       properties: {
         role: {
           type: 'string',
           example: 'USER'
         },
         firstName: {
-          type: 'string',
-          example: 'string'
+          type: "string",
+          example: "string",
         },
         lastName: {
-          type: 'string',
-          example: 'string'
+          type: "string",
+          example: "string",
         },
         email: {
-          type: 'string',
-          example: 'string'
+          type: "string",
+          example: "string",
         },
         password: {
-          type: 'string',
-          example: 'string'
-        }
-      }
-    },
-    Request: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'PENDING',
-          required: true
-        }
-      }
+          type: "string",
+          example: "string",
+        },
+      },
     },
     Hotel: {
       type: "object",
       properties: {
         name: {
           type: "string",
-          example: "The Grand Hotel"
+          example: "The Grand Hotel",
         },
         email: {
           type: "string",
-          example: "reservations@thegrandhotel.com"
+          example: "reservations@thegrandhotel.com",
         },
         address: {
           type: "string",
-          example: "123 Main St, City, State"
+          example: "123 Main St, City, State",
+        },
+        province: {
+          type: "string",
+          example: "Kigali",
+        },
+        district: {
+          type: "string",
+          example: "Gasabo",
+        },
+        sector: {
+          type: "string",
+          example: "Kacyiru",
+        },
+        cell: {
+          type: "string",
+          example: "Kamatamu",
+        },
+        village: {
+          type: "string",
+          example: "Karukina",
+        },
+        coordinates: {
+          type: "string",
+          example: "POINT (50.456789 1.234367)",
         },
         website: {
           type: "string",
-          example: "https://www.luxuryinn.com"
-        }
-      }
+          example: "https://www.luxuryinn.com",
+        },
+      },
     },
-    Room: {
-      type: "object",
-      properties: {
-        name: {
-          type: "string",
-          example: "Stunning Room"
-        },
-        description: {
-          type: "string",
-          example: "Well-organised room"
-        },
-        maxAccomodate: {
-          type: "integer",
-          example: "2"
-        },
-        floor: {
-          type: "integer",
-          example: "4"
-        },
-        roomType: {
-          type: "string",
-          example: "SINGLE"
-        }
-      }
-    }
-  }
+  },
 };
 export default config;

@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import { authMiddleware } from '../middlewares/authMiddleware';
-import {createHotel, updateHotel, getHotel, getHotels, deleteHotel} from "../controllers/hotelController";
+import { authMiddleware, isLoggedIn } from '../middlewares/authMiddleware';
+import { createHotel, updateHotel, getHotel, getHotels, deleteHotel } from "../controllers/hotelController";
 
 const router = Router();
 
-router.get('/', getHotels);
-router.get('/:id', getHotel);
-router.put('/:id', updateHotel);
-router.delete('/:id', deleteHotel);
-router.post('/', createHotel);
+router.get('/', isLoggedIn, getHotels);
+router.get('/:id', isLoggedIn, getHotel);
+router.put('/:id', isLoggedIn, updateHotel);
+router.delete('/:id', isLoggedIn, deleteHotel);
+router.post('/', isLoggedIn, createHotel);
 
 export default router;

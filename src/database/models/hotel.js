@@ -17,7 +17,11 @@ const hotelObj = {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
+<<<<<<< HEAD
     primaryKey: true
+=======
+    primaryKey: true,
+>>>>>>> dcd4ac1cc11e2988d541d4c0e1d9702cf6930126
   },
   name: {
     type: DataTypes.STRING,
@@ -38,6 +42,33 @@ const hotelObj = {
     type: DataTypes.STRING,
     allowNull: true,
   },
+<<<<<<< HEAD
+=======
+  province:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  district:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  sector:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  cell:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  village:{
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  coordinates: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+>>>>>>> dcd4ac1cc11e2988d541d4c0e1d9702cf6930126
   isActive: {
     type: DataTypes.BOOLEAN,
     allowNull: true,

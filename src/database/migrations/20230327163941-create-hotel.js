@@ -21,6 +21,24 @@ module.exports = {
       website: {
         type: Sequelize.STRING
       },
+      province: {
+        type: Sequelize.STRING
+      },
+      district: {
+        type: Sequelize.STRING
+      },
+      sector: {
+        type: Sequelize.STRING
+      },
+      cell: {
+        type: Sequelize.STRING
+      },
+      village: {
+        type: Sequelize.STRING
+      },
+      coordinates: {
+        type: Sequelize.STRING
+      },
       isActive: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
