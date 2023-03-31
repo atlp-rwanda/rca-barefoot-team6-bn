@@ -15,17 +15,17 @@ const getMostTravelledDestinations = async (req, res) => {
     }
     const requests = await Request.findAll({
       attributes: [
-        'room_id',
-        [sequelize.fn('COUNT', sequelize.col('room_id')), 'count']
+        'roomId',
+        [sequelize.fn('COUNT', sequelize.col('roomId')), 'count']
       ],
-      group: ['room_id']
+      group: ['roomId']
     });
 
     const mostTravelledDestinations = {}
     const rooms = await Room.findAll({
       attributes: ['id', 'hotel_id'],
       where: {
-        id: requests.map(request => request.dataValues.room_id)
+        id: requests.map(request => request.dataValues.roomId)
       }
     });
     const hotels = await Hotel.findAll({
@@ -35,9 +35,9 @@ const getMostTravelledDestinations = async (req, res) => {
       }
     });
     for (let i = 0; i < requests.length; i++) {
-      const { room_id, count } = requests[i].dataValues;
+      const { roomId, count } = requests[i].dataValues;
 
-      const room = rooms.find(room => room.dataValues.id === room_id);
+      const room = rooms.find(room => room.dataValues.id === roomId);
 
       const hotel = hotels.find(hotel => hotel.dataValues.id === room.hotel_id);
       const { name, district } = hotel.dataValues;

@@ -1,11 +1,7 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-<<<<<<< HEAD
   async up(queryInterface, Sequelize) {
-=======
-  async up (queryInterface, Sequelize) {
->>>>>>> 1bca06d7bbb292b2a1fd48b6963e896f30f33609
     await queryInterface.createTable('Hotels', {
       id: {
         allowNull: false,
@@ -58,14 +54,7 @@ module.exports = {
       }
     });
   },
-<<<<<<< HEAD
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('Hotels');
   }
 };
-=======
-  async down (queryInterface, Sequelize) {
-    await queryInterface.dropTable('Hotels');
-  }
-};
->>>>>>> 1bca06d7bbb292b2a1fd48b6963e896f30f33609

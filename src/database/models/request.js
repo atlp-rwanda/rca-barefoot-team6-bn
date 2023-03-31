@@ -4,6 +4,7 @@ import User from './user';
 import Room from './room';
 import { sequelize } from '../config/db';
 import dotenv from 'dotenv';
+import REQUESTS_ENUM from '../enums/request';
 dotenv.config();
 class Request extends Model {
   /**
@@ -21,20 +22,19 @@ const requestObj = {
     primaryKey: true,
     autoIncrement: true
   },
-  checkin: {
+  checkIn: {
     type: DataTypes.DATE,
     allowNull: true
   },
-  checkout: {
+  checkOut: {
     type: DataTypes.DATE,
     allowNull: true
   },
   status: {
-    // type: DataTypes.ENUM('PENDING', 'CONFIRMED', 'CLOSED'),
-    type: DataTypes.STRING,
-    defaultValue: 'PENDING'
+    type: DataTypes.ENUM(REQUESTS_ENUM.APPROVED, REQUESTS_ENUM.CANCELLED, REQUESTS_ENUM.PENDING, REQUESTS_ENUM.REJECTED),
+    defaultValue: REQUESTS_ENUM.PENDING
   },
-  room_id: {
+  roomId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -42,7 +42,7 @@ const requestObj = {
       key: 'id'
     }
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
@@ -55,16 +55,6 @@ const requestObj = {
 Request.init(requestObj, {
   sequelize,
   modelName: 'Requests'
-});
-Request.addHook('beforeCreate', (request) => {
-  // Set the checkin columns to the current time
-  request.checkin = new Date();
-});
-// Add a hook to update the checkout date when the status changes to CONFIRMED or CLOSED
-Request.addHook('beforeUpdate', 'updateCheckoutDate', (request) => {
-  if (request.changed('status') && ['CONFIRMED', 'CLOSED'].includes(request.status)) {
-    request.checkout = new Date();
-  }
 });
 
 Request.belongsTo(User);

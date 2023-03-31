@@ -2,6 +2,7 @@ import express from 'express';
 import user from './userRoute';
 import hotel from './hotelRoute';
 import destination from './destinationRoute';
+import request from './requestRoute'
 
 const router = express.Router();
 router.get('/', (req, res) => {
@@ -14,5 +15,5 @@ router.get('/', (req, res) => {
 router.use('/users', user);
 router.use('/hotels', hotel);
 router.use('/destinations', destination);
-
+router.use('/requests', request);
 export default router;

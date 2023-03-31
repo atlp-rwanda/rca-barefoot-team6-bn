@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -20,7 +20,7 @@ module.exports = {
           checkin: '2023-03-29T09:03:13.697Z',
           checkout: '2023-03-29T09:16:53.109Z',
           status: 'CLOSED',
-          room_id: 1,
+          roomId: 1,
           user_id: 1,
           createdAt: '2023-03-29T09:03:13.697Z',
           updatedAt: '2023-03-29T09:16:53.108Z'
@@ -30,7 +30,7 @@ module.exports = {
           checkin: '2023-03-29T09:19:21.916Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 1,
+          roomId: 1,
           user_id: 1,
           createdAt: '2023-03-29T09:19:21.916Z',
           updatedAt: '2023-03-29T09:19:21.916Z'
@@ -40,7 +40,7 @@ module.exports = {
           checkin: '2023-03-29T09:28:06.945Z',
           checkout: '2023-03-29T09:28:51.639Z',
           status: 'CLOSED',
-          room_id: 1,
+          roomId: 1,
           user_id: 3,
           createdAt: '2023-03-29T09:28:06.945Z',
           updatedAt: '2023-03-29T09:28:51.639Z'
@@ -50,7 +50,7 @@ module.exports = {
           checkin: '2023-03-29T09:55:11.207Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 2,
+          roomId: 2,
           user_id: 3,
           createdAt: '2023-03-29T09:55:11.207Z',
           updatedAt: '2023-03-29T09:55:11.207Z'
@@ -60,7 +60,7 @@ module.exports = {
           checkin: '2023-03-29T10:00:43.960Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 3,
+          roomId: 3,
           user_id: 3,
           createdAt: '2023-03-29T10:00:43.959Z',
           updatedAt: '2023-03-29T10:00:43.959Z'
@@ -70,7 +70,7 @@ module.exports = {
           checkin: '2023-03-29T10:02:16.010Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 3,
+          roomId: 3,
           user_id: 1,
           createdAt: '2023-03-29T10:02:16.010Z',
           updatedAt: '2023-03-29T10:02:16.010Z'
@@ -80,7 +80,7 @@ module.exports = {
           checkin: '2023-03-29T10:08:02.395Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 3,
+          roomId: 3,
           user_id: 6,
           createdAt: '2023-03-29T10:08:02.395Z',
           updatedAt: '2023-03-29T10:08:02.395Z'
@@ -90,7 +90,7 @@ module.exports = {
           checkin: '2023-03-29T10:09:16.487Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 1,
+          roomId: 1,
           user_id: 6,
           createdAt: '2023-03-29T10:09:16.487Z',
           updatedAt: '2023-03-29T10:09:16.487Z'
@@ -100,7 +100,7 @@ module.exports = {
           checkin: '2023-03-29T10:09:23.081Z',
           checkout: '2023-03-29T10:10:25.392Z',
           status: 'CLOSED',
-          room_id: 2,
+          roomId: 2,
           user_id: 6,
           createdAt: '2023-03-29T10:09:23.081Z',
           updatedAt: '2023-03-29T10:10:25.392Z'
@@ -110,7 +110,7 @@ module.exports = {
           checkin: '2023-03-29T10:24:00.360Z',
           checkout: null,
           status: 'PENDING',
-          room_id: 4,
+          roomId: 4,
           user_id: 1,
           createdAt: '2023-03-29T10:24:00.359Z',
           updatedAt: '2023-03-29T10:24:00.359Z'
@@ -120,7 +120,7 @@ module.exports = {
           checkin: '2023-03-29T10:21:03.567Z',
           checkout: '2023-03-29T10:27:09.955Z',
           status: 'CONFIRMED',
-          room_id: 2,
+          roomId: 2,
           user_id: 1,
           createdAt: '2023-03-29T10:21:03.566Z',
           updatedAt: '2023-03-29T10:27:09.955Z'
@@ -130,7 +130,7 @@ module.exports = {
     );
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *

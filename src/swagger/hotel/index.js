@@ -1,7 +1,6 @@
 import responses from "../responses";
 
 const hotel = {
-
   "/hotels": {
     post: {
       tags: ["Hotel"],

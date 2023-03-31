@@ -1,18 +1,20 @@
 import { Router } from 'express';
-import { createRequest, getRequests, updateRequest } from '../controllers/requestController';
-import { isLoggedIn } from '../middlewares/authMiddleware'
+import RequestController from '../controllers/requestController';
+import { isAuthorized, isLoggedIn } from '../middlewares/authMiddleware';
+
 const router = Router();
 
-// @route  POST /requests
-// @desc   Create a new request
-// @access Private
-router.post('/:room_id', isLoggedIn, createRequest);
+router.post('/', isLoggedIn, RequestController.createRequest);
+router.get('/', RequestController.getAllRequests);
+router.get('/:id', RequestController.getRequestById);
+router.get('/user/:userId', RequestController.getRequestsByUserId);
+router.get('/room/:roomId', RequestController.getRequestsByRoomId);
+router.get('/hotel/:hotelId', isLoggedIn, RequestController.getRequestsByHotelId)
+router.get('/filter', RequestController.filterRequestsByParams)
+router.patch('/:id', isLoggedIn, RequestController.updateRequest);
+router.patch('/approve/:id', isLoggedIn, isAuthorized('MANAGER'), RequestController.approveRequest);
+router.patch('/reject/:id', isLoggedIn, isAuthorized('MANAGER'), RequestController.rejectRequest);
+router.patch('/cancel/:id', isLoggedIn, isAuthorized('MANAGER'), RequestController.cancelRequest)
+router.delete('/:id', RequestController.deleteRequest);
 
-// @route  PUT /requests/:id
-// @desc   Update an existing request
-// @access Private
-// validateRequestFn
-router.put('/:id', isLoggedIn, updateRequest);
-router.get('/', isLoggedIn, getRequests);
-
-export default router
+export default router;

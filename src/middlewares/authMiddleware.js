@@ -22,10 +22,10 @@ export async function isLoggedIn(req, res, next) {
   }
 }
 
-export function isAgentOrAdmin(req, res, next) {
-  const { user } = req;
-  if (!user) return res.status(401).json({ message: 'Unauthorized' });
-  if (user.role !== 'AGENT' && user.role !== 'ADMIN') return res.status(403).json({ message: 'Forbidden' });
+export const isAuthorized = (...requiredRights) => async (req, res, next) => {
+  if (!req.user) return res.status(401).send({ message: 'Unauthorized' });
+  const { role } = req.user;
+  if (!requiredRights.includes(role)) return res.status(403).send({ message: 'Forbidden' });
   next();
 }
 

@@ -39,14 +39,12 @@ const roomObj = {
     allowNull: false
   },
   roomType: {
-    // type: DataTypes.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
     allowNull: false
   },
   hotel_id: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'hotel_id',
     references: {
       model: Hotel,
       key: 'id'
@@ -57,12 +55,6 @@ const roomObj = {
 Room.init(roomObj, {
   sequelize,
   modelName: 'Rooms'
-});
-// Add a hook to update the checkout date when the status changes to CONFIRMED or CLOSED
-Room.addHook('beforeUpdate', 'updateCheckoutDate', (Room) => {
-  if (Room.changed('status') && ['CONFIRMED', 'CLOSED'].includes(Room.status)) {
-    Room.checkout = new Date();
-  }
 });
 
 Room.belongsTo(Hotel)

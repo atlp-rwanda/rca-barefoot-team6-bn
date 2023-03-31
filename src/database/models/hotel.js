@@ -18,18 +18,16 @@ const hotelObj = {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true,
-    primaryKey: true,
-    primaryKey: true
   },
   name: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: false
+    allowNull: false,
   },
   address: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: false
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
@@ -69,44 +67,11 @@ const hotelObj = {
     allowNull: true,
     defaultValue: true,
   },
-  website: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  province: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  district: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  sector: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  cell: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  village: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  coordinates: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  isActive: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-    defaultValue: true
-  }
 };
 
 Hotel.init(hotelObj, {
   sequelize,
-  modelName: 'Hotels'
+  modelName: "Hotels",
 });
 
 sequelize.sync();

@@ -171,10 +171,21 @@ const config = {
     Request: {
       type: 'object',
       properties: {
+        roomId: {
+          type: 'integer',
+          example: 1
+        },
+        checkIn: {
+          type: 'string',
+          example: '2020-01-01'
+        },
+        checkOut: {
+          type: 'string',
+          example: '2020-01-01'
+        },
         status: {
           type: 'string',
-          example: 'PENDING',
-          required: true
+          example: 'PENDING'
         }
       }
     }

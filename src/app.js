@@ -2,7 +2,6 @@ import express, {
   json
 } from 'express';
 import dotenv from 'dotenv'; // Using require
-import requestRoute from './routes/requestRoute';
 import roomRoute from './routes/roomRoute';
 import passport from 'passport';
 import session from 'express-session';
@@ -45,7 +44,6 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 
 // all apis
 app.use('/api', routes);
-app.use('/api/requests', requestRoute);
 app.use('/api/rooms', roomRoute);
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)
