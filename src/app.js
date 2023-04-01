@@ -13,10 +13,9 @@ import swaggerUI from 'swagger-ui-express';
 // api docs
 import apiDoc from './swagger';
 import connectDB, { sequelize } from './database/config/db';
-
 const app = express();
 dotenv.config();
-
+const PORT = process.env.PORT || 3000;
 // configure session
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -26,12 +25,11 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
   }
 }));
-
 // initializing passport must come after session configuration otherwise it won't work
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(json())
+app.use(json());
 
 app.get('/', async (req, res) => {
   res.json({
@@ -42,11 +40,8 @@ app.get('/', async (req, res) => {
 
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
-
 // all apis
 app.use('/api', routes);
-
-const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)

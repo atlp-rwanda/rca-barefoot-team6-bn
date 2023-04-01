@@ -5,7 +5,7 @@ export async function createHotel(req, res) {
   try {
     const existingHotel = await Hotel.findOne({ where: { email: req.body.email } });
     if (existingHotel) {
-        return res.status(400).json({ error: 'Email already registered' });
+      return res.status(400).json({ error: 'Email already registered' });
     }
     const hotel = await Hotel.create(req.body);
     res.status(201).json({
