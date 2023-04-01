@@ -17,11 +17,26 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
       password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
+      },
+      resetPasswordToken: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      resetPasswordExpires: {
+        type: Sequelize.DATE
+      },
+      facebookId: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      googleId: {
+        type: Sequelize.STRING,
+        allowNull: true
       },
       emailVerificationToken: {
         type: Sequelize.STRING,

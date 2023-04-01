@@ -1,16 +1,18 @@
-
-
 'use strict'
 import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
+import dotenv from 'dotenv'
+import USER_ENUM from '../enums/user';
+
+dotenv.config();
 class User extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate (models) {
+  static associate(models) {
     // define association here
   }
 };
@@ -24,7 +26,7 @@ const userObj = {
   firstName: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: false
+    allowNull: true
   },
   lastName: {
     type: DataTypes.STRING,
@@ -38,7 +40,25 @@ const userObj = {
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: true
+  },
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  providerId: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  resetPasswordToken: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    defaultValue: ''
+  },
+  resetPasswordExpires: {
+    type: DataTypes.DATE,
+    allowNull: true,
+    defaultValue: null
   },
   emailVerificationToken: {
     type: DataTypes.STRING,
@@ -54,6 +74,10 @@ const userObj = {
     type: DataTypes.BOOLEAN,
     allowNull: true,
     defaultValue: false
+  },
+  role: {
+    type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
+    defaultValue: USER_ENUM.CLIENT
   }
 }
 User.init(userObj, {
@@ -62,8 +86,10 @@ User.init(userObj, {
 });
 
 User.beforeCreate(async (user, options) => {
-  const hashedPassword = await hash(user.password, 10)
-  user.password = hashedPassword;
+  if (user.password) {
+    const hashedPassword = await hash(user.password, 10)
+    user.password = hashedPassword;
+  }
 })
 
 User.prototype.isValidPassword = async function (password) {
