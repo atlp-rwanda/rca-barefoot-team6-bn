@@ -5,11 +5,10 @@ config()
 export async function isLoggedIn(req, res, next) {
   // config();
 
-  const header = req.header("Authorization");
-  if (!header || !header.startsWith("Bearer "))
-    return res.send({ message: 'Token Not Found' }).status(401);
+  const header = req.header('Authorization');
+  if (!header || !header.startsWith('Bearer ')) { return res.send({ message: 'Token Not Found' }).status(401); }
 
-  const token = header.split(" ")[1];
+  const token = header.split(' ')[1];
   if (!token) return res.send({ message: 'Invalid Bearer Token' }).status(400);
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

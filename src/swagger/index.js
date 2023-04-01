@@ -78,7 +78,7 @@ const config = {
       properties: {
         role: {
           type: 'string',
-          example: 'USER'
+          example: 'MANAGER'
         },
         firstName: {
           type: "string",
@@ -90,7 +90,7 @@ const config = {
         },
         email: {
           type: "string",
-          example: "string",
+          example: "manager@gmail.com",
         },
         password: {
           type: "string",

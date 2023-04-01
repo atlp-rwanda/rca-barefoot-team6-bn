@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import User from '../database/models/user';
 import jwt from 'jsonwebtoken';
 import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
@@ -62,15 +63,13 @@ export async function loginUser(req, res) {
   }
 }
 
-
 // get user profile
 export async function getMyProfile(req, res) {
   try {
 
     let user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
-    if (!user)
-      return res.status(404).send(API_RESPONSE(false, "User not found", 404));
+    if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {
     return res.status(500).send(e);

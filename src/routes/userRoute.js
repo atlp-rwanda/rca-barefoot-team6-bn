@@ -16,69 +16,69 @@ passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
 passport.use(
-    new GoogleStrategy(
-        {
-            callbackURL: '/api/users/auth/google/redirect',
-            clientID: GOOGLE_CLIENT_ID,
-            clientSecret: GOOGLE_CLIENT_SECRET,
-            profileFields: ['emails', 'firstName', 'lastName']
-        },
-        (accessToken, refreshToken, profile, done) => {
-            const user = {
-                googleId: profile.id,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                email: profile.emails[0].value
-            };
-            return done(null, user);
-        }
-    )
+  new GoogleStrategy(
+    {
+      callbackURL: '/api/users/auth/google/redirect',
+      clientID: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET,
+      profileFields: ['emails', 'firstName', 'lastName']
+    },
+    (accessToken, refreshToken, profile, done) => {
+      const user = {
+        googleId: profile.id,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        email: profile.emails[0].value
+      };
+      return done(null, user);
+    }
+  )
 );
 
 passport.use(
-    new FacebookStrategy(
-        {
-            callbackURL: '/api/users/auth/facebook/redirect',
-            clientID: FACEBOOK_APP_ID,
-            clientSecret: FACEBOOK_APP_SECRET,
-            profileFields: ['id', 'name', 'email']
-        },
-        (accessToken, refreshToken, profile, done) => {
-            const user = {
-                facebookId: profile.id,
-                firstName: profile.name.givenName,
-                lastName: profile.name.familyName,
-                email: profile.emails[0].value
-            };
-            return done(null, user);
-        }
-    )
+  new FacebookStrategy(
+    {
+      callbackURL: '/api/users/auth/facebook/redirect',
+      clientID: FACEBOOK_APP_ID,
+      clientSecret: FACEBOOK_APP_SECRET,
+      profileFields: ['id', 'name', 'email']
+    },
+    (accessToken, refreshToken, profile, done) => {
+      const user = {
+        facebookId: profile.id,
+        firstName: profile.name.givenName,
+        lastName: profile.name.familyName,
+        email: profile.emails[0].value
+      };
+      return done(null, user);
+    }
+  )
 );
 
 router.get(
-    '/auth/google',
-    passport.authenticate('google', {
-        scope: ['profile', 'email']
-    })
+  '/auth/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email']
+  })
 );
 
 router.get(
-    '/auth/google/redirect',
-    passport.authenticate('google', { failureRedirect: '/auth/google' }),
-    loginCallback
+  '/auth/google/redirect',
+  passport.authenticate('google', { failureRedirect: '/auth/google' }),
+  loginCallback
 );
 
 router.get(
-    '/auth/facebook',
-    passport.authenticate('facebook', {
-        scope: ['email']
-    })
+  '/auth/facebook',
+  passport.authenticate('facebook', {
+    scope: ['email']
+  })
 );
 
 router.get(
-    '/auth/facebook/redirect',
-    passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }),
-    loginCallback
+  '/auth/facebook/redirect',
+  passport.authenticate('facebook', { failureRedirect: '/auth/facebook' }),
+  loginCallback
 );
 
 router.post('/', createUser)

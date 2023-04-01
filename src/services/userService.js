@@ -9,7 +9,7 @@ class UserService {
    * @param {object} param details of a user.
    * @returns {object} users new user.
    */
-  static async findOrCreateUser (_user) {
+  static async findOrCreateUser(_user) {
     try {
       const users = await User.findOrCreate({
         where: { email: _user.email },

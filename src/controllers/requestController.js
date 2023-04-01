@@ -59,6 +59,8 @@ class RequestController {
       const request = await Request.create({
         userId: user.id, roomId, checkIn, checkOut
       });
+      request.UserId = undefined
+      request.RoomId = undefined
       return res.status(201).json({
         status: 201,
         message: 'Request created successfully',
