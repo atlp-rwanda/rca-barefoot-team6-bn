@@ -1,6 +1,10 @@
 import dotenv from 'dotenv';
 
 import hello from './hello';
+import user from './user';
+import auth from './auth';
+import hotel from './hotel';
+import feeback from './feedback';
 
 dotenv.config();
 
@@ -10,8 +14,12 @@ const host =
     : process.env.BASE_URL.split('http://')[1];
 
 const paths = {
-  ...hello
-//   add other defined apis here
+  ...hello,
+  ...user,
+  ...auth,
+  ...hotel,
+  ...feeback
+  //   add other defined apis here
 };
 
 const config = {
@@ -32,9 +40,131 @@ const config = {
     }
   },
   tags: [
-    { name: 'Hello', description: 'Example Api' }
+    {
+      name: 'Hello',
+      description: 'Example Api'
+    },
+    {
+      name: 'User',
+      description: 'User Api'
+    },
+    {
+      name: 'Auth',
+      description: 'Authentication Api'
+    },
+    {
+      name: 'Feedback',
+      description: 'Feedbacks Api'
+    }
     // Add other tags here
   ],
-  paths
+  paths,
+  definitions: {
+    LoginInfo: {
+      type: 'object',
+      properties: {
+        email: {
+          type: 'string',
+          example: 'admin@example.com'
+        },
+        password: {
+          type: 'string',
+          example: 'admin123!'
+        }
+      }
+    },
+    User: {
+      type: 'object',
+      properties: {
+        firstName: {
+          type: 'string',
+          example: 'string'
+        },
+        lastName: {
+          type: 'string',
+          example: 'string'
+        },
+        email: {
+          type: 'string',
+          example: 'string'
+        },
+        password: {
+          type: 'string',
+          example: 'string'
+        }
+      }
+    },
+    Feedback: {
+      type: 'object',
+      properties: {
+        hotelId: {
+          type: 'number',
+          example: '1'
+        },
+        subject: {
+          type: 'string',
+          example: 'The food'
+        },
+        feedback: {
+          type: 'string',
+          example: 'Their food is good but smells funny'
+        }
+      }
+    },
+    Hotel: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'The Grand Hotel'
+        },
+        email: {
+          type: 'string',
+          example: 'reservations@thegrandhotel.com'
+        },
+        address: {
+          type: 'string',
+          example: '123 Main St, City, State'
+        },
+        province: {
+          type: 'string',
+          example: 'Kigali'
+        },
+        district: {
+          type: 'string',
+          example: 'Gasabo'
+        },
+        sector: {
+          type: 'string',
+          example: 'Kacyiru'
+        },
+        cell: {
+          type: 'string',
+          example: 'Kamatamu'
+        },
+        village: {
+          type: 'string',
+          example: 'Karukina'
+        },
+        coordinates: {
+          type: 'object',
+          properties: {
+            latitude: {
+              type: 'number',
+              example: 37.7749
+            },
+            longitude: {
+              type: 'number',
+              example: -122.4194
+            }
+          }
+        },
+        website: {
+          type: 'string',
+          example: 'https://www.luxuryinn.com'
+        }
+      }
+    }
+  }
 };
 export default config;
