@@ -2,10 +2,8 @@
 import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
-import { config } from 'dotenv';
-import { registerSchema } from 'swaggiffy';
+require('dotenv').config();
 
-config();
 class User extends Model {
   /**
    * Helper method for defining associations.
@@ -16,7 +14,8 @@ class User extends Model {
     // define association here
   }
 };
-const userObject = {
+
+const userObj = {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -25,7 +24,7 @@ const userObject = {
   firstName: {
     type: DataTypes.STRING,
     unique: false,
-    allowNull: false
+    allowNull: true
   },
   lastName: {
     type: DataTypes.STRING,
@@ -75,14 +74,10 @@ const userObject = {
     defaultValue: false
   }
 }
-
-User.init(
-  userObject
-  , {
-    sequelize,
-    modelName: 'Users'
-  });
-registerSchema('Users', userObject, { orm: 'sequelize' }); // for sequelize model
+User.init(userObj, {
+  sequelize,
+  modelName: 'Users'
+});
 
 User.beforeCreate(async (user, options) => {
   if (user.password) {
@@ -98,6 +93,5 @@ User.prototype.isValidPassword = async function (password) {
 };
 
 sequelize.sync();
-
 // export the model
 export default User;

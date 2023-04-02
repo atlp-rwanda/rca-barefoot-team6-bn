@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import Hotel from '../database/models/hotel';
 
 // create a hotel
 export async function createHotel (req, res) {
-  const { name, address, email, website } = req.body;
   try {
     const existingHotel = await Hotel.findOne({ where: { email: req.body.email } });
     if (existingHotel) {
