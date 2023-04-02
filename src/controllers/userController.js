@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
 import { sendEmail } from '../utils/sendEmail';
 
-export async function createUser(req, res) {
+export async function createUser (req, res) {
   const { firstName, lastName, email, password, role } = req.body;
   try {
     const existingUser = await User.findOne({ where: { email } });
@@ -17,7 +17,7 @@ export async function createUser(req, res) {
     await updateUserVerificationInfo(user.id, token, false);
     user.password = undefined
     return res.status(201).json({
-      message: "User registered successfully! You should receive an email shortly.",
+      message: 'User registered successfully! You should receive an email shortly.',
       data: user
     });
   } catch (error) {
@@ -27,7 +27,7 @@ export async function createUser(req, res) {
 }
 
 // When user clicks verify email must be directed on this route
-export async function welcomeNewUser(req, res) {
+export async function welcomeNewUser (req, res) {
   const { user } = req;
   try {
     await sendEmail(user.email, 'Welcome to My App', 'Thank you for verifying your email address.');
@@ -40,7 +40,7 @@ export async function welcomeNewUser(req, res) {
 }
 
 // login user
-export async function loginUser(req, res) {
+export async function loginUser (req, res) {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
@@ -51,7 +51,7 @@ export async function loginUser(req, res) {
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
-    user.set("isLoggedIn", true);
+    user.set('isLoggedIn', true);
     await user.save()
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN
@@ -64,10 +64,9 @@ export async function loginUser(req, res) {
 }
 
 // get user profile
-export async function getMyProfile(req, res) {
+export async function getMyProfile (req, res) {
   try {
-
-    let user = await User.findOne({ where: { id: req.user.id } });
+    const user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
@@ -77,7 +76,7 @@ export async function getMyProfile(req, res) {
 }
 
 // GET users
-export async function getUsers(req, res) {
+export async function getUsers (req, res) {
   try {
     const users = await User.findAll();
     return res.status(200).json(users);
@@ -87,18 +86,18 @@ export async function getUsers(req, res) {
   }
 }
 
-async function sendVerificationEmail(email, token) {
+async function sendVerificationEmail (email, token) {
   const subject = 'Verify Your Email';
   const html = `<p>Click the following link to verify your email address: <a href="${process.env.WEB_URL}/api/users/verify-email/${token}">Verify My Email</a>`;
   await sendEmail(email, subject, '', html);
 }
 
-async function updateUserVerificationInfo(userId, token, isVerified) {
+async function updateUserVerificationInfo (userId, token, isVerified) {
   await User.update({ emailVerificationToken: token, isEmailVerified: isVerified }, { where: { id: userId } });
 }
 
 // logout
-export async function logout(req, res) {
+export async function logout (req, res) {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
     user.isLoggedIn = false;
@@ -111,7 +110,7 @@ export async function logout(req, res) {
 }
 
 // POST request to initiate password change process
-export async function initiatePasswordReset(req, res) {
+export async function initiatePasswordReset (req, res) {
   try {
     const { email } = req.body;
 
@@ -139,7 +138,7 @@ export async function initiatePasswordReset(req, res) {
   }
 };
 
-export async function resetPassword(req, res) {
+export async function resetPassword (req, res) {
   const { pass } = req.body;
   const { token } = req.params;
   try {
@@ -173,7 +172,7 @@ export async function resetPassword(req, res) {
   }
 };
 
-async function updateUserPasswordResetToken(userEmail, token) {
+async function updateUserPasswordResetToken (userEmail, token) {
   await User.update(
     { resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 },
     { where: { email: userEmail } }
