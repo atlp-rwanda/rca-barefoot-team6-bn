@@ -114,7 +114,7 @@ export async function logout (req, res) {
 }
 
 // POST request to initiate password change process
-exports.initiatePasswordReset = async (req, res) => {
+export async function initiatePasswordReset (req, res) {
   try {
     const { email } = req.body;
 
@@ -142,7 +142,7 @@ exports.initiatePasswordReset = async (req, res) => {
   }
 };
 
-exports.resetPassword = async (req, res) => {
+export async function resetPassword (req, res) {
   const { pass } = req.body;
   const { token } = req.params;
   try {

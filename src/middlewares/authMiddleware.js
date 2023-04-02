@@ -30,3 +30,10 @@ export async function verifyEmail (req, res, next) {
   req.user = user;
   next();
 }
+
+export const isAuthorized = (...requiredRights) => async (req, res, next) => {
+  if (!req.user) return res.status(401).send({ message: 'Unauthorized' });
+  const { role } = req.user;
+  if (!requiredRights.includes(role)) return res.status(403).send({ message: 'Forbidden' });
+  next();
+}

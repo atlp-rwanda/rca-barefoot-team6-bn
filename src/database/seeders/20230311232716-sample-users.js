@@ -7,14 +7,17 @@ module.exports = {
       firstName: 'John',
       lastName: 'Doe',
       email: 'admin@example.com',
+      role: 'ADMIN',
       password:
       '$2a$12$wFgG2fy/n04SvMwvJfKzv.PTdvp.AWkmVZPrkPEn9z98L17w1ssda',
+      isEmailVerified: true,
       createdAt: new Date(),
       updatedAt: new Date()
     },
     {
       firstName: 'Jane',
       lastName: 'Doe',
+      role: 'ADMIN',
       email: 'janedoe@gmail.com',
       password: '$2a$12$wFgG2fy/n04SvMwvJfKzv.PTdvp.AWkmVZPrkPEn9z98L17w1ssda',
       createdAt: new Date(),

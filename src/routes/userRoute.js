@@ -84,11 +84,11 @@ router.get(
 router.post('/', createUser)
 router.post('/login', loginUser)
 router.get('/self', isLoggedIn, getMyProfile);
-router.get('/', isLoggedIn, getUsers)
+router.get('/', getUsers)
 router.use('/verify-email/:token', verifyEmail)
 router.get('/verify-email/:token', welcomeNewUser)
 router.post('/request-password-reset', initiatePasswordReset);
 router.post('/reset-password/:token', resetPassword);
 router.put('/logout', isLoggedIn, logout);
 
-export default router
+export default router;
