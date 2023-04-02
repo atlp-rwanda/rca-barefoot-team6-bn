@@ -1,10 +1,10 @@
 import responses from '../responses';
 
 const feedback = {
-  '/': {
+  '/feedback': {
     post: {
       tags: ['Feedback'],
-      summary: '',
+      summary: 'Give feedback',
       parameters: [
         {
           in: 'body',
@@ -19,21 +19,73 @@ const feedback = {
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
         }
       ]
     },
     get: {
       tags: ['Feedback'],
-      summary: '',
-      description: '',
+      summary: 'Get all feedbacks',
       parameters: [],
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
+      responses,
+      security: [{
+        JWT: []
+      }]
+    }
+  },
+  '/feedback/{id}': {
+    put: {
+      tags: ['Feedback'],
+      summary: 'edit feedback by id',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'string'
+        },
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            $ref: '#/definitions/Feedback'
+          }
+        }
+      ],
       consumes: ['application/json'],
       produces: ['application/json'],
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
+        }
+      ]
+    },
+    delete: {
+      tags: ['Feedback'],
+      summary: 'delete feedback by id',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'string'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          JWT: []
         }
       ]
     }
