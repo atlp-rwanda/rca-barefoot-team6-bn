@@ -20,7 +20,7 @@ const hotel = {
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
         }
       ]
     },
@@ -34,7 +34,7 @@ const hotel = {
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
         }
       ]
     }
@@ -57,7 +57,7 @@ const hotel = {
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
         }
       ]
     },
@@ -85,7 +85,7 @@ const hotel = {
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
         }
       ]
     },
@@ -106,7 +106,7 @@ const hotel = {
       responses,
       security: [
         {
-          Bearer: ['global']
+          JWT: []
         }
       ]
     }

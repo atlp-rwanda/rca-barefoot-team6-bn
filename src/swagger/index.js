@@ -55,6 +55,10 @@ const config = {
     {
       name: 'Auth',
       description: 'Authentication Api'
+    },
+    {
+      name: 'Feedback',
+      description: 'Feedbacks Api'
     }
     // Add other tags here
   ],
