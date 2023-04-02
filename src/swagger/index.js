@@ -1,6 +1,10 @@
 import dotenv from 'dotenv';
 
 import hello from './hello';
+import user from './user';
+import auth from './auth';
+import hotel from './hotel';
+import feeback from './feedback';
 
 dotenv.config();
 
@@ -10,8 +14,12 @@ const host =
     : process.env.BASE_URL.split('http://')[1];
 
 const paths = {
-  ...hello
-//   add other defined apis here
+  ...hello,
+  ...user,
+  ...auth,
+  ...hotel,
+  ...feeback
+  //   add other defined apis here
 };
 
 const config = {
@@ -43,6 +51,10 @@ const config = {
     {
       name: 'Auth',
       description: 'Authentication Api'
+    },
+    {
+      name: 'Feedback',
+      description: 'Feedbacks Api'
     }
     // Add other tags here
   ],
@@ -79,6 +91,23 @@ const config = {
         password: {
           type: 'string',
           example: 'string'
+        }
+      }
+    },
+    Feedback: {
+      type: 'object',
+      properties: {
+        hotelId: {
+          type: 'number',
+          example: '1'
+        },
+        subject: {
+          type: 'string',
+          example: 'The food'
+        },
+        feedback: {
+          type: 'string',
+          example: 'Their food is good but smells funny'
         }
       }
     },
