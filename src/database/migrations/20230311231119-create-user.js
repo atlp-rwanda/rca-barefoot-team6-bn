@@ -38,10 +38,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
       emailVerificationToken: {
         type: Sequelize.STRING,
         allowNull: true,
