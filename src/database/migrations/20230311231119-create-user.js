@@ -1,4 +1,7 @@
 'use strict';
+
+const { default: USER_ENUM } = require('../enums/user');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -30,11 +33,11 @@ module.exports = {
       resetPasswordExpires: {
         type: Sequelize.DATE
       },
-      facebookId: {
-        type: Sequelize.STRING,
+      providerId: {
+        type: Sequelize.TEXT,
         allowNull: true
       },
-      googleId: {
+      provider: {
         type: Sequelize.STRING,
         allowNull: true
       },
@@ -52,6 +55,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         allowNull: true,
         defaultValue: false
+      },
+      role: {
+        type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
+        defaultValue: USER_ENUM.CLIENT
       },
       createdAt: {
         allowNull: false,

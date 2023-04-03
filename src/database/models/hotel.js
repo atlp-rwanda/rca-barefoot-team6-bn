@@ -1,6 +1,6 @@
-'use strict';
-import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../config/db';
+"use strict";
+import { Model, DataTypes } from "sequelize";
+import { sequelize } from "../config/db";
 
 class Hotel extends Model {
   /**
@@ -40,31 +40,49 @@ const hotelObj = {
   },
   province: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   district: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   sector: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   cell: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   village: {
     type: DataTypes.STRING,
-    allowNull: true,
+    allowNull: false,
   },
   coordinates: {
-    type: DataTypes.STRING,
-    allowNull: true,
+    type: DataTypes.JSONB,
+    allowNull: false,
+    defaultValue: {},
+    validate: {
+      isObject: function (value) {
+        if (typeof value !== 'object') {
+          throw new Error('Coordinates must be an object');
+        }
+      },
+      hasLatitude: function (value) {
+        if (!value.hasOwnProperty('latitude')) {
+          throw new Error('Coordinates object must have a latitude property');
+        }
+      },
+      hasLongitude: function (value) {
+        if (!value.hasOwnProperty('longitude')) {
+          throw new Error('Coordinates object must have a longitude property');
+        }
+      }
+    }
   },
   isActive: {
     type: DataTypes.BOOLEAN,
-    allowNull: true,
+    allowNull: false,
     defaultValue: true,
   },
 };

@@ -1,42 +1,43 @@
 'use strict';
+
+const { default: REQUESTS_ENUM } = require('../enums/request');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Requests', {
       id: {
-        allowNull: false,
-        autoIncrement: true,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        autoIncrement: true
       },
-      checkin: {
-        type: Sequelize.DATE
+      checkIn: {
+        type: DataTypes.DATE,
+        allowNull: true
       },
-      checkout: {
-        type: Sequelize.DATE
+      checkOut: {
+        type: DataTypes.DATE,
+        allowNull: true
       },
       status: {
-        type: Sequelize.STRING
-      },
-      user_id: {
-        type: Sequelize.INTEGER
+        type: DataTypes.ENUM(REQUESTS_ENUM.APPROVED, REQUESTS_ENUM.CANCELLED, REQUESTS_ENUM.PENDING, REQUESTS_ENUM.REJECTED),
+        defaultValue: REQUESTS_ENUM.PENDING
       },
       roomId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Rooms',
+          model: Room,
           key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        }
       },
-      createdAt: {
+      userId: {
+        type: DataTypes.INTEGER,
         allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        references: {
+          model: User,
+          key: 'id'
+        }
       }
     });
   },
