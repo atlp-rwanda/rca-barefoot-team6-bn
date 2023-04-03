@@ -42,11 +42,11 @@ const userObj = {
     type: DataTypes.STRING,
     allowNull: true
   },
-  provider: {
+  facebookId: {
     type: DataTypes.STRING,
     allowNull: true
   },
-  providerId: {
+  googleId: {
     type: DataTypes.TEXT,
     allowNull: true
   },

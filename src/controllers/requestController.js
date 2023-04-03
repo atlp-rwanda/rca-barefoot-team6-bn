@@ -1,3 +1,4 @@
+import REQUESTS_ENUM from "../database/enums/request";
 import Request from "../database/models/request";
 import Room from "../database/models/room";
 const { Op } = require('sequelize');
@@ -14,12 +15,6 @@ const isRoomFull = async (roomId, maxAccomodate) => {
   return count >= maxAccomodate;
 }
 
-const hasUserRequestedRoom = async (userId, checkOut) => {
-  const request = await Request.findOne({
-    where: { userId, checkOut }
-  });
-  return request !== null;
-};
 import RequestService from '../services/requestService';
 
 /**
@@ -46,16 +41,27 @@ class RequestController {
         where: { id: roomId }
       });
       if (!room) return res.status(404).json({ message: 'Room not found' });
+     
+      //verify if the room is already booked by another user
+      const booked =  await Request.findOne({
+        where: { roomId, status: REQUESTS_ENUM.APPROVED }
+      });
+      if (booked) return res.status(400).json({ message: 'This room is already booked' });
+     
+      //verify if the user is not requesting the room the second time
+      const userHasRequestedRoom = await Request.findOne({
+        where: { userId: user.id, roomId, status: REQUESTS_ENUM.PENDING }
+      });
 
+      if (userHasRequestedRoom) {
+        return res.status(400).json({ message: 'You\'ve already requested this room. Please, be patient with us while it is being processed' });
+      }
       const maxAccomodate = room.maxAccomodate;
       const roomIsFull = await isRoomFull(roomId, maxAccomodate);
       if (roomIsFull) {
         return res.status(400).json({ message: 'This room is full' });
       }
-      // const userHasRequestedRoom = await hasUserRequestedRoom(user.id, checkOut);
-      // if (userHasRequestedRoom) {
-      //   return res.status(400).json({ message: 'You\'ve already requested this room. Please, be patient with us while it is being processed' });
-      // }
+
       const request = await Request.create({
         userId: user.id, roomId, checkIn, checkOut
       });

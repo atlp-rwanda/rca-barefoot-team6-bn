@@ -159,8 +159,17 @@ const config = {
           example: "Karukina",
         },
         coordinates: {
-          type: "string",
-          example: "POINT (50.456789 1.234367)",
+          type: "object",
+          properties: {
+            latitude: {
+              type: "number",
+              example: 37.7749,
+            },
+            longitude: {
+              type: "number",
+              example: -122.4194,
+            },
+          },
         },
         website: {
           type: "string",
