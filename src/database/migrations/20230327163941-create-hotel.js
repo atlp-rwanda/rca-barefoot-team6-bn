@@ -37,7 +37,18 @@ module.exports = {
         type: Sequelize.STRING
       },
       coordinates: {
-        type: Sequelize.STRING
+        // type: Sequelize.STRING
+        type: Sequelize.JSONB,
+        // allowNull: true,
+        get: function () {
+          return {
+            latitude: this.getDataValue('coordinates.latitude'),
+            longitude: this.getDataValue('coordinates.longitude')
+          }
+        },
+        set: function (value) {
+          this.setDataValue('coordinates', JSON.stringify(value));
+        }
       },
       isActive: {
         type: Sequelize.BOOLEAN,

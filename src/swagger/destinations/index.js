@@ -16,7 +16,7 @@ const destinations = {
           enum: ['Hotel', 'District']
         },
         description: 'The level to filter the destinations by. Must be one of: Hotel, District.',
-        default: 'District'
+        default: 'Hotel'
       }]
     }
   }

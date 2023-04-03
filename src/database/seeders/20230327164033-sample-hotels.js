@@ -16,7 +16,10 @@ module.exports = {
           sector: 'Kacyiru',
           cell: 'Kamatamu',
           village: 'Karukina',
-          coordinates: 'POINT (23.456789 1.234567)',
+          // coordinates: {
+          //   latitude: 37.7749,
+          //   longitude: -122.4194
+          // },
           createdAt: new Date(),
           updatedAt: new Date()
         },
@@ -29,7 +32,10 @@ module.exports = {
           sector: 'Muhoza',
           cell: 'Kabuga',
           village: 'Kabuga',
-          coordinates: 'POINT (50.456789 1.234367)',
+          // coordinates: {
+          //   latitude: 37.7749,
+          //   longitude: -122.4194
+          // },
           website: 'https://www.luxuryinn.com',
           createdAt: new Date(),
           updatedAt: new Date()
