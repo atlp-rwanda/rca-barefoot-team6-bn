@@ -28,7 +28,7 @@ module.exports = {
         allowNull: true
       },
       resetPasswordExpires: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       facebookId: {
         type: Sequelize.STRING,
