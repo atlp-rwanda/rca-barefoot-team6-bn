@@ -68,7 +68,7 @@ class RequestService {
    */
   static async getRequestsByHotelId(hotelId) {
     try {
-      const allRooms = await Room.findAll({ where: { hotel_id: hotelId } });
+      const allRooms = await Room.findAll({ where: { hotelId: hotelId } });
       // then find all requests that have roomId in allRooms object
       const requests = await Request.findAll({ where: { roomId: allRooms.map(room => room.id) } });
       return requests;

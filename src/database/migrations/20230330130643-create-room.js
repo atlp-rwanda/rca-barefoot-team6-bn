@@ -23,18 +23,19 @@ module.exports = {
       },
       roomType: {
         // type: Sequelize.DataTypes.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
+        // type: Sequelize.STRING,
         allowNull: false
       },
-      hotel_id: {
+      hotelId: {
         type: Sequelize.INTEGER,
-        field: 'hotel_id',
+        field: 'hotelId',
         references: {
           model: 'Hotels',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,

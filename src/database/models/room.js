@@ -13,6 +13,7 @@ class Room extends Model {
      */
   static associate(models) {
     // define association here
+    Room.belongsTo(Hotel, { foreignKey: 'hotelId' });
   }
 };
 
@@ -42,14 +43,15 @@ const roomObj = {
     type: DataTypes.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
     allowNull: false
   },
-  hotel_id: {
+  hotelId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    field: 'hotelId',
     references: {
       model: Hotel,
-      key: 'id'
-    }
-  }
+      key: 'id',
+    },
+  },
 };
 
 Room.init(roomObj, {
@@ -57,7 +59,7 @@ Room.init(roomObj, {
   modelName: 'Rooms'
 });
 
-Room.belongsTo(Hotel)
+//  
 
 sequelize.sync();
 // export the model

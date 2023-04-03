@@ -2,7 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -22,40 +22,7 @@ module.exports = {
           description: 'Room 1 description',
           createdAt: new Date(),
           updatedAt: new Date(),
-          hotel_id: 1,
-          maxAccomodate: 2,
-          floor: 1,
-          roomType: 'SINGLE'
-        },
-        {
-          id: 2,
-          name: 'Room 2',
-          description: 'Room 2 description',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          hotel_id: 2,
-          maxAccomodate: 2,
-          floor: 1,
-          roomType: 'SINGLE'
-        },
-        {
-          id: 3,
-          name: 'Room 3',
-          description: 'Room 3 description',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          hotel_id: 1,
-          maxAccomodate: 2,
-          floor: 1,
-          roomType: 'SINGLE'
-        },
-        {
-          id: 4,
-          name: 'Room 4',
-          description: 'Room 4 description',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          hotel_id: 2,
+          hotelId: 1,
           maxAccomodate: 2,
           floor: 1,
           roomType: 'SINGLE'
@@ -65,7 +32,7 @@ module.exports = {
     );
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *

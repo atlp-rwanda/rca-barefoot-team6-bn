@@ -160,9 +160,15 @@ const config = {
         },
         coordinates: {
           type: "object",
-          example:{
-            latitude: 37.7749,
-            longitude: -122.4194
+          properties: {
+            latitude: {
+              type: "number",
+              example: 37.7749,
+            },
+            longitude: {
+              type: "number",
+              example: -122.4194,
+            },
           },
         },
         website: {
