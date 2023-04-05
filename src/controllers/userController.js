@@ -65,7 +65,6 @@ export async function loginUser (req, res) {
 
 // get user profile
 export async function getMyProfile (req, res) {
-export async function getMyProfile (req, res) {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;

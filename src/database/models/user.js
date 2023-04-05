@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 import { Model, DataTypes } from 'sequelize';
-import { hash } from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
-import dotenv from 'dotenv';
+import dotenv from 'dotenv'
 import USER_ENUM from '../enums/user';
 
 dotenv.config();
@@ -15,7 +15,7 @@ class User extends Model {
   static associate (models) {
     // define association here
   }
-}
+};
 
 const userObj = {
   id: {
@@ -38,14 +38,6 @@ const userObj = {
     unique: true,
     allowNull: false
   },
-  facebookId: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  googleId: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
   password: {
     type: DataTypes.STRING,
     allowNull: true
@@ -55,6 +47,14 @@ const userObj = {
     allowNull: true
   },
   providerId: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  facebookId: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  googleId: {
     type: DataTypes.TEXT,
     allowNull: true
   },
@@ -84,25 +84,16 @@ const userObj = {
     defaultValue: false
   },
   role: {
-    type: DataTypes.ENUM(
-      USER_ENUM.ADMIN,
-      USER_ENUM.AGENT,
-      USER_ENUM.CLIENT,
-      USER_ENUM.MANAGER
-    ),
+    type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
     defaultValue: USER_ENUM.CLIENT
   }
-};
+}
 User.init(userObj, {
   sequelize,
   modelName: 'Users'
 });
 
 User.beforeCreate(async (user, options) => {
-  if (user.password) {
-    const hashedPassword = await hash(user.password, 10)
-    user.password = hashedPassword;
-  }
   if (user.password) {
     const hashedPassword = await hash(user.password, 10)
     user.password = hashedPassword;

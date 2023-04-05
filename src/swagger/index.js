@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
 
-import hello from "./hello";
-import user from "./user";
-import auth from "./auth";
-import hotel from "./hotel";
+import hello from './hello';
+import user from './user';
+import auth from './auth';
+import hotel from './hotel';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ const paths = {
   ...hello,
   ...user,
   ...auth,
-  ...hotel,
+  ...hotel
   //   add other defined apis here
 };
 
