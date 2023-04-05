@@ -2,6 +2,7 @@ import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
 
+
 // Create a new Sequelize instance with the required configuration
 const sequelize = new Sequelize(process.env.DEV_DATABASE_URL, {
   dialect: 'postgres',

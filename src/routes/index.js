@@ -16,4 +16,5 @@ router.use('/users', user);
 router.use('/hotels', hotel);
 router.use('/destinations', destination);
 router.use('/requests', request);
+
 export default router;

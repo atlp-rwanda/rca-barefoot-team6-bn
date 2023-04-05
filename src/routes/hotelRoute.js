@@ -1,6 +1,7 @@
 import { Router } from 'express';
-import { isLoggedIn } from '../middlewares/authMiddleware';
-import { createHotel, updateHotel, getHotel, getHotels, deleteHotel } from '../controllers/hotelController';
+import { authMiddleware, isLoggedIn } from '../middlewares/authMiddleware';
+import {createHotel, updateHotel, getHotel, getHotels, deleteHotel} from "../controllers/hotelController";
+
 
 const router = Router();
 
