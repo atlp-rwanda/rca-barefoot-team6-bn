@@ -3,16 +3,15 @@ import User from '../database/models/user';
 import jwt from 'jsonwebtoken';
 import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
 import { sendEmail } from '../utils/sendEmail';
-import { generateResetPasswordToken } from '../utils/passwordResetToken';
 
 export async function createUser (req, res) {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
-    const user = await User.create({ firstName, lastName, email, password });
+    const user = await User.create({ firstName, lastName, email, password, role });
     const token = await generateEmailVerificationToken(email);
     await sendVerificationEmail(email, token);
     await updateUserVerificationInfo(user.id, token, false);
@@ -43,7 +42,6 @@ export async function welcomeNewUser (req, res) {
 // login user
 export async function loginUser (req, res) {
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -52,9 +50,6 @@ export async function loginUser (req, res) {
     const isMatch = await user.isValidPassword(password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
-    }
-    if (!user.isEmailVerified) {
-      return res.status(400).json({ message: 'Please verify your email address' });
     }
     user.set('isLoggedIn', true);
     await user.save()
@@ -73,6 +68,7 @@ export async function getMyProfile (req, res) {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
+    // eslint-disable-next-line no-undef
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {
@@ -100,6 +96,7 @@ async function sendVerificationEmail (email, token) {
 async function updateUserVerificationInfo (userId, token, isVerified) {
   await User.update({ emailVerificationToken: token, isEmailVerified: isVerified }, { where: { id: userId } });
 }
+
 // logout
 export async function logout (req, res) {
   try {
@@ -114,7 +111,7 @@ export async function logout (req, res) {
 }
 
 // POST request to initiate password change process
-exports.initiatePasswordReset = async (req, res) => {
+export async function initiatePasswordReset (req, res) {
   try {
     const { email } = req.body;
 
@@ -142,7 +139,7 @@ exports.initiatePasswordReset = async (req, res) => {
   }
 };
 
-exports.resetPassword = async (req, res) => {
+export async function resetPassword (req, res) {
   const { pass } = req.body;
   const { token } = req.params;
   try {

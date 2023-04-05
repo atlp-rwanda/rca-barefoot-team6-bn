@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authMiddleware, isLoggedIn } from '../middlewares/authMiddleware';
 import {createHotel, updateHotel, getHotel, getHotels, deleteHotel} from "../controllers/hotelController";
 
+
 const router = Router();
 
 router.get('/', isLoggedIn, getHotels);
