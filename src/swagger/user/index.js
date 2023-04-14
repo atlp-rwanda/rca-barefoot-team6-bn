@@ -106,6 +106,34 @@ const user = {
       ]
     }
   },
+  '/users/update': {
+    put: {
+      tags: ['User'],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            $ref: '#/definitions/User'
+          },
+          required: true
+        }
+      ],
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
+      responses,
+      security: [{
+        JWT: []
+      }
+      ]
+    }
+  },
   '/users/self': {
     get: {
       tags: ['User'],

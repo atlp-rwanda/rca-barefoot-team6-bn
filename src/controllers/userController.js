@@ -69,7 +69,27 @@ export async function getMyProfile (req, res) {
     const user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
-    return res.send(user);
+    return res.status(200).send(user)
+  } catch (e) {
+    return res.status(500).send(e);
+  }
+}
+export async function updateMyProfile (req, res) {
+  try {
+    const user = await User.findOne({ where: { id: req.user.id } });
+    if (req.body.firstName && req.body.firstName !== '') {
+      user.firstName = req.body.firstName
+    }
+    if (req.body.lastName && req.body.lastName !== '') {
+      user.lastName = req.body.lastName
+    }
+    if (req.body.email && req.body.email !== '') {
+      user.email = req.body.email
+    }
+    user.save();
+    user.update();
+    return res.status(404).json({ message: 'updated successfully', user });
+    // eslint-disable-next-line no-undef
   } catch (e) {
     return res.status(500).send(e);
   }
