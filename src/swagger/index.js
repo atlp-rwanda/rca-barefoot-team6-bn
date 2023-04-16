@@ -7,6 +7,7 @@ import hotel from './hotel';
 import room from './room';
 import auth from './auth';
 import destinations from './destinations';
+import feeback from './feedback';
 
 dotenv.config();
 
@@ -22,7 +23,8 @@ const paths = {
   ...room,
   ...request,
   ...auth,
-  ...destinations
+  ...destinations,
+  ...feeback
   //   add other defined apis here
 };
 

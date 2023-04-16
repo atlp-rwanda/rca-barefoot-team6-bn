@@ -1,11 +1,7 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-<<<<<<< HEAD
   async up (queryInterface, Sequelize) {
-=======
-  async up(queryInterface, Sequelize) {
->>>>>>> 27815fd (feat: create CRUD operations for hotels)
     await queryInterface.createTable('Hotels', {
       id: {
         allowNull: false,
@@ -69,14 +65,7 @@ module.exports = {
       }
     });
   },
-<<<<<<< HEAD
   async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('Hotels');
   }
 };
-=======
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Hotels');
-  }
-};
->>>>>>> 27815fd (feat: create CRUD operations for hotels)
