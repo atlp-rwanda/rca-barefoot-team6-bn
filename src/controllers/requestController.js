@@ -1,6 +1,10 @@
-import REQUESTS_ENUM from "../database/enums/request";
-import Request from "../database/models/request";
-import Room from "../database/models/room";
+/* eslint-disable no-unused-vars */
+import REQUESTS_ENUM from '../database/enums/request';
+import Request from '../database/models/request';
+import Room from '../database/models/room';
+import { sendEmail } from '../utils/sendEmail';
+import User from '../database/models/user';
+import RequestService from '../services/requestService';
 const { Op } = require('sequelize');
 
 const isRoomFull = async (roomId, maxAccomodate) => {
@@ -15,8 +19,6 @@ const isRoomFull = async (roomId, maxAccomodate) => {
   return count >= maxAccomodate;
 }
 
-import RequestService from '../services/requestService';
-
 /**
  * @class RequestController
  * @classdesc RequestController
@@ -27,11 +29,11 @@ class RequestController {
     * @param {object} request details of a request.
     * @returns {object} requests new request.
     */
-  static async createRequest(req, res) {
+  static async createRequest (req, res) {
     const { user } = req;
     const { roomId, checkIn, checkOut } = req.body;
     try {
-      if (req.body.status != "PENDING") {
+      if (req.body.status !== 'PENDING') {
         return res.status(400).json({
           status: 400,
           message: 'You are not permitted to change default request status'
@@ -41,14 +43,14 @@ class RequestController {
         where: { id: roomId }
       });
       if (!room) return res.status(404).json({ message: 'Room not found' });
-     
-      //verify if the room is already booked by another user
-      const booked =  await Request.findOne({
+
+      // verify if the room is already booked by another user
+      const booked = await Request.findOne({
         where: { roomId, status: REQUESTS_ENUM.APPROVED }
       });
       if (booked) return res.status(400).json({ message: 'This room is already booked' });
-     
-      //verify if the user is not requesting the room the second time
+
+      // verify if the user is not requesting the room the second time
       const userHasRequestedRoom = await Request.findOne({
         where: { userId: user.id, roomId, status: REQUESTS_ENUM.PENDING }
       });
@@ -79,7 +81,7 @@ class RequestController {
     }
   }
 
-  static async getAllRequests(req, res) {
+  static async getAllRequests (req, res) {
     try {
       const requests = await RequestService.getAllRequests();
       return res.status(200).json({
@@ -96,7 +98,7 @@ class RequestController {
     }
   }
 
-  static async getRequestById(req, res) {
+  static async getRequestById (req, res) {
     try {
       const request = await RequestService.getRequestById(req.params.id);
       if (!request) {
@@ -119,7 +121,7 @@ class RequestController {
     }
   }
 
-  static async getRequestsByUserId(req, res) {
+  static async getRequestsByUserId (req, res) {
     try {
       const requests = await RequestService.getRequestsByUserId(req.params.userId);
       return res.status(200).json({
@@ -136,7 +138,7 @@ class RequestController {
     }
   }
 
-  static async getRequestsByRoomId(req, res) {
+  static async getRequestsByRoomId (req, res) {
     try {
       const requests = await RequestService.getRequestsByRoomId(req.params.roomId);
       return res.status(200).json({
@@ -153,7 +155,7 @@ class RequestController {
     }
   }
 
-  static async getRequestsByHotelId(req, res) {
+  static async getRequestsByHotelId (req, res) {
     try {
       const requests = await RequestService.getRequestsByHotelId(req.params.hotelId);
       return res.status(200).json({
@@ -170,7 +172,7 @@ class RequestController {
     }
   }
 
-  static async filterRequestsByParams(req, res) {
+  static async filterRequestsByParams (req, res) {
     try {
       const requests = await RequestService.filterRequestsByParams(req.query);
       return res.status(200).json({
@@ -187,7 +189,7 @@ class RequestController {
     }
   }
 
-  static async updateRequest(req, res) {
+  static async updateRequest (req, res) {
     const { user } = req;
     try {
       if (req.body.status) {
@@ -218,7 +220,7 @@ class RequestController {
     }
   }
 
-  static async deleteRequest(req, res) {
+  static async deleteRequest (req, res) {
     try {
       const requests = await RequestService.getRequestById(req.params.id);
       if (!requests) {
@@ -243,19 +245,22 @@ class RequestController {
     }
   }
 
-  static async approveRequest(req, res) {
+  static async approveRequest (req, res) {
     try {
       const requests = await RequestService.getRequestById(req.params.id);
+      const id = requests.userId
+      const user = await User.findOne({ where: id });
       if (!requests) {
         return res.status(404).json({
           status: 404,
           message: 'Request not found'
         });
       }
-      if (requests.status != 'PENDING') {
+      if (requests.status !== 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'APPROVED')
+      await sendEmail(user.email, 'Your room request has been approved');
       return res.status(200).json({
         status: 200,
         message: 'Request approved successfully',
@@ -270,7 +275,7 @@ class RequestController {
     }
   }
 
-  static async rejectRequest(req, res) {
+  static async rejectRequest (req, res) {
     try {
       const requests = await RequestService.getRequestById(req.params.id);
       if (!requests) {
@@ -279,7 +284,7 @@ class RequestController {
           message: 'Request not found'
         });
       }
-      if (requests.status != 'PENDING') {
+      if (requests.status !== 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'REJECTED')
@@ -297,7 +302,7 @@ class RequestController {
     }
   }
 
-  static async cancelRequest(req, res) {
+  static async cancelRequest (req, res) {
     try {
       const requests = await RequestService.getRequestById(req.params.id);
       if (!requests) {
@@ -306,7 +311,7 @@ class RequestController {
           message: 'Request not found'
         });
       }
-      if (requests.status != 'PENDING') {
+      if (requests.status !== 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const request = await RequestService.changeRequestStatus(req.params.id, 'CANCELLED')

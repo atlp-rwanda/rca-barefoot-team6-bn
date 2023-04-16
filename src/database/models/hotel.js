@@ -80,48 +80,6 @@ const hotelObj = {
       }
     }
   },
-  province: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  district: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  sector: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  cell: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  village: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  coordinates: {
-    type: DataTypes.JSONB,
-    allowNull: false,
-    defaultValue: {},
-    validate: {
-      isObject: function (value) {
-        if (typeof value !== 'object') {
-          throw new Error('Coordinates must be an object');
-        }
-      },
-      hasLatitude: function (value) {
-        if (!value.hasOwnProperty('latitude')) {
-          throw new Error('Coordinates object must have a latitude property');
-        }
-      },
-      hasLongitude: function (value) {
-        if (!value.hasOwnProperty('longitude')) {
-          throw new Error('Coordinates object must have a longitude property');
-        }
-      }
-    }
-  },
   isActive: {
     type: DataTypes.BOOLEAN,
     allowNull: false,

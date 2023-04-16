@@ -1,5 +1,5 @@
 'use strict'
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import User from './user';
 import Room from './room';
 import { sequelize } from '../config/db';
@@ -12,7 +12,7 @@ class Request extends Model {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-  static associate(models) {
+  static associate (models) {
     // define association here
   }
 };

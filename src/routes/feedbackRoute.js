@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { authMiddleware } from '../middlewares/authMiddleware';
+import { isLoggedIn } from '../middlewares/authMiddleware';
 import { createFeedback, deleteFeedback, getFeedbacks, updateFeedback } from '../controllers/feedBackControllers';
 const router = Router();
-router.post('/', authMiddleware, createFeedback);
-router.get('/', authMiddleware, getFeedbacks);
-router.put('/:id', authMiddleware, updateFeedback);
-router.delete('/:id', authMiddleware, deleteFeedback);
+router.post('/', isLoggedIn, createFeedback);
+router.get('/', isLoggedIn, getFeedbacks);
+router.put('/:id', isLoggedIn, updateFeedback);
+router.delete('/:id', isLoggedIn, deleteFeedback);
 export default router;
