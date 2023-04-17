@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-useless-catch */
 import User from '../database/models/user';
 

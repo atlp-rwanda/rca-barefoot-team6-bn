@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authMiddleware, isLoggedIn } from '../middlewares/authMiddleware';
+import { isLoggedIn } from '../middlewares/authMiddleware';
 import {createHotel, updateHotel, getHotel, getHotels, deleteHotel} from "../controllers/hotelController";
 
 const router = Router();
@@ -11,3 +11,4 @@ router.delete('/:id', isLoggedIn, deleteHotel);
 router.post('/', isLoggedIn, createHotel);
 
 export default router;
+

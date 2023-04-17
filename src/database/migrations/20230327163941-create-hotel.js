@@ -1,7 +1,7 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Hotels', {
       id: {
         allowNull: false,
@@ -21,32 +21,32 @@ module.exports = {
       website: {
         type: Sequelize.STRING
       },
-      province:{
+      province: {
         type: Sequelize.STRING
       },
-      district:{
+      district: {
         type: Sequelize.STRING
       },
-      sector:{
+      sector: {
         type: Sequelize.STRING
       },
-      cell:{
+      cell: {
         type: Sequelize.STRING
       },
-      village:{
+      village: {
         type: Sequelize.STRING
       },
       coordinates: {
         // type: Sequelize.STRING
         type: Sequelize.JSONB,
         // allowNull: true,
-        get: function() {
+        get: function () {
           return {
             latitude: this.getDataValue('coordinates.latitude'),
             longitude: this.getDataValue('coordinates.longitude')
           }
         },
-        set: function(value) {
+        set: function (value) {
           this.setDataValue('coordinates', JSON.stringify(value));
         }
       },
@@ -65,7 +65,8 @@ module.exports = {
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('Hotels');
   }
 };
+

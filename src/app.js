@@ -2,11 +2,14 @@ import express, {
   json
 } from 'express';
 import dotenv from 'dotenv'; // Using require
-import passport from 'passport';
-import session from 'express-session';
+import userRoute from './routes/userRoute';
+import hotelRoute from './routes/hotelRoute';
+import requestRoute from './routes/requestRoute';
+import destinationRoute from './routes/destinationRoute';
+import roomRoute from './routes/roomRoute';
+import accomodationFacilityRoomRoute from './routes/accomodationFacilityRoomRoute';
+import accomodationFacilityRoute from './routes/accomodationFacilityRoute';
 
-// all routes
-import routes from './routes';
 
 // swagger
 import swaggerUI from 'swagger-ui-express';
@@ -17,21 +20,18 @@ import connectDB, { sequelize } from './database/config/db';
 const app = express();
 dotenv.config();
 
-// configure session
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
-  }
-}));
-
-// initializing passport must come after session configuration otherwise it won't work
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(json())
+
+app.use('/api/users', userRoute);
+app.use('/api/hotels', hotelRoute);
+app.use('/api/request', requestRoute);
+app.use('/api/destinations', destinationRoute);
+app.use('/api/rooms', roomRoute);
+app.use('/api/accomodation-facility-rooms', accomodationFacilityRoomRoute);
+app.use('/api/accomodation-facilities', accomodationFacilityRoute);
+
+const PORT = process.env.PORT || 3000;
+
 
 app.get('/', async (req, res) => {
   res.json({
@@ -42,11 +42,6 @@ app.get('/', async (req, res) => {
 
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
-
-// all apis
-app.use('/api', routes);
-
-const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)
