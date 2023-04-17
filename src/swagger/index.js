@@ -2,8 +2,13 @@ import dotenv from 'dotenv';
 
 import hello from './hello';
 import user from './user';
-import auth from './auth';
+import request from './request';
 import hotel from './hotel';
+import room from './room';
+import auth from './auth';
+import destinations from './destinations';
+import accommodationFacility from './accomodationFacility';
+import accomodationFacilityRoom from './accomodationFacilityRooms';
 
 dotenv.config();
 
@@ -15,8 +20,13 @@ const host =
 const paths = {
   ...hello,
   ...user,
+  ...hotel,
+  ...room,
+  ...request,
   ...auth,
-  ...hotel
+  ...destinations,
+  ...accommodationFacility,
+  ...accomodationFacilityRoom
   //   add other defined apis here
 };
 
@@ -70,6 +80,10 @@ const config = {
     User: {
       type: 'object',
       properties: {
+        role: {
+          type: 'string',
+          example: 'MANAGER'
+        },
         firstName: {
           type: 'string',
           example: 'string'
@@ -80,11 +94,36 @@ const config = {
         },
         email: {
           type: 'string',
-          example: 'string'
+          example: 'manager@gmail.com'
         },
         password: {
           type: 'string',
           example: 'string'
+        }
+      }
+    },
+    Room: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Room 1'
+        },
+        description: {
+          type: 'string',
+          example: 'Room description'
+        },
+        maxAccomodate: {
+          type: 'integer',
+          example: '2'
+        },
+        floor: {
+          type: 'integer',
+          example: '2'
+        },
+        roomType: {
+          type: 'string',
+          example: 'SINGLE'
         }
       }
     },
@@ -139,6 +178,65 @@ const config = {
         website: {
           type: 'string',
           example: 'https://www.luxuryinn.com'
+        }
+      }
+    },
+    Request: {
+      type: 'object',
+      properties: {
+        roomId: {
+          type: 'integer',
+          example: 1
+        },
+        checkIn: {
+          type: 'string',
+          example: '2020-01-01'
+        },
+        checkOut: {
+          type: 'string',
+          example: '2020-01-01'
+        },
+        status: {
+          type: 'string',
+          example: 'PENDING'
+        }
+      }
+    },
+    accommodationFacility: {
+      type: 'object',
+      properties: {
+        accomodationFacility_id: {
+          type: 'integer',
+          example: 1
+        },
+        name: {
+          type: 'string',
+          example: 'Hotel'
+        },
+        address: {
+          type: 'string',
+          example: 'Kigali'
+        }
+      }
+    },
+    accomodationFacilityRoom: {
+      type: 'object',
+      properties: {
+        accomodationFacility_id: {
+          type: 'integer',
+          example: 1
+        },
+        roomId: {
+          type: 'integer',
+          example: 1
+        },
+        roomName: {
+          type: 'string',
+          example: 'Room 1'
+        },
+        roomType: {
+          type: 'string',
+          example: 'SINGLE'
         }
       }
     }

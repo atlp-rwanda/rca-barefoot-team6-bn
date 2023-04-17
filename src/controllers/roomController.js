@@ -3,7 +3,7 @@ import Hotel from '../database/models/hotel';
 import Room from '../database/models/room';
 import { Op } from 'sequelize';
 
-// create a hotel
+// create a room
 export async function createRoom (req, res) {
   const { name, description, maxAccomodate, floor, roomType } = req.body;
   const { hotel_id } = req.params
