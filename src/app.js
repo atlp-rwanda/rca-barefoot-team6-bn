@@ -10,6 +10,7 @@ import roomRoute from './routes/roomRoute';
 import accomodationFacilityRoomRoute from './routes/accomodationFacilityRoomRoute';
 import accomodationFacilityRoute from './routes/accomodationFacilityRoute';
 
+
 // swagger
 import swaggerUI from 'swagger-ui-express';
 // api docs
@@ -31,6 +32,7 @@ app.use('/api/accomodation-facilities', accomodationFacilityRoute);
 
 const PORT = process.env.PORT || 3000;
 
+
 app.get('/', async (req, res) => {
   res.json({
     status: true,
@@ -40,6 +42,7 @@ app.get('/', async (req, res) => {
 
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
+
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)
   await connectDB();

@@ -1,3 +1,4 @@
+
 /* eslint-disable no-prototype-builtins */
 'use strict';
 import { Model, DataTypes } from 'sequelize';
