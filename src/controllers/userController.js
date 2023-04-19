@@ -3,16 +3,15 @@ import User from '../database/models/user';
 import jwt from 'jsonwebtoken';
 import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
 import { sendEmail } from '../utils/sendEmail';
-import { generateResetPasswordToken } from '../utils/passwordResetToken';
 
 export async function createUser (req, res) {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
-    const user = await User.create({ firstName, lastName, email, password });
+    const user = await User.create({ firstName, lastName, email, password, role });
     const token = await generateEmailVerificationToken(email);
     await sendVerificationEmail(email, token);
     await updateUserVerificationInfo(user.id, token, false);
@@ -43,7 +42,6 @@ export async function welcomeNewUser (req, res) {
 // login user
 export async function loginUser (req, res) {
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -52,9 +50,6 @@ export async function loginUser (req, res) {
     const isMatch = await user.isValidPassword(password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
-    }
-    if (!user.isEmailVerified) {
-      return res.status(400).json({ message: 'Please verify your email address' });
     }
     user.set('isLoggedIn', true);
     await user.save()
@@ -100,6 +95,7 @@ async function sendVerificationEmail (email, token) {
 async function updateUserVerificationInfo (userId, token, isVerified) {
   await User.update({ emailVerificationToken: token, isEmailVerified: isVerified }, { where: { id: userId } });
 }
+
 // logout
 export async function logout (req, res) {
   try {

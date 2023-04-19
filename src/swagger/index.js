@@ -122,6 +122,31 @@ const config = {
         }
       }
     },
+    Room: {
+      type: 'object',
+      properties: {
+        name: {
+          type: 'string',
+          example: 'Room 1'
+        },
+        description: {
+          type: 'string',
+          example: 'Room description'
+        },
+        maxAccomodate: {
+          type: 'integer',
+          example: '2'
+        },
+        floor: {
+          type: 'integer',
+          example: '2'
+        },
+        roomType: {
+          type: 'string',
+          example: 'SINGLE'
+        }
+      }
+    },
     Hotel: {
       type: 'object',
       properties: {

@@ -21,32 +21,32 @@ module.exports = {
       website: {
         type: Sequelize.STRING
       },
-      province:{
+      province: {
         type: Sequelize.STRING
       },
-      district:{
+      district: {
         type: Sequelize.STRING
       },
-      sector:{
+      sector: {
         type: Sequelize.STRING
       },
-      cell:{
+      cell: {
         type: Sequelize.STRING
       },
-      village:{
+      village: {
         type: Sequelize.STRING
       },
       coordinates: {
         // type: Sequelize.STRING
         type: Sequelize.JSONB,
         // allowNull: true,
-        get: function() {
+        get: function () {
           return {
             latitude: this.getDataValue('coordinates.latitude'),
             longitude: this.getDataValue('coordinates.longitude')
           }
         },
-        set: function(value) {
+        set: function (value) {
           this.setDataValue('coordinates', JSON.stringify(value));
         }
       },
