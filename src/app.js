@@ -5,6 +5,7 @@ import dotenv from 'dotenv'; // Using require
 import roomRoute from './routes/roomRoute';
 import passport from 'passport';
 import session from 'express-session';
+import cors from 'cors';
 
 // all routes
 import routes from './routes';
@@ -31,6 +32,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(json());
+// Set CORS headers
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Allow specific headers
+}));
 
 const db = require('./database/models/index');
 

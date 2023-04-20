@@ -18,6 +18,10 @@ module.exports = {
       lastName: {
         type: Sequelize.STRING
       },
+      role: {
+        type: Sequelize.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
+        defaultValue: USER_ENUM.CLIENT
+      },
       email: {
         type: Sequelize.STRING,
         allowNull: false

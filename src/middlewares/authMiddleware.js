@@ -21,13 +21,6 @@ export async function isLoggedIn (req, res, next) {
   }
 }
 
-export const isAuthorized = (...requiredRights) => async (req, res, next) => {
-  if (!req.user) return res.status(401).send({ message: 'Unauthorized' });
-  const { role } = req.user;
-  if (!requiredRights.includes(role)) return res.status(403).send({ message: 'Forbidden' });
-  next();
-}
-
 export async function verifyEmail (req, res, next) {
   const { token } = req.params;
   const user = await User.findOne({ where: { emailVerificationToken: token } });
@@ -35,5 +28,12 @@ export async function verifyEmail (req, res, next) {
     return res.status(404).json({ message: 'Email verification failed. Token is invalid or has expired.' });
   }
   req.user = user;
+  next();
+}
+
+export const isAuthorized = (...requiredRights) => async (req, res, next) => {
+  if (!req.user) return res.status(401).send({ message: 'Unauthorized' });
+  const { role } = req.user;
+  if (!requiredRights.includes(role)) return res.status(403).send({ message: 'Forbidden' });
   next();
 }

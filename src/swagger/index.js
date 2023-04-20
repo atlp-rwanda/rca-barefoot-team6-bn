@@ -2,10 +2,10 @@ import dotenv from 'dotenv';
 
 import hello from './hello';
 import user from './user';
-import request from './request';
+import auth from './auth';
 import hotel from './hotel';
 import room from './room';
-import auth from './auth';
+import request from './request';
 import destinations from './destinations';
 import feeback from './feedback';
 

@@ -75,6 +75,29 @@ export async function getMyProfile (req, res) {
   }
 }
 
+export async function updateMyProfile (req, res) {
+  try {
+    const user = await User.findOne({ where: { id: req.user.id } });
+
+    // eslint-disable-next-line no-empty
+    if (req.body.email && req.body.email !== '') {
+      console.log('Hello');
+      user.email = req.body.email
+    }
+    if (req.body.firstName && req.body.firstName !== '') {
+      user.firstName = req.body.firstName
+    }
+    if (req.body.lastName && req.body.lastName !== '') {
+      user.lastName = req.body.lastName
+    }
+    user.save();
+    user.update();
+    return res.status(200).json({ message: 'Successfully UPdated' });
+  } catch (e) {
+    return res.status(500).send(e);
+  }
+}
+
 // GET users
 export async function getUsers (req, res) {
   try {

@@ -1,44 +1,52 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     await queryInterface.createTable('Rooms', {
       id: {
-        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
         primaryKey: true,
-        autoIncrement: true
+        type: Sequelize.INTEGER
       },
       name: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       description: {
-        type: DataTypes.STRING,
-        allowNull: false
+        type: Sequelize.STRING
       },
       maxAccomodate: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       floor: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       roomType: {
-        type: DataTypes.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
+        // type: Sequelize.DataTypes.ENUM('PRESIDENTIAL', 'SINGLE', 'DOUBLE_ROOM'),
+        type: Sequelize.STRING,
         allowNull: false
       },
       hotel_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        type: Sequelize.INTEGER,
+        field: 'hotel_id',
         references: {
-          model: Hotel,
+          model: 'Hotels',
           key: 'id'
-        }
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     await queryInterface.dropTable('Rooms');
   }
 };

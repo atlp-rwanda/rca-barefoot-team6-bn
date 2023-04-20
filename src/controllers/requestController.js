@@ -55,15 +55,15 @@ class RequestController {
         where: { userId: user.id, roomId, status: REQUESTS_ENUM.PENDING }
       });
 
-      if (userHasRequestedRoom) {
-        return res.status(400).json({ message: 'You\'ve already requested this room. Please, be patient with us while it is being processed' });
-      }
       const maxAccomodate = room.maxAccomodate;
       const roomIsFull = await isRoomFull(roomId, maxAccomodate);
       if (roomIsFull) {
         return res.status(400).json({ message: 'This room is full' });
       }
-
+      // const userHasRequestedRoom = await hasUserRequestedRoom(user.id, checkOut);
+      // if (userHasRequestedRoom) {
+      //   return res.status(400).json({ message: 'You\'ve already requested this room. Please, be patient with us while it is being processed' });
+      // }
       const request = await Request.create({
         userId: user.id, roomId, checkIn, checkOut
       });

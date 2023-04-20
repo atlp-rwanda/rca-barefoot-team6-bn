@@ -69,11 +69,13 @@ const hotelObj = {
         }
       },
       hasLatitude: function (value) {
+        // eslint-disable-next-line no-prototype-builtins
         if (!value.hasOwnProperty('latitude')) {
           throw new Error('Coordinates object must have a latitude property');
         }
       },
       hasLongitude: function (value) {
+        // eslint-disable-next-line no-prototype-builtins
         if (!value.hasOwnProperty('longitude')) {
           throw new Error('Coordinates object must have a longitude property');
         }

@@ -48,7 +48,7 @@ const userObj = {
     allowNull: true
   },
   googleId: {
-    type: DataTypes.TEXT,
+    type: DataTypes.STRING,
     allowNull: true
   },
   resetPasswordToken: {
