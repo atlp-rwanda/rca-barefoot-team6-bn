@@ -1,9 +1,9 @@
 import User from '../database/models/user';
 import { config } from 'dotenv';
 import jwt from 'jsonwebtoken'
-
-export async function isLoggedIn (req, res, next) {
-  config();
+config()
+export async function isLoggedIn(req, res, next) {
+  // config();
 
   const header = req.header('Authorization');
   if (!header || !header.startsWith('Bearer ')) { return res.send({ message: 'Token Not Found' }).status(401); }
@@ -17,11 +17,18 @@ export async function isLoggedIn (req, res, next) {
     req.user = user;
     next();
   } catch (err) {
-    return res.send({ message: 'Invalid Bearer Token' }).status(400);
+    return res.send({ message: 'Invalid Bearer Token', error: err.message }).status(400);
   }
 }
 
-export async function verifyEmail (req, res, next) {
+export const isAuthorized = (...requiredRights) => async (req, res, next) => {
+  if (!req.user) return res.status(401).send({ message: 'Unauthorized' });
+  const { role } = req.user;
+  if (!requiredRights.includes(role)) return res.status(403).send({ message: 'Forbidden' });
+  next();
+}
+
+export async function verifyEmail(req, res, next) {
   const { token } = req.params;
   const user = await User.findOne({ where: { emailVerificationToken: token } });
   if (!user) {
