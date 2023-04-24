@@ -43,12 +43,27 @@ const userObj = {
     type: DataTypes.STRING,
     allowNull: true
   },
+<<<<<<< HEAD
+=======
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  providerId: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
   facebookId: {
     type: DataTypes.STRING,
     allowNull: true
   },
   googleId: {
+<<<<<<< HEAD
     type: DataTypes.STRING,
+=======
+    type: DataTypes.TEXT,
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
     allowNull: true
   },
   resetPasswordToken: {

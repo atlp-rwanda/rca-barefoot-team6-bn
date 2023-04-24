@@ -68,6 +68,7 @@ export async function getMyProfile (req, res) {
   try {
     const user = await User.findOne({ where: { id: req.user.id } });
     delete user.dataValues.password;
+    // eslint-disable-next-line no-undef
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {

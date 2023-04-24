@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 /* eslint-disable no-unused-vars */
 import REQUESTS_ENUM from '../database/enums/request';
 import Request from '../database/models/request';
 import Room from '../database/models/room';
 import { sendEmail } from '../utils/sendEmail';
 import User from '../database/models/user';
+=======
+import Request from '../database/models/request';
+import Room from '../database/models/room';
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 import RequestService from '../services/requestService';
 const { Op } = require('sequelize');
 
@@ -19,6 +24,16 @@ const isRoomFull = async (roomId, maxAccomodate) => {
   return count >= maxAccomodate;
 }
 
+<<<<<<< HEAD
+=======
+// const hasUserRequestedRoom = async (userId, checkOut) => {
+//   const request = await Request.findOne({
+//     where: { userId, checkOut }
+//   });
+//   return request !== null;
+// };
+
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 /**
  * @class RequestController
  * @classdesc RequestController
@@ -33,7 +48,12 @@ class RequestController {
     const { user } = req;
     const { roomId, checkIn, checkOut } = req.body;
     try {
+<<<<<<< HEAD
       if (req.body.status !== 'PENDING') {
+=======
+      // eslint-disable-next-line eqeqeq
+      if (req.body.status != 'PENDING') {
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
         return res.status(400).json({
           status: 400,
           message: 'You are not permitted to change default request status'
@@ -44,6 +64,7 @@ class RequestController {
       });
       if (!room) return res.status(404).json({ message: 'Room not found' });
 
+<<<<<<< HEAD
       // verify if the room is already booked by another user
       const booked = await Request.findOne({
         where: { roomId, status: REQUESTS_ENUM.APPROVED }
@@ -55,6 +76,8 @@ class RequestController {
         where: { userId: user.id, roomId, status: REQUESTS_ENUM.PENDING }
       });
 
+=======
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
       const maxAccomodate = room.maxAccomodate;
       const roomIsFull = await isRoomFull(roomId, maxAccomodate);
       if (roomIsFull) {
@@ -248,19 +271,30 @@ class RequestController {
   static async approveRequest (req, res) {
     try {
       const requests = await RequestService.getRequestById(req.params.id);
+<<<<<<< HEAD
       const id = requests.userId
       const user = await User.findOne({ where: id });
+=======
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
       if (!requests) {
         return res.status(404).json({
           status: 404,
           message: 'Request not found'
         });
       }
+<<<<<<< HEAD
       if (requests.status !== 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'APPROVED')
       await sendEmail(user.email, 'Your room request has been approved');
+=======
+      // eslint-disable-next-line eqeqeq
+      if (requests.status != 'PENDING') {
+        return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
+      }
+      const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'APPROVED')
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
       return res.status(200).json({
         status: 200,
         message: 'Request approved successfully',
@@ -284,7 +318,12 @@ class RequestController {
           message: 'Request not found'
         });
       }
+<<<<<<< HEAD
       if (requests.status !== 'PENDING') {
+=======
+      // eslint-disable-next-line eqeqeq
+      if (requests.status != 'PENDING') {
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'REJECTED')
@@ -311,7 +350,12 @@ class RequestController {
           message: 'Request not found'
         });
       }
+<<<<<<< HEAD
       if (requests.status !== 'PENDING') {
+=======
+      // eslint-disable-next-line eqeqeq
+      if (requests.status != 'PENDING') {
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const request = await RequestService.changeRequestStatus(req.params.id, 'CANCELLED')

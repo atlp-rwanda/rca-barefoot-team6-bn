@@ -16,10 +16,10 @@ const room = {
           type: 'integer'
         },
         {
-          in: "body",
-          name: "body",
+          in: 'body',
+          name: 'body',
           schema: {
-            $ref: "#/definitions/Room",
+            $ref: '#/definitions/Room'
           }
         }
       ],
@@ -30,7 +30,49 @@ const room = {
         JWT: []
       }]
     }
+  },
+  '/rooms': {
+    get: {
+      tags: ['Room'],
+      summary: '',
+      description: '',
+      parameters: [],
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
+      responses,
+      security: [{
+        JWT: []
+      }]
+    }
+  },
+  '/rooms/search': {
+    get: {
+      tags: [
+        'Room'
+      ],
+      summary: 'Search a room by name or description',
+      description: '',
+      parameters: [
+        {
+          in: 'query',
+          name: 'search',
+          required: true,
+          type: 'string'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [{
+        JWT: []
+      }]
+    }
   }
+
 }
 
 export default room;

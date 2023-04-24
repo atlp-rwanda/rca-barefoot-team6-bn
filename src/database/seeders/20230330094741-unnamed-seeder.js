@@ -2,11 +2,7 @@
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-<<<<<<< HEAD
-  async up(queryInterface, Sequelize) {
-=======
   async up (queryInterface, Sequelize) {
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
     /**
      * Add seed commands here.
      *
@@ -21,22 +17,15 @@ module.exports = {
       [
         {
           id: 1,
-<<<<<<< HEAD
-          checkIn: '2023-03-29T09:03:13.697Z',
-          checkOut: '2023-03-29T09:16:53.109Z',
-          status: 'PENDING',
-          roomId: 1,
-          userId: 1,
-          createdAt: '2023-03-29T09:03:13.697Z',
-          updatedAt: '2023-03-29T09:16:53.108Z'
-=======
           checkin: '2023-03-29T09:03:13.697Z',
           checkout: '2023-03-29T09:16:53.109Z',
           status: 'CLOSED',
           roomId: 1,
           user_id: 1,
           createdAt: '2023-03-29T09:03:13.697Z',
-          updatedAt: '2023-03-29T09:16:53.108Z'
+          updatedAt: '2023-03-29T09:16:53.108Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 2,
@@ -46,7 +35,9 @@ module.exports = {
           roomId: 1,
           user_id: 1,
           createdAt: '2023-03-29T09:19:21.916Z',
-          updatedAt: '2023-03-29T09:19:21.916Z'
+          updatedAt: '2023-03-29T09:19:21.916Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 3,
@@ -56,7 +47,9 @@ module.exports = {
           roomId: 1,
           user_id: 3,
           createdAt: '2023-03-29T09:28:06.945Z',
-          updatedAt: '2023-03-29T09:28:51.639Z'
+          updatedAt: '2023-03-29T09:28:51.639Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 4,
@@ -66,7 +59,9 @@ module.exports = {
           roomId: 2,
           user_id: 3,
           createdAt: '2023-03-29T09:55:11.207Z',
-          updatedAt: '2023-03-29T09:55:11.207Z'
+          updatedAt: '2023-03-29T09:55:11.207Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 5,
@@ -76,7 +71,9 @@ module.exports = {
           roomId: 3,
           user_id: 3,
           createdAt: '2023-03-29T10:00:43.959Z',
-          updatedAt: '2023-03-29T10:00:43.959Z'
+          updatedAt: '2023-03-29T10:00:43.959Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 6,
@@ -86,7 +83,9 @@ module.exports = {
           roomId: 3,
           user_id: 1,
           createdAt: '2023-03-29T10:02:16.010Z',
-          updatedAt: '2023-03-29T10:02:16.010Z'
+          updatedAt: '2023-03-29T10:02:16.010Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 7,
@@ -96,7 +95,9 @@ module.exports = {
           roomId: 3,
           user_id: 6,
           createdAt: '2023-03-29T10:08:02.395Z',
-          updatedAt: '2023-03-29T10:08:02.395Z'
+          updatedAt: '2023-03-29T10:08:02.395Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 8,
@@ -106,7 +107,9 @@ module.exports = {
           roomId: 1,
           user_id: 6,
           createdAt: '2023-03-29T10:09:16.487Z',
-          updatedAt: '2023-03-29T10:09:16.487Z'
+          updatedAt: '2023-03-29T10:09:16.487Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 9,
@@ -116,7 +119,9 @@ module.exports = {
           roomId: 2,
           user_id: 6,
           createdAt: '2023-03-29T10:09:23.081Z',
-          updatedAt: '2023-03-29T10:10:25.392Z'
+          updatedAt: '2023-03-29T10:10:25.392Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 11,
@@ -126,7 +131,9 @@ module.exports = {
           roomId: 4,
           user_id: 1,
           createdAt: '2023-03-29T10:24:00.359Z',
-          updatedAt: '2023-03-29T10:24:00.359Z'
+          updatedAt: '2023-03-29T10:24:00.359Z',
+          UserId: null,
+          RoomId: null
         },
         {
           id: 10,
@@ -136,19 +143,16 @@ module.exports = {
           roomId: 2,
           user_id: 1,
           createdAt: '2023-03-29T10:21:03.566Z',
-          updatedAt: '2023-03-29T10:27:09.955Z'
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
+          updatedAt: '2023-03-29T10:27:09.955Z',
+          UserId: null,
+          RoomId: null
         }
       ],
       {}
     );
   },
 
-<<<<<<< HEAD
-  async down(queryInterface, Sequelize) {
-=======
   async down (queryInterface, Sequelize) {
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
     /**
      * Add commands to revert seed here.
      *

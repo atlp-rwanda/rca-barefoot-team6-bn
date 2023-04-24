@@ -1,5 +1,9 @@
 'use strict'
+<<<<<<< HEAD
 import { Model, DataTypes } from 'sequelize';
+=======
+import { Model, DataTypes, Sequelize } from 'sequelize';
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 import User from './user';
 import Room from './room';
 import { sequelize } from '../config/db';
@@ -12,7 +16,11 @@ class Request extends Model {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+<<<<<<< HEAD
   static associate (models) {
+=======
+  static associate(models) {
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
     // define association here
   }
 };

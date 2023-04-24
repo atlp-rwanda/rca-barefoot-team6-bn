@@ -69,3 +69,7 @@ module.exports = {
     await queryInterface.dropTable('Hotels');
   }
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7

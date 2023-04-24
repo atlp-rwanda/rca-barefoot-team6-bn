@@ -28,7 +28,10 @@ module.exports = {
           name: 'Luxury Inn',
           email: 'info@luxuryinn.com',
           address: '456 Broad St, City, State',
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
           province: 'North',
           district: 'Musanze',
           sector: 'Muhoza',
@@ -42,11 +45,19 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
       ],
       {}
     );
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
   async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.

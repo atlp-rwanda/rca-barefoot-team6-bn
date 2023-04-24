@@ -2,12 +2,13 @@ import dotenv from 'dotenv';
 
 import hello from './hello';
 import user from './user';
-import auth from './auth';
+import request from './request';
 import hotel from './hotel';
 import room from './room';
-import request from './request';
+import auth from './auth';
 import destinations from './destinations';
-import feeback from './feedback';
+import accommodationFacility from './accomodationFacility';
+import accomodationFacilityRoom from './accomodationFacilityRooms';
 
 dotenv.config();
 
@@ -24,7 +25,8 @@ const paths = {
   ...request,
   ...auth,
   ...destinations,
-  ...feeback
+  ...accommodationFacility,
+  ...accomodationFacilityRoom
   //   add other defined apis here
 };
 
@@ -57,10 +59,6 @@ const config = {
     {
       name: 'Auth',
       description: 'Authentication Api'
-    },
-    {
-      name: 'Feedback',
-      description: 'Feedbacks Api'
     }
     // Add other tags here
   ],
@@ -201,6 +199,44 @@ const config = {
         status: {
           type: 'string',
           example: 'PENDING'
+        }
+      }
+    },
+    accommodationFacility: {
+      type: 'object',
+      properties: {
+        accomodationFacility_id: {
+          type: 'integer',
+          example: 1
+        },
+        name: {
+          type: 'string',
+          example: 'Hotel'
+        },
+        address: {
+          type: 'string',
+          example: 'Kigali'
+        }
+      }
+    },
+    accomodationFacilityRoom: {
+      type: 'object',
+      properties: {
+        accomodationFacility_id: {
+          type: 'integer',
+          example: 1
+        },
+        roomId: {
+          type: 'integer',
+          example: 1
+        },
+        roomName: {
+          type: 'string',
+          example: 'Room 1'
+        },
+        roomType: {
+          type: 'string',
+          example: 'SINGLE'
         }
       }
     }
