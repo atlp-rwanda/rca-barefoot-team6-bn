@@ -61,8 +61,14 @@ module.exports = {
         defaultValue: false
       },
       role: {
+<<<<<<< HEAD
         type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
         defaultValue: USER_ENUM.CLIENT
+=======
+        allowNull: false,
+        type: Sequelize.ENUM('ADMIN', 'AGENT', 'CLIENT','MANAGER'),
+        defaultValue: 'CLIENT'
+>>>>>>> d0ffcf5e53e68b6f1904ab593f8ea1dcde55888f
       },
       createdAt: {
         allowNull: false,

@@ -1,5 +1,3 @@
-
-/* eslint-disable no-prototype-builtins */
 'use strict';
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/db';
@@ -12,6 +10,7 @@ class Hotel extends Model {
    */
   static associate (models) {
     // define association here
+    Hotel.hasMany(models.Room)
   }
 }
 

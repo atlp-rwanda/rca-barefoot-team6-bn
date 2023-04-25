@@ -12,7 +12,7 @@ export async function isLoggedIn (req, res, next) {
   if (!token) return res.send({ message: 'Invalid Bearer Token' }).status(400);
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const user = await User.findOne({ where: { id: decoded.id } });
+    const user = await User.findOne({ where: { id: decoded.id, isLoggedIn: true } });
     if (!user) return res.status(404).send({ message: 'Invalid User Account' });
     req.user = user;
     next();

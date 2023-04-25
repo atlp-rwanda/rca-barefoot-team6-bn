@@ -1,7 +1,7 @@
 import responses from '../responses'
 
 const room = {
-  '/rooms/{hotel_id}': {
+  '/rooms/{hotelId}': {
     post: {
       tags: [
         'Room'
@@ -11,7 +11,7 @@ const room = {
       parameters: [
         {
           in: 'path',
-          name: 'hotel_id',
+          name: 'hotelId',
           required: true,
           type: 'integer'
         },
@@ -29,39 +29,19 @@ const room = {
       security: [{
         JWT: []
       }]
-    }
-  },
-  '/rooms': {
-    get: {
-      tags: ['Room'],
-      summary: '',
-      description: '',
-      parameters: [],
-      consumes: [
-        'application/json'
-      ],
-      produces: [
-        'application/json'
-      ],
-      responses,
-      security: [{
-        JWT: []
-      }]
-    }
-  },
-  '/rooms/search': {
+    },
     get: {
       tags: [
         'Room'
       ],
-      summary: 'Search a room by name or description',
+      summary: 'Get all rooms in hotel',
       description: '',
       parameters: [
         {
-          in: 'query',
-          name: 'search',
+          in: 'path',
+          name: 'hotelId',
           required: true,
-          type: 'string'
+          type: 'integer'
         }
       ],
       consumes: ['application/json'],
@@ -71,8 +51,24 @@ const room = {
         JWT: []
       }]
     }
-  }
+  },
 
+  '/rooms': {
+    get: {
+      tags: [
+        'Room'
+      ],
+      summary: 'Get all rooms',
+      description: '',
+      parameters: [],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [{
+        JWT: []
+      }]
+    }
+  }
 }
 
 export default room;

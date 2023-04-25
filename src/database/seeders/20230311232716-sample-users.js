@@ -11,6 +11,7 @@ module.exports = {
       password:
       '$2a$12$wFgG2fy/n04SvMwvJfKzv.PTdvp.AWkmVZPrkPEn9z98L17w1ssda',
       isEmailVerified: true,
+      role:'ADMIN',
       createdAt: new Date(),
       updatedAt: new Date()
     },
@@ -19,6 +20,7 @@ module.exports = {
       lastName: 'Doe',
       role: 'ADMIN',
       email: 'janedoe@gmail.com',
+      role:'CLIENT',
       password: '$2a$12$wFgG2fy/n04SvMwvJfKzv.PTdvp.AWkmVZPrkPEn9z98L17w1ssda',
       createdAt: new Date(),
       updatedAt: new Date()

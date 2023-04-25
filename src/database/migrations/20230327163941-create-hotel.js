@@ -70,6 +70,9 @@ module.exports = {
   }
 };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
+=======
+>>>>>>> d0ffcf5e53e68b6f1904ab593f8ea1dcde55888f

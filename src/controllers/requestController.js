@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import REQUESTS_ENUM from '../database/enums/request';
 import Request from '../database/models/request';
 import Room from '../database/models/room';
-import { sendEmail } from '../utils/sendEmail';
-import User from '../database/models/user';
+
 import RequestService from '../services/requestService';
 const { Op } = require('sequelize');
 
@@ -33,7 +31,7 @@ class RequestController {
     const { user } = req;
     const { roomId, checkIn, checkOut } = req.body;
     try {
-      if (req.body.status !== 'PENDING') {
+      if (req.body.status != 'PENDING') {
         return res.status(400).json({
           status: 400,
           message: 'You are not permitted to change default request status'
@@ -55,15 +53,15 @@ class RequestController {
         where: { userId: user.id, roomId, status: REQUESTS_ENUM.PENDING }
       });
 
+      if (userHasRequestedRoom) {
+        return res.status(400).json({ message: 'You\'ve already requested this room. Please, be patient with us while it is being processed' });
+      }
       const maxAccomodate = room.maxAccomodate;
       const roomIsFull = await isRoomFull(roomId, maxAccomodate);
       if (roomIsFull) {
         return res.status(400).json({ message: 'This room is full' });
       }
-      // const userHasRequestedRoom = await hasUserRequestedRoom(user.id, checkOut);
-      // if (userHasRequestedRoom) {
-      //   return res.status(400).json({ message: 'You\'ve already requested this room. Please, be patient with us while it is being processed' });
-      // }
+
       const request = await Request.create({
         userId: user.id, roomId, checkIn, checkOut
       });
@@ -248,19 +246,17 @@ class RequestController {
   static async approveRequest (req, res) {
     try {
       const requests = await RequestService.getRequestById(req.params.id);
-      const id = requests.userId
-      const user = await User.findOne({ where: id });
       if (!requests) {
         return res.status(404).json({
           status: 404,
           message: 'Request not found'
         });
       }
-      if (requests.status !== 'PENDING') {
+      // eslint-disable-next-line eqeqeq
+      if (requests.status != 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'APPROVED')
-      await sendEmail(user.email, 'Your room request has been approved');
       return res.status(200).json({
         status: 200,
         message: 'Request approved successfully',
@@ -284,7 +280,7 @@ class RequestController {
           message: 'Request not found'
         });
       }
-      if (requests.status !== 'PENDING') {
+      if (requests.status != 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'REJECTED')
@@ -311,7 +307,7 @@ class RequestController {
           message: 'Request not found'
         });
       }
-      if (requests.status !== 'PENDING') {
+      if (requests.status != 'PENDING') {
         return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
       }
       const request = await RequestService.changeRequestStatus(req.params.id, 'CANCELLED')

@@ -3,10 +3,14 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
 <<<<<<< HEAD
+<<<<<<< HEAD
   async up(queryInterface, Sequelize) {
 =======
   async up (queryInterface, Sequelize) {
 >>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
+=======
+  async up(queryInterface, Sequelize) {
+>>>>>>> d0ffcf5e53e68b6f1904ab593f8ea1dcde55888f
     /**
      * Add seed commands here.
      *
@@ -26,6 +30,7 @@ module.exports = {
           description: 'Room 1 description',
           createdAt: new Date(),
           updatedAt: new Date(),
+<<<<<<< HEAD
           hotel_id: 1,
           maxAccomodate: 2,
           floor: 1,
@@ -66,6 +71,12 @@ module.exports = {
           floor: 1,
           roomType: 'SINGLE'
 >>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
+=======
+          hotelId: 1,
+          maxAccomodate: 2,
+          floor: 1,
+          roomType: 'SINGLE'
+>>>>>>> d0ffcf5e53e68b6f1904ab593f8ea1dcde55888f
         }
       ],
       {}
@@ -73,10 +84,14 @@ module.exports = {
   },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   async down(queryInterface, Sequelize) {
 =======
   async down (queryInterface, Sequelize) {
 >>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
+=======
+  async down(queryInterface, Sequelize) {
+>>>>>>> d0ffcf5e53e68b6f1904ab593f8ea1dcde55888f
     /**
      * Add commands to revert seed here.
      *

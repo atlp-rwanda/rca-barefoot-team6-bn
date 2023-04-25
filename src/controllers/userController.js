@@ -3,6 +3,7 @@ import User from '../database/models/user';
 import jwt from 'jsonwebtoken';
 import { generateEmailVerificationToken } from '../utils/emailVerificationToken';
 import { sendEmail } from '../utils/sendEmail';
+import { generateResetPasswordToken } from '../utils/passwordResetToken';
 
 export async function createUser (req, res) {
   const { firstName, lastName, email, password, role } = req.body;
@@ -72,7 +73,10 @@ export async function getMyProfile (req, res) {
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {
-    return res.status(500).send(e);
+    return res.status(500).send({
+      message: 'server error',
+      error: e.message
+    });
   }
 }
 
