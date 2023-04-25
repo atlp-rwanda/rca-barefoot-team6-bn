@@ -5,6 +5,9 @@ import dotenv from 'dotenv'; // Using require
 import passport from 'passport';
 import session from 'express-session';
 
+// cors
+import cors from 'cors';
+
 // all routes
 import routes from './routes';
 
@@ -16,6 +19,10 @@ import connectDB, { sequelize } from './database/config/db';
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 3000;
+
+// cors
+app.use(cors());
+
 // configure session
 app.use(session({
   secret: process.env.SESSION_SECRET,
