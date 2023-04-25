@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 
 /* eslint-disable no-prototype-builtins */
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 'use strict';
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../config/db';
@@ -74,19 +71,11 @@ const hotelObj = {
         }
       },
       hasLatitude: function (value) {
-<<<<<<< HEAD
-        // eslint-disable-next-line no-prototype-builtins
-=======
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
         if (!value.hasOwnProperty('latitude')) {
           throw new Error('Coordinates object must have a latitude property');
         }
       },
       hasLongitude: function (value) {
-<<<<<<< HEAD
-        // eslint-disable-next-line no-prototype-builtins
-=======
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
         if (!value.hasOwnProperty('longitude')) {
           throw new Error('Coordinates object must have a longitude property');
         }

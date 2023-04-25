@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-import Hotel from '../database/models/hotel';
-import Room from '../database/models/room';
-
-// create a hotel
-=======
 /* eslint-disable camelcase */
 import Hotel from '../database/models/hotel';
 import Room from '../database/models/room';
 import { Op } from 'sequelize';
 
 // create a room
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 export async function createRoom (req, res) {
   const { name, description, maxAccomodate, floor, roomType } = req.body;
   const { hotel_id } = req.params
@@ -33,8 +26,6 @@ export async function createRoom (req, res) {
     });
   }
 }
-<<<<<<< HEAD
-=======
 
 // function to get all roooms
 export async function getRooms (req, res) {
@@ -86,4 +77,3 @@ export async function getRoomsBySearch (req, res) {
     });
   }
 }
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7

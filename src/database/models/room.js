@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 'use strict'
-=======
-'use strict';
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 import { Model, DataTypes } from 'sequelize';
 import Hotel from './hotel';
 import { sequelize } from '../config/db';
@@ -10,7 +6,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 class Room extends Model {
   /**
-<<<<<<< HEAD
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The
@@ -20,17 +15,6 @@ class Room extends Model {
     // define association here
   }
 };
-=======
-   * Helper method for defining associations.
-   * This method is not a part of Sequelize lifecycle.
-   * The
-   *  `models/index` file will call this method automatically.
-   */
-  static associate (models) {
-    // define association here
-  }
-}
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 
 const roomObj = {
   id: {
@@ -73,11 +57,7 @@ Room.init(roomObj, {
   modelName: 'Rooms'
 });
 
-<<<<<<< HEAD
 Room.belongsTo(Hotel)
-=======
-Room.belongsTo(Hotel);
->>>>>>> ac14e0b60be67f639d6906940bf779a5bcb511a7
 
 sequelize.sync();
 // export the model
