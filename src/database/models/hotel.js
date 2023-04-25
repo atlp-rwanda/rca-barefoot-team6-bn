@@ -59,7 +59,7 @@ const hotelObj = {
     allowNull: true,
   },
   coordinates: {
-    type: DataTypes.GEOMETRY("POINT"),
+    type: DataTypes.STRING,
     allowNull: true,
   },
   isActive: {

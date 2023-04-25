@@ -6,13 +6,13 @@ import { sendEmail } from '../utils/sendEmail';
 import { generateResetPasswordToken } from '../utils/passwordResetToken';
 
 export async function createUser (req, res) {
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, role } = req.body;
   try {
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ error: 'Email already registered' });
     }
-    const user = await User.create({ firstName, lastName, email, password });
+    const user = await User.create({ firstName, lastName, email, password, role });
     const token = await generateEmailVerificationToken(email);
     await sendVerificationEmail(email, token);
     await updateUserVerificationInfo(user.id, token, false);

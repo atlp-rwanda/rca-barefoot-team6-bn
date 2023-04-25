@@ -3,6 +3,7 @@ import { Model, DataTypes } from 'sequelize';
 import { hash, compare } from 'bcryptjs';
 import { sequelize } from '../config/db';
 import dotenv from 'dotenv'
+import USER_ENUM from '../enums/user';
 
 dotenv.config();
 class User extends Model {
@@ -73,6 +74,10 @@ const userObj = {
     type: DataTypes.BOOLEAN,
     allowNull: true,
     defaultValue: false
+  },
+  role: {
+    type: DataTypes.ENUM(USER_ENUM.ADMIN, USER_ENUM.AGENT, USER_ENUM.CLIENT, USER_ENUM.MANAGER),
+    defaultValue: USER_ENUM.CLIENT
   }
 }
 User.init(userObj, {

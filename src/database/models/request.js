@@ -4,6 +4,7 @@ import User from './user';
 import Room from './room';
 import { sequelize } from '../config/db';
 import dotenv from 'dotenv';
+import REQUESTS_ENUM from '../enums/request';
 dotenv.config();
 class Request extends Model {
   /**
@@ -30,16 +31,16 @@ const requestObj = {
     allowNull: true
   },
   status: {
-    type: DataTypes.ENUM('PENDING', 'CONFIRMED', 'CLOSED'),
-    defaultValue: 'PENDING'
+    type: DataTypes.ENUM(REQUESTS_ENUM.APPROVED, REQUESTS_ENUM.CANCELLED, REQUESTS_ENUM.PENDING, REQUESTS_ENUM.REJECTED),
+    defaultValue: REQUESTS_ENUM.PENDING
   },
   roomId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: Room,
-      key: 'id'
-    }
+    // references: {
+    //   model: Room,
+    //   key: 'id'
+    // }
   },
   userId: {
     type: DataTypes.INTEGER,
@@ -67,7 +68,7 @@ Request.addHook('beforeUpdate', 'updateCheckoutDate', (request) => {
 });
 
 Request.belongsTo(User);
-Request.belongsTo(Room);
+// Request.belongsTo(Room);
 
 sequelize.sync();
 // export the model
