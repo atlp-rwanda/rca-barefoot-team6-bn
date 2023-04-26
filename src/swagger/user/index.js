@@ -106,11 +106,21 @@ const user = {
       ]
     }
   },
-  '/users/self': {
-    get: {
+  '/users/update': {
+    put: {
       tags: ['User'],
-      summary: 'Get my profile',
-      parameters: [],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            $ref: '#/definitions/User'
+          },
+          required: true
+        }
+      ],
       consumes: [
         'application/json'
       ],
@@ -120,7 +130,8 @@ const user = {
       responses,
       security: [{
         JWT: []
-      }]
+      }
+      ]
     }
   },
   '/users/request-password-reset': {
@@ -189,6 +200,23 @@ const user = {
           Bearer: ['global']
         }
       ]
+    }
+  },
+  '/users/self': {
+    get: {
+      tags: ['User'],
+      summary: 'Get my profile',
+      parameters: [],
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
+      responses,
+      security: [{
+        JWT: []
+      }]
     }
   },
   '/users/logout': {

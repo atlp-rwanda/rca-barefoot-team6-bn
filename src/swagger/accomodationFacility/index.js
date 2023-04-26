@@ -1,18 +1,36 @@
 import responses from '../responses';
 
-const hotel = {
+const accommodationFacility = {
 
-  '/hotels': {
+  '/accomodation-facilities': {
     post: {
-      tags: ['Hotel'],
+      tags: ['AccommodationFacility'],
       summary: '',
+      description: 'post accommodation facility',
       parameters: [
         {
           in: 'body',
           name: 'body',
           schema: {
-            $ref: '#/definitions/Hotel'
+            properties: {
+              name: {
+                type: 'string',
+                example: 'Villa',
+                required: true
+              },
+              address: {
+                type: 'string',
+                example: 'Kigali',
+                required: true
+              },
+              image: {
+                type: 'string',
+                example: 'image',
+                required: true
+              }
+            }
           }
+
         }
       ],
       consumes: ['application/json'],
@@ -25,7 +43,7 @@ const hotel = {
       ]
     },
     get: {
-      tags: ['Hotel'],
+      tags: ['AccommodationFacility'],
       summary: '',
       description: '',
       parameters: [],
@@ -39,9 +57,9 @@ const hotel = {
       ]
     }
   },
-  '/hotels/{id}': {
+  '/accomodation-facilities/{id}': {
     get: {
-      tags: ['Hotel'],
+      tags: ['AccommodationFacility'],
       summary: '',
       description: '',
       parameters: [
@@ -62,7 +80,7 @@ const hotel = {
       ]
     },
     put: {
-      tags: ['Hotel'],
+      tags: ['AccommodationFacility'],
       summary: '',
       description: '',
       parameters: [
@@ -76,7 +94,7 @@ const hotel = {
           in: 'body',
           name: 'body',
           schema: {
-            $ref: '#/definitions/Hotel'
+            $ref: '#/definitions/AccommodationFacility'
           }
         }
       ],
@@ -90,7 +108,7 @@ const hotel = {
       ]
     },
     delete: {
-      tags: ['Hotel'],
+      tags: ['AccommodationFacility'],
       summary: '',
       description: '',
       parameters: [
@@ -113,4 +131,4 @@ const hotel = {
   }
 };
 
-export default hotel;
+export default accommodationFacility;

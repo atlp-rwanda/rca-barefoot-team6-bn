@@ -11,7 +11,7 @@ class Room extends Model {
      * The
      *  `models/index` file will call this method automatically.
      */
-  static associate(models) {
+  static associate (models) {
     // define association here
     Room.belongsTo(Hotel, { foreignKey: 'hotelId' });
   }
@@ -49,9 +49,9 @@ const roomObj = {
     field: 'hotelId',
     references: {
       model: Hotel,
-      key: 'id',
-    },
-  },
+      key: 'id'
+    }
+  }
 };
 
 Room.init(roomObj, {
@@ -59,7 +59,7 @@ Room.init(roomObj, {
   modelName: 'Rooms'
 });
 
-//  
+//
 
 sequelize.sync();
 // export the model

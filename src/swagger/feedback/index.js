@@ -1,17 +1,16 @@
 import responses from '../responses';
 
-const hotel = {
-
-  '/hotels': {
+const feedback = {
+  '/feedback': {
     post: {
-      tags: ['Hotel'],
-      summary: '',
+      tags: ['Feedback'],
+      summary: 'Give feedback',
       parameters: [
         {
           in: 'body',
           name: 'body',
           schema: {
-            $ref: '#/definitions/Hotel'
+            $ref: '#/definitions/Feedback'
           }
         }
       ],
@@ -25,45 +24,25 @@ const hotel = {
       ]
     },
     get: {
-      tags: ['Hotel'],
-      summary: '',
-      description: '',
+      tags: ['Feedback'],
+      summary: 'Get all feedbacks',
       parameters: [],
-      consumes: ['application/json'],
-      produces: ['application/json'],
+      consumes: [
+        'application/json'
+      ],
+      produces: [
+        'application/json'
+      ],
       responses,
-      security: [
-        {
-          JWT: []
-        }
-      ]
+      security: [{
+        JWT: []
+      }]
     }
   },
-  '/hotels/{id}': {
-    get: {
-      tags: ['Hotel'],
-      summary: '',
-      description: '',
-      parameters: [
-        {
-          in: 'path',
-          name: 'id',
-          required: true,
-          type: 'string'
-        }
-      ],
-      consumes: ['application/json'],
-      produces: ['application/json'],
-      responses,
-      security: [
-        {
-          JWT: []
-        }
-      ]
-    },
+  '/feedback/{id}': {
     put: {
-      tags: ['Hotel'],
-      summary: '',
+      tags: ['Feedback'],
+      summary: 'edit feedback by id',
       description: '',
       parameters: [
         {
@@ -76,7 +55,7 @@ const hotel = {
           in: 'body',
           name: 'body',
           schema: {
-            $ref: '#/definitions/Hotel'
+            $ref: '#/definitions/Feedback'
           }
         }
       ],
@@ -90,8 +69,8 @@ const hotel = {
       ]
     },
     delete: {
-      tags: ['Hotel'],
-      summary: '',
+      tags: ['Feedback'],
+      summary: 'delete feedback by id',
       description: '',
       parameters: [
         {
@@ -113,4 +92,4 @@ const hotel = {
   }
 };
 
-export default hotel;
+export default feedback;

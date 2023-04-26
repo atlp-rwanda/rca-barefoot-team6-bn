@@ -16,10 +16,10 @@ const room = {
           type: 'integer'
         },
         {
-          in: "body",
-          name: "body",
+          in: 'body',
+          name: 'body',
           schema: {
-            $ref: "#/definitions/Room",
+            $ref: '#/definitions/Room'
           }
         }
       ],
@@ -42,7 +42,7 @@ const room = {
           name: 'hotelId',
           required: true,
           type: 'integer'
-        },
+        }
       ],
       consumes: ['application/json'],
       produces: ['application/json'],

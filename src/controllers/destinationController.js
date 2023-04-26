@@ -23,7 +23,7 @@ const getMostTravelledDestinations = async (req, res) => {
 
     const mostTravelledDestinations = {}
     const rooms = await Room.findAll({
-      attributes: ['id', 'hotelId'],
+      attributes: ['id', 'hotel_id'],
       where: {
         id: requests.map(request => request.dataValues.roomId)
       }
@@ -31,7 +31,7 @@ const getMostTravelledDestinations = async (req, res) => {
     const hotels = await Hotel.findAll({
       attributes: ['id', 'name', 'district'],
       where: {
-        id: rooms.map(room => room.dataValues.hotelId)
+        id: rooms.map(room => room.dataValues.hotel_id)
       }
     });
     for (let i = 0; i < requests.length; i++) {
@@ -39,7 +39,7 @@ const getMostTravelledDestinations = async (req, res) => {
 
       const room = rooms.find(room => room.dataValues.id === roomId);
 
-      const hotel = hotels.find(hotel => hotel.dataValues.id === room.hotelId);
+      const hotel = hotels.find(hotel => hotel.dataValues.id === room.hotel_id);
       const { name, district } = hotel.dataValues;
       const location = req.params.level === 'District' ? district : name;
       if (mostTravelledDestinations[location]) {

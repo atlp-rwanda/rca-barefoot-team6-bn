@@ -14,6 +14,7 @@ class User extends Model {
    */
   static associate(models) {
     // define association here
+
   }
 };
 
@@ -38,15 +39,23 @@ const userObj = {
     unique: true,
     allowNull: false
   },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  providerId: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
   facebookId: {
     type: DataTypes.STRING,
     allowNull: true
   },
   googleId: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  password: {
     type: DataTypes.STRING,
     allowNull: true
   },

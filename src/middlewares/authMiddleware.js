@@ -2,7 +2,7 @@ import User from '../database/models/user';
 import { config } from 'dotenv';
 import jwt from 'jsonwebtoken'
 config()
-export async function isLoggedIn(req, res, next) {
+export async function isLoggedIn (req, res, next) {
   // config();
 
   const header = req.header('Authorization');
@@ -28,7 +28,7 @@ export const isAuthorized = (...requiredRights) => async (req, res, next) => {
   next();
 }
 
-export async function verifyEmail(req, res, next) {
+export async function verifyEmail (req, res, next) {
   const { token } = req.params;
   const user = await User.findOne({ where: { emailVerificationToken: token } });
   if (!user) {
