@@ -50,6 +50,38 @@ const user = {
       ]
     }
   },
+  '/users/{id}': {
+    put: {
+      tags: ['User'],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'string'
+        },
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            $ref: '#/definitions/User'
+          }
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          Bearer: [
+            'global'
+          ]
+        }
+      ]
+    }
+  },
   '/users/verify-email/{token}': {
     get: {
       tags: ['User'],

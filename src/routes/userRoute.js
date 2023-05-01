@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { isLoggedIn, verifyEmail } from '../middlewares/authMiddleware';
-import { getUsers, getMyProfile, loginUser, createUser, welcomeNewUser, logout, initiatePasswordReset, resetPassword } from '../controllers/userController';
+import { getUsers, getMyProfile, loginUser, createUser, welcomeNewUser, logout, initiatePasswordReset, resetPassword, updateUser } from '../controllers/userController';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
@@ -82,6 +82,7 @@ router.get(
 );
 
 router.post('/', createUser)
+router.put('/:id', updateUser)
 router.post('/login', loginUser)
 router.get('/self', isLoggedIn, getMyProfile);
 router.get('/', isLoggedIn, getUsers)
