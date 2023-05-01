@@ -40,8 +40,37 @@ export async function welcomeNewUser (req, res) {
   }
 }
 
+// update a user
+export async function updateUser (req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: 'User not found'
+      });
+    }
+    await user.update(req.body);
+    res.status(200).json({
+      status: true,
+      message: 'User updated successfully',
+      user
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Internal server error',
+      error
+    });
+  }
+}
+
 // login user
-export async function loginUser(req, res) {
+export async function loginUser (req, res) {
   const { email, password } = req.body;
   try {
     const user = await User.findOne({ where: { email } });
@@ -76,14 +105,14 @@ export async function getMyProfile (req, res) {
     return res.send(user);
   } catch (e) {
     return res.status(500).send({
-      message:"server error",
-      error:e.message
+      message: 'server error',
+      error: e.message
     });
   }
 }
 
 // GET users
-export async function getUsers(req, res) {
+export async function getUsers (req, res) {
   try {
     const users = await User.findAll();
     return res.status(200).json(users);
@@ -116,7 +145,7 @@ export async function logout (req, res) {
 }
 
 // POST request to initiate password change process
-export async function initiatePasswordReset(req, res) {
+export async function initiatePasswordReset (req, res) {
   try {
     const { email } = req.body;
 
@@ -144,7 +173,7 @@ export async function initiatePasswordReset(req, res) {
   }
 };
 
-export async function resetPassword(req, res) {
+export async function resetPassword (req, res) {
   const { pass } = req.body;
   const { token } = req.params;
   try {
@@ -178,7 +207,7 @@ export async function resetPassword(req, res) {
   }
 };
 
-async function updateUserPasswordResetToken(userEmail, token) {
+async function updateUserPasswordResetToken (userEmail, token) {
   await User.update(
     { resetPasswordToken: token, resetPasswordExpires: Date.now() + 3600000 },
     { where: { email: userEmail } }
