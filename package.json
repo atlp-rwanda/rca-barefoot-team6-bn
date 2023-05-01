@@ -17,7 +17,8 @@
     "db:migrate:reset": "sequelize-cli db:migrate:undo:all && npm run db:migrate",
     "db:g:seed": "sequelize-cli seed:generate --name",
     "db:seeds": "sequelize-cli db:seed:all",
-    "seeding": "npm run db:migrate:reset && npm run db:seeds"
+    "seeding": "npm run db:migrate:reset && npm run db:seeds",
+    "db:hard:reset": "sequelize db:drop && sequelize db:create && npm run db:migrate && npm run db:seeds"
   },
   "repository": {
     "type": "git",

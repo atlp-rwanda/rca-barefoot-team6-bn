@@ -41,13 +41,9 @@ const user = {
         'application/json'
       ],
       responses,
-      security: [
-        {
-          Bearer: [
-            'global'
-          ]
-        }
-      ]
+      security: [{
+        JWT: []
+      }]
     }
   },
   '/users/{id}': {
@@ -73,13 +69,9 @@ const user = {
       consumes: ['application/json'],
       produces: ['application/json'],
       responses,
-      security: [
-        {
-          Bearer: [
-            'global'
-          ]
-        }
-      ]
+      security: [{
+        JWT: []
+      }]
     }
   },
   '/users/verify-email/{token}': {
@@ -114,7 +106,7 @@ const user = {
   '/users/login': {
     post: {
       tags: ['User'],
-      summary: '',
+      summary: 'Login with email and password',
       description: '',
       parameters: [
         {
