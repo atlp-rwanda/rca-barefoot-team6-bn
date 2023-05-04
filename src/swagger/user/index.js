@@ -78,7 +78,7 @@ const user = {
   '/users/login': {
     post: {
       tags: ['User'],
-      summary: '',
+      summary: 'Login with email and password',
       description: '',
       parameters: [
         {

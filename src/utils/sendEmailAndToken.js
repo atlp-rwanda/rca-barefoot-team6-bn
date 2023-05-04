@@ -1,7 +1,8 @@
 'use strict'
 import nodemailer from 'nodemailer';
-require('dotenv').config();
-export async function sendEmail (to, subject, text, html) {
+import dotenv from 'dotenv';
+dotenv.config();
+export async function sendEmail(to, subject, text, html) {
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     // host: 'smtp.ethereal.com',

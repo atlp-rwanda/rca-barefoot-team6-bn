@@ -1,5 +1,5 @@
 "use strict";
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, ForeignKeyConstraintError } from "sequelize";
 import { sequelize } from "../config/db";
 
 class Hotel extends Model {
@@ -10,6 +10,7 @@ class Hotel extends Model {
    */
   static associate(models) {
     // define association here
+    Hotel.hasMany(models.Room)
   }
 }
 

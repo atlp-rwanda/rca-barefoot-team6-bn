@@ -71,7 +71,6 @@ export async function welcomeNewUser (req, res) {
 // login user
 export async function loginUser (req, res) {
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -104,7 +103,10 @@ export async function getMyProfile (req, res) {
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {
-    return res.status(500).send(e);
+    return res.status(500).send({
+      message: 'server error',
+      error: e.message
+    });
   }
 }
 
@@ -142,7 +144,7 @@ export async function logout (req, res) {
 }
 
 // POST request to initiate password change process
-exports.initiatePasswordReset = async (req, res) => {
+export async function initiatePasswordReset (req, res) {
   try {
     const { email } = req.body;
 
@@ -170,7 +172,7 @@ exports.initiatePasswordReset = async (req, res) => {
   }
 };
 
-exports.resetPassword = async (req, res) => {
+export async function resetPassword (req, res) {
   const { pass } = req.body;
   const { token } = req.params;
   try {

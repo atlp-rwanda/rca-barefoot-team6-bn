@@ -85,7 +85,7 @@ router.post('/', createUser)
 router.put('/:id', isLoggedIn, updateUser)
 router.post('/login', loginUser)
 router.get('/self', isLoggedIn, getMyProfile);
-router.get('/', isLoggedIn, getUsers)
+router.get('/', getUsers)
 router.use('/verify-email/:token', verifyEmail)
 router.get('/verify-email/:token', welcomeNewUser)
 router.post('/request-password-reset', initiatePasswordReset);
