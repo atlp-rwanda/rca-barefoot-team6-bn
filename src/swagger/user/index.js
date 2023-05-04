@@ -78,7 +78,7 @@ const user = {
   '/users/login': {
     post: {
       tags: ['User'],
-      summary: '',
+      summary: 'Login with email and password',
       description: '',
       parameters: [
         {
@@ -160,6 +160,27 @@ const user = {
           name: 'id',
           required: true,
           type: 'number'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          JWT: []
+        }
+      ]
+    },
+    delete: {
+      tags: ['User'],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'string'
         }
       ],
       consumes: ['application/json'],

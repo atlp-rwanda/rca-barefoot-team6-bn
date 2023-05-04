@@ -14,13 +14,16 @@ export async function createUser (req, res) {
     }
     const user = await User.create({ firstName, lastName, email, password });
     const token = await generateEmailVerificationToken(email);
-    await sendVerificationEmail(email, token);
+    const { url, verifyToken } = await sendVerificationEmail(email, token);
     await updateUserVerificationInfo(user.id, token, false);
+    // redirect user to the verification URL
+    const verificationUrl = `${url}/verify/${verifyToken}`;
     user.password = undefined
-    return res.status(201).json({
-      message: 'User registered successfully! You should receive an email shortly.',
-      data: user
-    });
+    return res.redirect(verificationUrl);
+    // return res.status(201).json({
+    //   message: 'User registered successfully! You should receive an email shortly.',
+    //   data: user
+    // });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Server Error', error: error.message });
@@ -71,7 +74,6 @@ export async function welcomeNewUser (req, res) {
 // login user
 export async function loginUser (req, res) {
   const { email, password } = req.body;
-
   try {
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -95,6 +97,33 @@ export async function loginUser (req, res) {
     return res.status(500).json({ message: 'Server Error', error: error.message });
   }
 }
+// get a single user
+export async function getUser (req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: 'User not found'
+      });
+    }
+    res.status(200).json({
+      status: true,
+      message: 'User found',
+      user
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Internal server error',
+      error
+    });
+  }
+}
 
 // get user profile
 export async function getMyProfile (req, res) {
@@ -104,7 +133,10 @@ export async function getMyProfile (req, res) {
     if (!user) { return res.status(404).send(API_RESPONSE(false, 'User not found', 404)); }
     return res.send(user);
   } catch (e) {
-    return res.status(500).send(e);
+    return res.status(500).send({
+      message: 'server error',
+      error: e.message
+    });
   }
 }
 
@@ -119,10 +151,12 @@ export async function getUsers (req, res) {
   }
 }
 
-async function sendVerificationEmail (email, token) {
+async function sendVerificationEmail (email, verifyToken) {
   const subject = 'Verify Your Email';
-  const html = `<p>Click the following link to verify your email address: <a href="${process.env.WEB_URL}/api/users/verify-email/${token}">Verify My Email</a>`;
+  const url = process.env.NODE_ENV === 'production' ? process.env.PROD_WEB_URL : process.env.WEB_URL;
+  const html = `<p>Click the following link to verify your email address: <a href="${url}/verify/${verifyToken}">Verify My Email</a>`;
   await sendEmail(email, subject, '', html);
+  return { url, verifyToken };
 }
 
 async function updateUserVerificationInfo (userId, token, isVerified) {
@@ -142,7 +176,7 @@ export async function logout (req, res) {
 }
 
 // POST request to initiate password change process
-exports.initiatePasswordReset = async (req, res) => {
+export async function initiatePasswordReset (req, res) {
   try {
     const { email } = req.body;
 
@@ -170,7 +204,7 @@ exports.initiatePasswordReset = async (req, res) => {
   }
 };
 
-exports.resetPassword = async (req, res) => {
+export async function resetPassword (req, res) {
   const { pass } = req.body;
   const { token } = req.params;
   try {
@@ -210,3 +244,32 @@ async function updateUserPasswordResetToken (userEmail, token) {
     { where: { email: userEmail } }
   );
 };
+
+// delete a user
+export async function deleteUser (req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: 'User not found'
+      });
+    }
+    await user.destroy();
+    res.status(200).json({
+      status: true,
+      message: 'User deleted successfully',
+      user
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Internal server error',
+      error
+    });
+  }
+}
