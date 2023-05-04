@@ -1,6 +1,7 @@
 import express, {
   json
 } from 'express';
+import cors from 'cors'
 import dotenv from 'dotenv'; // Using require
 import passport from 'passport';
 import session from 'express-session';
@@ -40,11 +41,19 @@ app.get('/', async (req, res) => {
   })
 });
 
+// add this middleware function before your routes
+app.use(cors({
+  origin: 'http://localhost:5173',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Allow specific HTTP methods
+  allowedHeaders: ['Access-Control-Allow-Headers', 'Content-Type', 'Authorization'] // Allow specific headers
+}));
+
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 
 // all apis
 app.use('/api', routes);
+// cors
 
 const PORT = process.env.PORT || 3000;
 

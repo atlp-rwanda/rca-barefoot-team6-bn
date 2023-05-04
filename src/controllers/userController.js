@@ -27,6 +27,34 @@ export async function createUser (req, res) {
   }
 }
 
+// update a user
+export async function updateUser (req, res) {
+  try {
+    const user = await User.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: false,
+        message: 'User not found'
+      });
+    }
+    await user.update(req.body);
+    res.status(200).json({
+      status: true,
+      message: 'User updated successfully',
+      user
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Internal server error',
+      error
+    });
+  }
+}
 // When user clicks verify email must be directed on this route
 export async function welcomeNewUser (req, res) {
   const { user } = req;
