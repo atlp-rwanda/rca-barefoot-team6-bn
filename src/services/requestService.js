@@ -18,7 +18,10 @@ class RequestService {
         include: [
           { model: User },
           {
-            model: Room
+            model: Room,
+            include: [
+              { model: Hotel }
+            ]
           }
         ]
       });
