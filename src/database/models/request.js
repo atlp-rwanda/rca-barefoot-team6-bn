@@ -57,8 +57,12 @@ Request.init(requestObj, {
   modelName: 'Requests'
 });
 
-Request.belongsTo(User);
-Request.belongsTo(Room);
+Request.belongsTo(User, {
+  foreignKey: 'userId'
+});
+Request.belongsTo(Room, {
+  foreignKey: 'roomId'
+});
 
 sequelize.sync();
 // export the model

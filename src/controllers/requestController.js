@@ -8,7 +8,7 @@ const isRoomFull = async (roomId, maxAccomodate) => {
     where: {
       roomId,
       status: {
-        [Op.ne]: 'CLOSED'
+        [Op.ne]: 'CANCELLED'
       }
     }
   });
@@ -82,11 +82,7 @@ class RequestController {
   static async getAllRequests(req, res) {
     try {
       const requests = await RequestService.getAllRequests();
-      return res.status(200).json({
-        status: 200,
-        message: 'Requests retrieved successfully',
-        data: requests
-      });
+      return res.json(requests).status(200);
     } catch (error) {
       return res.status(500).json({
         status: 500,
@@ -253,7 +249,7 @@ class RequestController {
         });
       }
       if (requests.status != 'PENDING') {
-        return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
+        return res.status(400).json({ message: 'Request status must be PENDING to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'APPROVED')
       return res.status(200).json({
@@ -280,7 +276,7 @@ class RequestController {
         });
       }
       if (requests.status != 'PENDING') {
-        return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
+        return res.status(400).json({ message: 'Request status must be PENDING to be updated' });
       }
       const updatedRequest = await RequestService.changeRequestStatus(req.params.id, 'REJECTED')
       return res.status(200).json({
@@ -307,7 +303,7 @@ class RequestController {
         });
       }
       if (requests.status != 'PENDING') {
-        return res.status(400).json({ message: 'Request status must be "PENDING" to be updated' });
+        return res.status(400).json({ message: 'Request status must be PENDING to be updated' });
       }
       const request = await RequestService.changeRequestStatus(req.params.id, 'CANCELLED')
       return res.status(200).json({

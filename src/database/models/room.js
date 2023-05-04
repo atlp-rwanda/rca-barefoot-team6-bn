@@ -46,7 +46,6 @@ const roomObj = {
   hotelId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    field: 'hotelId',
     references: {
       model: Hotel,
       key: 'id',
@@ -54,12 +53,15 @@ const roomObj = {
   },
 };
 
+
 Room.init(roomObj, {
   sequelize,
   modelName: 'Rooms'
 });
 
-//  
+Room.belongsTo(Hotel, {
+  foreignKey: 'hotelId'
+});
 
 sequelize.sync();
 // export the model
