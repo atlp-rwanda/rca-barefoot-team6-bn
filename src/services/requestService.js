@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-useless-catch */
+import Hotel from '../database/models/hotel';
 import Request from '../database/models/request';
 import Room from '../database/models/room';
+import User from '../database/models/user';
 
 /** Class representing request services. */
 
@@ -10,9 +12,16 @@ class RequestService {
     * Return all requests
     * @returns {[object]} all request.
     */
-  static async getAllRequests() {
+  static async getAllRequests () {
     try {
-      const requests = await Request.findAll();
+      const requests = await Request.findAll({
+        include: [
+          { model: User },
+          {
+            model: Room
+          }
+        ]
+      });
       return requests;
     } catch (error) {
       throw error;
@@ -24,7 +33,7 @@ class RequestService {
  * @param number id for request
  * @returns {object} request.
  */
-  static async getRequestById(id) {
+  static async getRequestById (id) {
     try {
       const request = await Request.findOne(
         { where: { id } });
@@ -39,7 +48,7 @@ class RequestService {
    * @param number userId for user
    * @returns {[object]} all user requests
    */
-  static async getRequestsByUserId(userId) {
+  static async getRequestsByUserId (userId) {
     try {
       const requests = await Request.findAll({ where: { userId } });
       return requests;
@@ -52,7 +61,7 @@ class RequestService {
    * Get all requests by roomId for a room
    * @returns {[Object]} all room requests
    */
-  static async getRequestsByRoomId(roomId) {
+  static async getRequestsByRoomId (roomId) {
     try {
       const requests = await Request.findAll({ where: { roomId } });
       return requests;
@@ -66,9 +75,9 @@ class RequestService {
    * @param hotelId hotel id
    * @returns {[object]} all requests in a hotel
    */
-  static async getRequestsByHotelId(hotelId) {
+  static async getRequestsByHotelId (hotelId) {
     try {
-      const allRooms = await Room.findAll({ where: { hotelId: hotelId } });
+      const allRooms = await Room.findAll({ where: { hotelId } });
       // then find all requests that have roomId in allRooms object
       const requests = await Request.findAll({ where: { roomId: allRooms.map(room => room.id) } });
       return requests;
@@ -82,7 +91,7 @@ class RequestService {
    * @param {object} {status, roomId, userId, checkIn, checkOut}
    * @returns {[object]} requests that matches all the params
    */
-  static async filterRequests(params) {
+  static async filterRequests (params) {
     try {
       const requests = await Request.findAll({ where: { ...params } });
       return requests;
@@ -97,7 +106,7 @@ class RequestService {
    * @param status request status
    * @returns {object} updated data
    */
-  static async changeRequestStatus(id, status) {
+  static async changeRequestStatus (id, status) {
     try {
       const request = await Request.update({ status }, { where: { id } });
       if (request.length > 0) {
@@ -115,7 +124,7 @@ class RequestService {
      * @param {object} request new data
      * @returns {object} updated requests
      */
-  static async updateRequest(id, request, userId) {
+  static async updateRequest (id, request, userId) {
     try {
       const newRequest = await Request.update(request, { where: { id, userId } });
       return newRequest;
@@ -129,7 +138,7 @@ class RequestService {
      * @param id for request
      * @returns {object} deleted requests
      */
-  static async deleteRequest(id) {
+  static async deleteRequest (id) {
     try {
       const request = await Request.destroy({ where: { id } });
       return request;

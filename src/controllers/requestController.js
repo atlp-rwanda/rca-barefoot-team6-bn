@@ -8,7 +8,7 @@ const isRoomFull = async (roomId, maxAccomodate) => {
     where: {
       roomId,
       status: {
-        [Op.ne]: 'CLOSED'
+        [Op.ne]: 'CANCELLED'
       }
     }
   });
