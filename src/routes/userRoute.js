@@ -82,16 +82,15 @@ router.get(
 );
 
 router.post('/', createUser)
-router.put('/:id', isLoggedIn, updateUser)
-router.put('/:id', isLoggedIn, getUser)
-router.delete('/:id', isLoggedIn, deleteUser)
 router.post('/login', loginUser)
+router.delete('/:id', isLoggedIn, deleteUser)
 router.get('/self', isLoggedIn, getMyProfile);
 router.get('/', getUsers)
-router.use('/verify-email/:token', verifyEmail)
-router.get('/verify-email/:token', welcomeNewUser)
+router.get('/verify-email/:token', verifyEmail, welcomeNewUser)
 router.post('/request-password-reset', initiatePasswordReset);
 router.post('/reset-password/:token', resetPassword);
 router.put('/logout', isLoggedIn, logout);
+router.patch('/:id', isLoggedIn, updateUser)
+router.get('/:id', isLoggedIn, getUser)
 
 export default router

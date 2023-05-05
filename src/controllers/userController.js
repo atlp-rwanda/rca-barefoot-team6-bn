@@ -61,6 +61,7 @@ export async function updateUser (req, res) {
 // When user clicks verify email must be directed on this route
 export async function welcomeNewUser (req, res) {
   const { user } = req;
+  console.log('User: ', user);
   try {
     await sendEmail(user.email, 'Welcome to My App', 'Thank you for verifying your email address.');
     await updateUserVerificationInfo(user.id, null, true);
@@ -153,8 +154,8 @@ export async function getUsers (req, res) {
 
 async function sendVerificationEmail (email, verifyToken) {
   const subject = 'Verify Your Email';
-  const url = process.env.NODE_ENV === 'production' ? process.env.PROD_WEB_URL : process.env.WEB_URL;
-  const html = `<p>Click the following link to verify your email address: <a href="${url}/verify/${verifyToken}">Verify My Email</a>`;
+  const url = process.env.WEB_URL;
+  const html = `<p>Click the following link to verify your email address: <a href="${url}/auth/verify/${verifyToken}">Verify My Email</a>`;
   await sendEmail(email, subject, '', html);
   return { url, verifyToken };
 }

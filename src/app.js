@@ -44,11 +44,7 @@ app.get('/', async (req, res) => {
 });
 
 // add this middleware function before your routes
-app.use(cors({
-  origin: 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], // Allow specific HTTP methods
-  allowedHeaders: ['Access-Control-Allow-Headers', 'Content-Type', 'Authorization'] // Allow specific headers
-}));
+app.use(cors());
 
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
