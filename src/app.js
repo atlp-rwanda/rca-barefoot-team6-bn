@@ -11,6 +11,7 @@ import cors from 'cors';
 // all routes
 import routes from './routes';
 
+
 // swagger
 import swaggerUI from 'swagger-ui-express';
 // api docs
@@ -35,6 +36,7 @@ app.use(session({
 // initializing passport must come after session configuration otherwise it won't work
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(cors());
 
 app.use(json());
 
