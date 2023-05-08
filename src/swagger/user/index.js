@@ -46,34 +46,6 @@ const user = {
       }]
     }
   },
-  '/users/{id}': {
-    put: {
-      tags: ['User'],
-      summary: '',
-      description: '',
-      parameters: [
-        {
-          in: 'path',
-          name: 'id',
-          required: true,
-          type: 'string'
-        },
-        {
-          in: 'body',
-          name: 'body',
-          schema: {
-            $ref: '#/definitions/User'
-          }
-        }
-      ],
-      consumes: ['application/json'],
-      produces: ['application/json'],
-      responses,
-      security: [{
-        JWT: []
-      }]
-    }
-  },
   '/users/verify-email/{token}': {
     get: {
       tags: ['User'],
@@ -149,6 +121,76 @@ const user = {
       security: [{
         JWT: []
       }]
+    }
+  },
+  '/users/{id}': {
+    put: {
+      tags: ['User'],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'string'
+        },
+        {
+          in: 'body',
+          name: 'body',
+          schema: {
+            $ref: '#/definitions/User'
+          }
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [{
+        JWT: []
+      }]
+    },
+    get: {
+      tags: ['User'],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'number'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          JWT: []
+        }
+      ]
+    },
+    delete: {
+      tags: ['User'],
+      summary: '',
+      description: '',
+      parameters: [
+        {
+          in: 'path',
+          name: 'id',
+          required: true,
+          type: 'string'
+        }
+      ],
+      consumes: ['application/json'],
+      produces: ['application/json'],
+      responses,
+      security: [
+        {
+          JWT: []
+        }
+      ]
     }
   },
   '/users/request-password-reset': {

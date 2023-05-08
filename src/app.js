@@ -1,12 +1,10 @@
 import express, {
   json
 } from 'express';
+import cors from 'cors'
 import dotenv from 'dotenv'; // Using require
 import passport from 'passport';
 import session from 'express-session';
-
-// cors
-import cors from 'cors';
 
 // all routes
 import routes from './routes';
@@ -45,10 +43,14 @@ app.get('/', async (req, res) => {
   })
 });
 
+// add this middleware function before your routes
+app.use(cors());
+
 // use swagger apis
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 // all apis
 app.use('/api', routes);
+// cors
 
 app.listen(PORT, async () => {
   console.log(`App listening on port ${PORT}`)

@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { isAuthorized, isLoggedIn, verifyEmail } from '../middlewares/authMiddleware';
-import { getUsers, getMyProfile, loginUser, createUser, welcomeNewUser, logout, initiatePasswordReset, resetPassword, updateUser } from '../controllers/userController';
+import { isLoggedIn, verifyEmail } from '../middlewares/authMiddleware';
+import { getUsers, getMyProfile, loginUser, createUser, welcomeNewUser, logout, initiatePasswordReset, resetPassword, updateUser, getUser, deleteUser } from '../controllers/userController';
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Strategy as FacebookStrategy } from 'passport-facebook';
@@ -82,14 +82,15 @@ router.get(
 );
 
 router.post('/', createUser)
-router.put('/:id', isLoggedIn, isAuthorized('ADMIN'), updateUser)
 router.post('/login', loginUser)
+router.delete('/:id', isLoggedIn, deleteUser)
 router.get('/self', isLoggedIn, getMyProfile);
 router.get('/', getUsers)
-router.use('/verify-email/:token', verifyEmail)
-router.get('/verify-email/:token', welcomeNewUser)
+router.get('/verify-email/:token', verifyEmail, welcomeNewUser)
 router.post('/request-password-reset', initiatePasswordReset);
 router.post('/reset-password/:token', resetPassword);
 router.put('/logout', isLoggedIn, logout);
+router.patch('/:id', isLoggedIn, updateUser)
+router.get('/:id', isLoggedIn, getUser)
 
 export default router

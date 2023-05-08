@@ -12,9 +12,9 @@ router.get('/room/:roomId', RequestController.getRequestsByRoomId);
 router.get('/hotel/:hotelId', isLoggedIn, RequestController.getRequestsByHotelId)
 router.get('/filter', RequestController.filterRequestsByParams)
 router.patch('/:id', isLoggedIn, RequestController.updateRequest);
-router.patch('/approve/:id', isLoggedIn, isAuthorized('MANAGER'), RequestController.approveRequest);
-router.patch('/reject/:id', isLoggedIn, isAuthorized('MANAGER'), RequestController.rejectRequest);
-router.patch('/cancel/:id', isLoggedIn, isAuthorized('MANAGER'), RequestController.cancelRequest)
+router.patch('/approve/:id', isLoggedIn, isAuthorized('ADMIN'), RequestController.approveRequest);
+router.patch('/reject/:id', isLoggedIn, isAuthorized('ADMIN'), RequestController.rejectRequest);
+router.patch('/cancel/:id', isLoggedIn, isAuthorized('ADMIN'), RequestController.cancelRequest)
 router.delete('/:id', RequestController.deleteRequest);
 
 export default router;
