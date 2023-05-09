@@ -90,7 +90,7 @@ router.get('/verify-email/:token', verifyEmail, welcomeNewUser)
 router.post('/request-password-reset', initiatePasswordReset);
 router.post('/reset-password/:token', resetPassword);
 router.put('/logout', isLoggedIn, logout);
-router.patch('/:id', isLoggedIn, updateUser)
+router.put('/:id', isLoggedIn, updateUser)
 router.get('/:id', isLoggedIn, getUser)
 
 export default router
