@@ -132,7 +132,7 @@ export async function initiatePasswordReset(req, res) {
     await sendEmail(
       user.email,
       'Reset Password',
-      `You recently requested to reset your password.\n\nPlease click on the following link or paste it into your browser to reset your password:\n\nhttp://${req.headers.host}/api/users/reset-password/${resetToken}\n\nThis link is valid for 1 hour.\n\nIf you did not request a password reset, please ignore this email.\n\nThanks,\nThe Example App Team`
+      `You recently requested to reset your password.\n\nPlease click on the following link or paste it into your browser to reset your password:\n\nhttp://${process.env.WEB_URL}/reset-password?token=${resetToken}\n\nThis link is valid for 1 hour.\n\nIf you did not request a password reset, please ignore this email.\n\nThanks,\nThe Example App Team`
     );
 
     // save the user document
